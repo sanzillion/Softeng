@@ -17,6 +17,9 @@
     <!-- Custom CSS -->
     <link href="css/business-casual.css" rel="stylesheet">
 
+    <!-- Icons Font Awesome -->
+    <link rel="stylesheet" href="icons/css/font-awesome.min.css">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -46,7 +49,7 @@
     <nav id="na" class="navbar navbar-default bgwhite" role="navigation">
         <div id="cont" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -60,8 +63,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav cblack">
-                    <li>
-                        <a href="index.html"><i class="glyphicon glyphicon-home">
+                    <li class="page-scroll">
+                        <a href="#home"><i class="glyphicon glyphicon-home">
                         </i>&nbsp<b>Home</b></a>
                     </li>
                     <li>
@@ -72,8 +75,8 @@
                         <a href="blog.html"><i class="glyphicon glyphicon-log-in">
                         </i>&nbsp<b>Admin</b></a>
                     </li>
-                    <li>
-                        <a href="contact.html"><i class="glyphicon glyphicon-cog">
+                    <li class="page-scroll">
+                        <a href="#contact"><i class="glyphicon glyphicon-cog">
                         </i>&nbsp <b>Contact</b></a>
                     </li>
                 </ul>
@@ -83,8 +86,7 @@
         <!-- /.container -->
     </nav>
 
-    <div class="container">
-
+    <div class="container" id="home">
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
@@ -117,47 +119,103 @@
                             <span class="icon-next"></span>
                         </a>
                     </div>
-                    <h2 class="brand-before">
+                    <!-- <h2 class="brand-before">
                         <small>Welcome to</small>
-                    </h2>
-                    <h1 class="brand-name">Business Casual</h1>
-                    <hr class="tagline-divider">
+                    </h2> -->
+                    <!-- <h1 class="brand-name">SJP2CD | EYESEETEA | ICT</h1> -->
+                    <!-- <hr class="tagline-divider"> -->
                     <h2>
-                        <small>By
-                            <strong>Start Bootstrap</strong>
+                        <small>St. John Paul II College of Davao,
+                            <strong>EYESEETEA Inc., </strong>
+                            ICT Firefox
                         </small>
                     </h2>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="about">
+          <div class="box">
+            <div class="col-lg-12 text-justify">
+              <hr>
+              <h2 class="intro-text text-center">
+                <strong>ICT</strong> Sanction Record System
+              </h2>
+              <hr>
+              <div class="col-lg-3">
+              </div>
+              <div class="col-lg-6">
+                <p> A system project of Information Technology Students as a
+                requirement of <strong>Software Engineering subject</strong> from
+                the College of Information and Communications Technology of
+                <strong>St. John Paul II College of Davao.</strong></p>
+              </div>
+              <div class="col-lg-3">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="bulletin">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">Build a website
-                        <strong>worth visiting</strong>
+                    <h2 class="intro-text text-center">
+                        <strong>BULLETIN BOARD &nbsp</strong>
+                        <i class="glyphicon glyphicon-list-alt"></i>
+                         &nbsp ANNOUNCEMENT
                     </h2>
-                    <hr>
-                    <img class="img-responsive img-border img-left" src="img/intro-pic.jpg" alt="">
-                    <hr class="visible-xs">
-                    <p>The boxes used in this template are nested inbetween a normal Bootstrap row and the start of your column layout. The boxes will be full-width boxes, so if you want to make them smaller then you will need to customize.</p>
-                    <p>A huge thanks to <a href="http://join.deathtothestockphoto.com/" target="_blank">Death to the Stock Photo</a> for allowing us to use the beautiful photos that make this template really come to life. When using this template, make sure your photos are decent. Also make sure that the file size on your photos is kept to a minumum to keep load times to a minimum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                    <hr style="margin-bottom: 40px !important">
+                    <div class="col-lg-6">
+                      <img class="img-responsive img-border img-left" src="img/slide-1" alt="">
+                    </div>
+                    <div class="col-lg-6 text-justify">
+                      <hr class="visible-xs">
+                      <h3 class="no-margin" style="margin-bottom: 10px;">TITLE HERE</h3>
+                      <p>The boxes used in this template are nested inbetween a
+                        normal Bootstrap row and the start of your column layout.
+                        The boxes will be full-width boxes, so if you want to make
+                        them smaller then you will need to customize.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Nunc placerat diam quis nisl vestibulum dignissim. In hac
+                        habitasse platea dictumst. Interdum et malesuada fames ac
+                        ante ipsum primis in faucibus. Pellentesque habitant morbi
+                        tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="contact">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">Beautiful boxes
-                        <strong>to showcase your content</strong>
+                    <h2 class="intro-text text-center">CONTACT &nbsp<i class="glyphicon glyphicon-cog"></i>
+                        <strong>&nbspSUPPORT</strong>
                     </h2>
                     <hr>
-                    <p>Use as many boxes as you like, and put anything you want in them! They are great for just about anything, the sky's the limit!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                    <div class="col-lg-3">
+                    </div>
+                    <div class="col-lg-6 text-justify">
+                      <form class="" action="index.html" method="post">
+                        <div class="form-group">
+                          <label for="name">Name :</label>
+                          <input type="text" class="form-control" id="name"
+                          name="" value="">
+                          <label for="email">Email :</label>
+                          <input type="text" class="form-control" id="email"
+                          name="" value="">
+                          <label for="comment">Comment :</label>
+                          <textarea class="form-control" rows="5" id="comment">
+                          </textarea>
+                        </div>
+                      </form>
+                      <p class="pull-right">Or you can contact us thru the links below.</p>
+                    </div>
+                    <div class="col-lg-3">
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -165,14 +223,162 @@
     </div>
     <!-- /.container -->
 
-    <footer class="bgblack">
+    <!-- FOOTER -->
+    <footer class="bggray padtopbot">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p class="cwhite">Copyright &copy; Your Website 2014</p>
+            <div class="row text-center margin-bottom">
+              <h1 class="text-center cwhite no-margin margin-top"> Developers </h1>
+              <h4 class="text-center cwhite no-margin padbot">Software Engineers</h4>
+                <div class="col-lg-3">
+                  <div class=" lightborder">
+                    <h4 class="cwhite">KATH</h4>
+                    <p class="cwhite no-padding txt10">Project Leader/ Technical Writer</p>
+                    <hr style="width:200px; margin-top: 5px; margin-bottom: 5px;">
+                    <p class="cwhite no-padding txtsmall">
+                      <i class="fa fa-user-circle"></i> &nbsp Katherin Potestas</p>
+                    <p class="cwhite no-padding txt10">
+                      <i class="fa fa-google"></i> &nbsp katherinedemirapotestas</p>
+                    <div class="btn btn-group">
+                      <a class="btn btn-default" href="http://www.facebook.com/jeonnochuiiee"
+                      target="_blank">
+                        <i class="fa fa-facebook-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/jeonnochuiiee"
+                      target="_blank">
+                        <i class="fa fa-twitter-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-instagram fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-google-plus fa-lg"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
+
+                <div class="col-lg-3">
+                  <div class="lightborder">
+                    <h4 class="cwhite no-padding ">SANZ</h4>
+                    <p class="cwhite no-padding txt10">Programmer/ UI designer</p>
+                    <hr style="width:200px; margin-top: 5px; margin-bottom: 5px;">
+                    <p class="cwhite no-padding txtsmall">
+                      <i class="fa fa-user-circle"></i> &nbsp Sandru Moses Valle</p>
+                    <p class="cwhite no-padding txt10">
+                      <i class="fa fa-google"></i> &nbsp sanzimagery@gmail.com</p>
+                    <div class="btn btn-group">
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-facebook-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.github.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-github fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.codepen.io/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-codepen fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.freecodecamp.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-free-code-camp fa-lg "></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.sanzillion.wordpress.com"
+                      target="_blank">
+                        <i class="fa fa-wordpress fa-lg "></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="lightborder">
+                    <h4 class="cwhite">ANGEL</h4>
+                    <p class="cwhite no-padding txt10">Tester/ Technical Writer</p>
+                    <hr style="width:190px; margin-top: 5px; margin-bottom: 5px;">
+                    <p class="cwhite no-padding txtsmall">
+                      <i class="fa fa-user-circle"></i> &nbsp Angelica Callao</p>
+                    <p class="cwhite no-padding txt10">
+                      <i class="fa fa-google"></i> &nbsp angelbarbie@gmail.com</p>
+                    <div class="btn btn-group">
+                      <a class="btn btn-default" href="http://www.facebook.com/angel.callo"
+                      target="_blank">
+                        <i class="fa fa-facebook-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/angel.callo"
+                      target="_blank">
+                        <i class="fa fa-twitter-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-instagram fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-google-plus fa-lg"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3">
+                  <div class="lightborder">
+                    <h4 class="cwhite">JUN</h4>
+                    <p class="cwhite no-padding txt10">Analyst/ Technical Writer</p>
+                    <hr style="width:190px; margin-top: 5px; margin-bottom: 5px;">
+                    <p class="cwhite no-padding txtsmall">
+                      <i class="fa fa-user-circle"></i> &nbsp Charlito Turtor Jr.</p>
+                    <p  class="cwhite no-padding txt10">
+                      <i class="fa fa-google"></i> &nbsp  charlitogwapito@gmail.com</p>
+                    <div class="btn btn-group">
+                      <a class="btn btn-default" href="http://www.facebook.com/charl.turtor.1"
+                      target="_blank">
+                        <i class="fa fa-facebook-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/charl.turtor.1"
+                      target="_blank">
+                        <i class="fa fa-twitter-square fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-instagram fa-lg"></i>
+                      </a>
+                      <a class="btn btn-default" href="http://www.facebook.com/sanzillion"
+                      target="_blank">
+                        <i class="fa fa-google-plus fa-lg"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
             </div>
         </div>
+    </footer>
+    <footer class=" bgblue ">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 padtopbot">
+            <label class=" cwhite">Follow us on: </label>
+            <div id="btns" class="btn btn-group">
+              <a href="#">
+                <i class="fa fa-facebook fa-2x sidemargin cwhite"></i>
+              </a>
+              <a href="#">
+                <i class="fa fa-twitter fa-2x sidemargin cwhite"></i>
+              </a>
+              <a href="#">
+                <i class="fa fa-feed fa-2x sidemargin cwhite"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6 padtopbot">
+            <p class="cwhite pull-right txtsmall no-padding" style="padding: 10px 10px;">Copyright &copy;
+              <strong>EYESEETEA Inc.</strong> 2016</p>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- jQuery -->
@@ -180,6 +386,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
     <!-- Custom JS -->
     <script src="js/master.js"></script>

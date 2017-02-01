@@ -211,12 +211,44 @@ footer p {
   background-color: black !important;
 }
 
+.bgblue{
+  background-color: #338BFF !important;
+}
+
+.bggray{
+  background-color: #202020 !important;
+}
+
+.bgdarkred{
+  background-color: #B2282D !important;
+}
+
 .cwhite{
   color: white !important;
 }
 
 .cblack{
   color: black !important;
+}
+
+.cblue{
+  color: #338BFF !important;
+}
+
+.cdarkblue{
+  color: #002C5F !important;
+}
+
+.cred{
+  color: #F64747 !important;
+}
+
+.cdarkred{
+  color: #B2282D !important;
+}
+
+.cgreen{
+  color: #2DA12B !important;
 }
 
 .changeheight{
@@ -228,10 +260,58 @@ footer p {
   padding-right: 10px;
 }
 
+.sidemargin{
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.padtopbot{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+.padbot{
+  padding-bottom: 40px;
+}
+
 .transparent{
   opacity: .9;
 }
 
 .navbrand{
   width: 100px;
+}
+
+.no-padding{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.txtsmall{
+  font-size: 15px !important;
+}
+
+.txt10{
+  font-size: 12px !important;
+}
+
+.no-margin{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.margin-top{
+  margin-top: 30px;
+}
+
+.margin-bottom{
+  margin-bottom: 25px;
+}
+
+.lightborder{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid white;
+  margin-top: 10px;
 }
