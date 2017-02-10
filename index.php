@@ -1,3 +1,27 @@
+<?php
+
+include "process/functions.php";
+
+$loc = "uploads/";
+$src = "img/slide-1";
+$title = 'Title Here';
+$par = 'The boxes used in this template are nested inbetween a
+	normal Bootstrap row and the start of your column layout.
+	The boxes will be full-width boxes, so if you want to make
+	them smaller then you will need to customize. <br>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	Nunc placerat diam quis nisl vestibulum dignissim. In hac
+	habitasse platea dictumst. Interdum et malesuada fames ac
+	ante ipsum primis in faucibus. Pellentesque habitant morbi
+	tristique senectus et netus et malesuada fames ac turpis egestas.';
+
+if(!empty(getbulletin())){
+	$results = getbulletin();
+	$src = $loc.$results->imgname;
+	$title = $results->title;
+	$par = $results->post;
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,9 +59,9 @@
 
 </head>
 
-<body>
+<body class="fadein2s">
 
-    <div class="brand" style="background-color: white;">
+    <div class="brand fadein" style="background-color: white;">
       <div class="container center-block logo">
             <img class="img-responsive" src="img/srs.png" alt="logo"></a>
       </div>
@@ -63,19 +87,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav cblack">
-                    <li class="page-scroll">
+                    <li class="page-scroll fadein2s">
                         <a href="#home"><i class="glyphicon glyphicon-home">
                         </i>&nbsp<b>Home</b></a>
                     </li>
-                    <li>
-                        <a href="about.html"><i class="glyphicon glyphicon-file">
+                    <li class="fadein3s">
+                        <a href="" data-toggle="modal" data-target="#record"><i class="glyphicon glyphicon-file">
                         </i>&nbsp<b>Record</b></a>
                     </li>
-                    <li>
-                        <a href="blog.html"><i class="glyphicon glyphicon-log-in">
+                    <li class="fadein4s">
+                        <a href="" data-toggle="modal" data-target="#admin"><i class="glyphicon glyphicon-log-in">
                         </i>&nbsp<b>Admin</b></a>
                     </li>
-                    <li class="page-scroll">
+                    <li class="page-scroll fadein5s">
                         <a href="#contact"><i class="glyphicon glyphicon-cog">
                         </i>&nbsp <b>Contact</b></a>
                     </li>
@@ -86,7 +110,7 @@
         <!-- /.container -->
     </nav>
 
-    <div class="container" id="home">
+    <div class="container frombot-animate" id="home">
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
@@ -168,20 +192,12 @@
                     </h2>
                     <hr style="margin-bottom: 40px !important">
                     <div class="col-lg-6">
-                      <img class="img-responsive img-border img-left" src="img/slide-1" alt="">
+                      <img class="img-responsive img-border" src="<?php echo $src; ?>" alt="">
                     </div>
                     <div class="col-lg-6 text-justify">
                       <hr class="visible-xs">
-                      <h3 class="no-margin" style="margin-bottom: 10px;">TITLE HERE</h3>
-                      <p>The boxes used in this template are nested inbetween a
-                        normal Bootstrap row and the start of your column layout.
-                        The boxes will be full-width boxes, so if you want to make
-                        them smaller then you will need to customize.</p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nunc placerat diam quis nisl vestibulum dignissim. In hac
-                        habitasse platea dictumst. Interdum et malesuada fames ac
-                        ante ipsum primis in faucibus. Pellentesque habitant morbi
-                        tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                      <h3 class="no-margin" style="margin-bottom: 10px;"><?php echo $title; ?></h3>
+                      <p><?php echo $par; ?></p>
                     </div>
                 </div>
             </div>
@@ -198,20 +214,26 @@
                     <div class="col-lg-3">
                     </div>
                     <div class="col-lg-6 text-justify">
-                      <form class="" action="index.html" method="post">
+                      <form class="" id="contact-form" action="form-handler-nodb.php" method="post">
                         <div class="form-group">
                           <label for="name">Name :</label>
                           <input type="text" class="form-control" id="name"
-                          name="" value="">
+                          name="name" value="" required>
                           <label for="email">Email :</label>
                           <input type="text" class="form-control" id="email"
-                          name="" value="">
+                          name="email" value="" required>
                           <label for="comment">Comment :</label>
-                          <textarea class="form-control" rows="5" id="comment">
+                          <textarea class="form-control" rows="5"
+                          name="comment" id="comment" required>
                           </textarea>
+                          <div class="text-right">
+                            <button class="btn btn-default" type="submit"
+                            name="submitform" style="width: 100%;
+                            margin-top: 10px;">Submit Form</button>
+                          </div>
+                            <p class="pull-right">Or you can contact us thru the links below.</p>
                         </div>
                       </form>
-                      <p class="pull-right">Or you can contact us thru the links below.</p>
                     </div>
                     <div class="col-lg-3">
                     </div>
@@ -227,7 +249,7 @@
     <footer class="bggray padtopbot">
         <div class="container">
             <div class="row text-center margin-bottom">
-              <h1 class="text-center cwhite no-margin margin-top"> Developers </h1>
+              <h1 class="text-center cwhite no-margin" style="margin-top: 10px;"> Developers </h1>
               <h4 class="text-center cwhite no-margin padbot">Software Engineers</h4>
                 <div class="col-lg-3">
                   <div class=" lightborder">
@@ -355,6 +377,7 @@
 
             </div>
         </div>
+
     </footer>
     <footer class=" bgblue ">
       <div class="container">
@@ -381,14 +404,72 @@
       </div>
     </footer>
 
+    <!-- Modal for admin -->
+    <div class="modal fade margin-top" id="admin" role="dialog"
+    style="margin-top: 50px;">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title font2 text-center">Admin</h3>
+          </div>
+          <div class="modal-body">
+            <form class="padside" id="loginform"
+             action="process/loginprocess.php" method="post">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="user" type="text" class="form-control" name="user"
+                placeholder="Username" required>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input id="password" type="password" class="form-control" name="pass"
+                placeholder="Password" required>
+              </div>
+              <button type="submit" name="submit" class="btn btn-block btn-default"
+              style="margin-top: 10px;">Submit</button>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for records-->
+  <div class="modal fade" id="record" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title font2">Record</h3>
+        </div>
+        <div class="modal-body">
+          <p>This is a large modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Plugin JavaScript -->
+    <!-- Easing Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Validation Plugin JS-->
+    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script> -->
 
     <!-- Custom JS -->
     <script src="js/master.js"></script>
@@ -399,8 +480,15 @@
         interval: 5000 //changes the speed
     })
 
-    // alert($(window).width());
     </script>
+
+    <?php
+    if(isset($_GET['error'])){
+      echo '<script type="text/javascript">
+        alert("Invalid user or password");
+      </script>';
+    }
+     ?>
 
 </body>
 

@@ -6,7 +6,7 @@
 
 body {
     /*font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;*/
-    font-family: 'Play', sans-serif;
+    font-family: 'Play', arial;
     background-color: #DCDCDC;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -15,7 +15,7 @@ body {
 }
 
 .font2{
-  font-family: 'Squada One', cursive;
+  font-family: 'Squada One', arial;
 }
 
 h1,
@@ -25,7 +25,6 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -314,4 +313,49 @@ footer p {
   padding-bottom: 10px;
   border: 1px solid white;
   margin-top: 10px;
+}
+
+.fadein{
+  animation-name: fromleft;
+  animation-duration: 1s;
+}
+
+.fadein2s{
+  animation-name: opacity;
+  animation-duration: 2s;
+}
+
+.fadein3s{
+  animation-name: opacity;
+  animation-duration: 3s;
+}
+
+.fadein4s{
+  animation-name: opacity;
+  animation-duration: 4s;
+}
+
+.fadein5s{
+  animation-name: opacity;
+  animation-duration: 5s;
+}
+
+.frombot-animate{
+  animation-name: frombot;
+  animation-duration: 2.5s;
+}
+
+@keyframes opacity{
+  0%   {opacity: 0;}
+  100% {opacity: 10;}
+}
+
+@keyframes fromleft {
+  0%   {opacity: 0; margin-top: -50px;}
+  100% {opacity: 10; margin-top: 0px;}
+}
+
+@keyframes frombot{
+  0%   {opacity: 0; margin-top: 100px;}
+  100% {opacity: 10; margin-top: 0px;}
 }
