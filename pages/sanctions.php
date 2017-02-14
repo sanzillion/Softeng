@@ -162,7 +162,7 @@ if(!isset($_SESSION['admin'])){
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="students.php"><i class="fa fa-fw fa-edit"></i> Students</a>
+                        <a href="students.php"><i class="fa fa-fw fa-group"></i> Students</a>
                     </li>
                     <li>
                         <a href="meetings.php"><i class="fa fa-fw fa-bar-chart-o"></i> Meetings</a>

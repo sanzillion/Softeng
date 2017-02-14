@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
  	$cpnum = $_POST['cpnum'];
 	$year = $_POST['yr'];
 
-	$stmt = $db->prepare("UPDATE student SET 
+	$stmt = $db->prepare("UPDATE student SET
 								name = :name,
 		                 		year = :year,
 		                 		cpnum = :cpnum
@@ -18,14 +18,14 @@ if(isset($_POST['update'])){
 
 			$stmt->bindValue('name',$name);
 			$stmt->bindValue('year',$year);
-			$stmt->bindValue('id',$id); 
-			$stmt->bindValue('cpnum',$cpnum); 
+			$stmt->bindValue('id',$id);
+			$stmt->bindValue('cpnum',$cpnum);
 
 			$stmt->execute();
-			header('Location:../pages/student.php#popup2');
+			header('Location:../pages/students.php?success=1');
 }
 
-if(isset($_POST['updato'])){
+if(isset($_POST['updato'])){ //update meeting
 
 	$id = $_POST['id'];
  	$des = $_POST['des'];
@@ -41,19 +41,23 @@ if(isset($_POST['updato'])){
 	$sth = $db->prepare("ALTER TABLE `sanction` CHANGE `$desc` `$des` VARCHAR(11) NOT NULL");
 	$sth->execute();
 
-	$stmt = $db->prepare("UPDATE meeting SET 
+	$stmt = $db->prepare("UPDATE meeting SET
 								description = :des,
 								m_date = :dat
 		                 		WHERE m_id = :id");
 
 			$stmt->bindValue('des',$des);
 			$stmt->bindValue('dat',$dat);
-			$stmt->bindValue('id',$id); 
+			$stmt->bindValue('id',$id);
 
-			$stmt->execute();
+	if($stmt->execute()){
+		header('Location:../pages/meetings.php?success=2');
+	}else{
+		header('Location:../pages/meetings.php?error');
+	}
 
 
-	header('Location:../pages/meeting.php#popup2');
+
 }
 
 ?>

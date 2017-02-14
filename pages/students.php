@@ -5,7 +5,22 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../pages/login.php?error2');
 }
 
+$admin = $_SESSION['admin'];
+$db = connect();
+$dis = "disabled";
+$color = "color: gray;";
+if(isset($_SESSION['QUE_ERROR'])){
+		if($_SESSION['QUE_ERROR'] > 3){
+		$dis = " ";
+		$color = " ";
+	}
+	else{
+		$dis = "disabled";
+	}
+}
+
  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,7 +152,7 @@ if(!isset($_SESSION['admin'])){
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                      <?php echo $_SESSION['admin']; ?><b class="caret"></b></a>
+                      <?php echo $_SESSION['admin']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -162,7 +177,7 @@ if(!isset($_SESSION['admin'])){
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-edit"></i> Students</a>
+                        <a href="#"><i class="fa fa-fw fa-group"></i> Students</a>
                     </li>
                     <li>
                         <a href="meetings.php"><i class="fa fa-fw fa-bar-chart-o"></i> Meetings</a>
@@ -196,9 +211,6 @@ if(!isset($_SESSION['admin'])){
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Students
-                        </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
@@ -211,164 +223,217 @@ if(!isset($_SESSION['admin'])){
                 </div>
                 <!-- /.row -->
 
-                <!-- Flot Charts -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Flot Charts</h2>
-                        <p class="lead">Flot is a pure JavaScript plotting library for jQuery, with a focus on simple usage, attractive looks and interactive features. For full usage instructions and documentation for Flot Charts, visit <a href="http://www.flotcharts.org/">http://www.flotcharts.org/</a>.</p>
-                    </div>
-                </div>
-                <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-12">
+									<div class="col-lg-4">
+											<div class="panel panel-green">
+													<div class="panel-heading">
+															<h3 class="panel-title"><i class="fa fa-user"></i>&nbsp Manage Students</h3>
+													</div>
+													<div class="panel-body" style="overflow-x: hidden;">
+															<div class="" style="margin-bottom: 10px;">
+																<div class="row">
+																	<div class="col-md-6" style="margin-bottom: 10px;">
+																		<button type="button" data-toggle="modal" data-target="#register-student"
+																		class="btn btn-success btn-block" name="button">
+																		<i class="fa fa-user-plus"></i>&nbsp Register</button>
+																	</div>
+																</div>
+																<hr>
+																<!-- row end -->
+ 																<div class="row" style="margin-bottom: 10px;">
+																	<div class="col-md-12">
+																		<form class="upcsv" class="form-group" enctype="multipart/form-data"
+																		action="../process/fileprocess.php"	method="POST">
+																			<h4>CSV File Upload</h4>
+																			<input class="form-control" name="csv" type="file"
+																			placeholder="asdfasdf" value="Names" required>
+																			<div class="text-right" style="margin-top: 10px;">
+																				<button class="btn btn-primary"
+																				type="submit" name="sub"> Submit File  <i class="fa fa-send">
+																				</i></button>
+																			</div>
+																		</form>
+																	</div>
+																</div>
+																<hr>
+																<!-- row end -->
+																<div class="row">
+																	<div class="col-md-12">
+																		<form class="form-horizontal" enctype="multipart/form-data"
+																		action="../process/fileprocess.php"	method="POST"
+																		<?php echo $dis; ?> style=" <?php echo $color; ?> ">
+																						<a class="btn btn-default btn-block" href="javascript:;" data-toggle="collapse"
+																						data-target="#txtupload">Txt Files Upload <i class="fa fa-caret-down fa-fw"></i></a>
+																						<div id="txtupload" class="collapse">
+																							<div class="form-group" style="margin-top: 10px;">
+																								<label for="names" class="col-sm-2">Name:</label>
+																								<div class="col-sm-10">
+																									<input id="names" name="userfile" type="file"
+																									class="" placeholder="Names" required <?php echo $dis; ?>>
+																								</div>
+																							</div>
+																							<div class="form-group">
+																								<label for="year" class="col-sm-2">Year:</label>
+																								<div class="col-sm-10">
+																									<input type="file" name="yrs" id="year"
+																									placeholder="Year" required <?php echo $dis; ?>>
+																								</div>
+																							</div>
+																							<div class="form-group">
+																								<label for="cpnum" class="col-sm-2">CP:</label>
+																								<div class="col-sm-10">
+																									<input id="cpnum" type="file" name="cpnum" placeholder="Mobile"
+																									required <?php echo $dis; ?>>
+																								</div>
+																							</div>
+																							<div class="text-right" style="margin-bottom: 10px;">
+																								<button class="btn btn-default" type="submit"
+																								value="Submit File" name="submit"
+																								<?php echo $dis; ?>> Submit File
+																								 <i class="fa fa-send"></i> </button>
+																							</div>
+																						</div>
+																						<!-- div collapse -->
+																			</form>
+																	</div>
+																</div>
+																<!-- row end -->
+
+															</div>
+															<!-- panel end -->
+													</div>
+											</div>
+									</div>
+									  <div class="col-lg-8">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Line Graph Example with Tooltips</h3>
+                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp Students List</h3>
                             </div>
-                            <div class="panel-body">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-line-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Pie Chart Example with Tooltips</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-pie-chart"></div>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Multiple Axes Line Graph Example with Tooltips and Raw Data</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-multiple-axes-chart"></div>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Moving Line Chart</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-moving-line-chart"></div>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Bar Graph with Tooltips</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-bar-chart"></div>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+														<div class="row">
+															<div class="col-md-12">
+																<div class="input-group">
+																		<span style="border-radius: 0px;"
+																		class="input-group-addon"><i class="fa fa-search"></i></span>
+																		<input style="border-radius: 0px;
+																		background-color: #F4F4F4;"
+																		class="form-control" type="text" name="searchname"
+																		value="" id="searchname" placeholder="Search here by name">
+																</div>
+															</div>
+														</div>
+														<!-- end of row search -->
+														<div class="row">
+															<div class="col-md-12">
+																<table class="table block" style="margin-bottom: 0px;">
+																	<thead class="text-center">
+																		<tr>
+																			<th width="30%" class="indent">Name</th>
+																			<th width="20%" class="text-center">Year</th>
+																			<th width="20%" class="text-center">Mobile No.</th>
+																			<th width="30%" class="text-center">Option</th>
+																		</tr>
+																	</thead>
+																</table>
+															</div>
+														</div>
+														<!-- end of row table header -->
+                            <div class="panel-body" style="padding-top: 0px;">
+															<div class="row"style="overflow: auto;">
+																<div  id="students-table" class="flot-chart"																>
+																	<table class="table table-hover table-striped">
+																		<tbody>
+																			<?php foreach(getstudents() as $g): ?>
+																			<tr>
+																				<td class="indent"><?php echo  $g->name; ?></td>
+																				<td><?php echo  $g->year; ?></td>
+																				<td class="text-center"><?php echo  $g->cpnum; ?></td>
+																				<td class="text-center"><a data-toggle="modal" data-id="<?php echo $g->s_id;?>" title="Add this item"
+																					class="editStudents btn btn-primary" href="#edit-students" data-target="#edit-students">
+																				<i class="fa fa-edit"></i></a>
+																				<a class="deleteStudent btn btn-danger" data-id="<?php echo $g->s_id?>">
+																				<i class="fa fa-trash"></i></a></td>
+																			</tr>
+																		<?php endforeach; ?>
+																		</tbody>
+																	</table>
+																</div>
+															</div> <!-- end of row -->
+																<div class="col-md-12" style="margin-top: 10px;">
+																	<a type="button" disabled href="../process/deletestudent.php?action=deleteall"
+																	onclick="return confirm('Sanction Records Will be deleted too!')"
+																	class="btn btn-danger" name="button">
+																	<i class="fa fa-warning"></i> &nbsp Delete All</a>
+																</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.row -->
 
-                <!-- Morris Charts -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Morris Charts</h2>
-                        <p class="lead">Morris.js is a very simple API for drawing line, bar, area and donut charts. For full usage instructions and documentation for Morris.js charts, visit <a href="http://morrisjs.github.io/morris.js/">http://morrisjs.github.io/morris.js/</a>.</p>
-                    </div>
-                </div>
-                <!-- /.row -->
+								<div class="modal fade" id="edit-students" role="dialog">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content form-group">
+											<form class="" action="../process/updatestudent.php" method="post">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title font2">Record</h3>
+											</div>
+											<div class="modal-body" id="students_details">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" name="update">Save Changes</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- end of modal -->
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Area Line Graph Example with Tooltips</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-area-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Donut Chart Example</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Line Graph Example with Tooltips</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-line-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Bar Graph Example</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-bar-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
+								<div class="modal fade" id="register-student" role="dialog">
+									<div class="modal-dialog modal-sm">
+										<div class="modal-content form-group">
+											<form class="form-group" action="../process/registerprocess.php" method="post">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 class="modal-title font2"><i class="fa fa-user-plus"></i>&nbsp Register Student</h3>
+												</div>
+												<div class="modal-body">
+													<input class="form-control" type="text" name="fname"
+													placeholder="firstname" style="margin-bottom: 10px;" required>
+														<input class="form-control" type="text" name="lname"
+														placeholder="lastname" style="margin-bottom: 10px;" required>
+														<input class="form-control" type="text" name="cpnum"
+														placeholder="cp number | ex: 63907..." style="margin-bottom: 10px;"
+														required>
+													<div class="row">
+														<div class="col-sm-3 text-center">
+															<h5>Year : </h5>
+														</div>
+														<div class="col-sm-9">
+															<select class="form-control" id="yr"
+															 name="yr" required>
+																<option></option>
+																<option>1st</option>
+																<option>2nd</option>
+																<option>3rd</option>
+																<option>4th</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+													data-dismiss="modal">Cancel</button>
+													<button type="submit" class="btn btn-primary" name="update">Submit Form</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- end of modal -->
 
             </div>
             <!-- /.container-fluid -->
@@ -385,6 +450,53 @@ if(!isset($_SESSION['admin'])){
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
 
+		<!-- Custom JS -->
+		<script src="../js/master.js"></script>
+
+		<script type="text/javascript">
+		//i dont know why this code wont run on master.js (external source)
+		// take this problem up later PROBLEM
+		$(function(){
+				$('#searchname').keyup(function(event){
+						var keyCode = event.which; // check which key was pressed
+						var name = $(this).val(); // get the complete input
+						var nothing = 'nothingLOL';
+						if(name != '')
+							{
+									 $.ajax({
+												url:"editstudents.php",
+												method:"POST",
+												data:{searchname:name},
+												success:function(data){
+														 $('#students-table').html(data);
+														 console.log('success!');
+												}
+									 });
+							}
+						else{
+							$.ajax({
+									 url:"editstudents.php",
+									 method:"POST",
+									 data:{show:nothing},
+									 success:function(data){
+												$('#students-table').html(data);
+												console.log('success!');
+									 }
+							});
+						}
+				});
+		});
+		</script>
+
+<?php
+if(isset($_GET['success']) && $_GET['success'] == 1){
+	echo ' <script type="text/javascript">
+			$(document).ready(function(){
+				alert("Update Success");
+			});
+	 </script>';
+}
+ ?>
 
 </body>
 

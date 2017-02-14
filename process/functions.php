@@ -101,7 +101,12 @@ function deletemeetbyid($id){
 	$db = connect();
 	$sth = $db->prepare("DELETE FROM meeting Where m_id = :id");
 	$sth->bindValue('id',$id);
-	$sth->execute();
+  if($sth->execute()){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 function getdescription(){
@@ -184,13 +189,13 @@ function gn(){
 
 function getrecord(){
 	$db = connect();
-	$stmt = $db->prepare("SELECT * from record ORDER BY r_id DESC LIMIT 50");
+	$stmt = $db->prepare("SELECT * from record ORDER BY r_id DESC LIMIT 10");
 	$stmt->execute();
 	$account = $stmt->fetchAll(PDO::FETCH_OBJ);
 	return $account;
 }
 
-function getstudent2($name){ //getemp2
+function searchstudent($name){ //getemp2
 	$names = "";
 	$names.= '%';
 	$names.= $name;

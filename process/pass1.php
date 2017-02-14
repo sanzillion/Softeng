@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include "../process/functions.php";
 $db = connect();

@@ -457,6 +457,7 @@ if(!empty(getbulletin())){
   </div>
 
 
+</div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

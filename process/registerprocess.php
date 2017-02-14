@@ -3,24 +3,26 @@ session_start();
 include "../process/functions.php";
 $db = connect();
 
-if(isset($_POST['sub'])){
-	$desc = $_POST['desc'];
-	$date = $_POST['dato'];
+if(isset($_POST['addmeeting'])){ //from meeting.php
+	$desc = $_POST['desc']; //description
+	$date = $_POST['dato']; //date
 
-	$query = $db->prepare("INSERT INTO meeting SET 
+	$query = $db->prepare("INSERT INTO meeting SET
 		                 		description = :descs,
 		                 		m_date = :datet");
 
-	$execute_query = [':descs' => $desc, 
+	$execute_query = [':descs' => $desc,
 						':datet' => $date];
 
-	$query->execute($execute_query);
-
 	$sth = $db->prepare("ALTER TABLE  `sanction` ADD  `$desc` VARCHAR(11) NOT NULL");
-	$sth->execute();
 
-	header('Location: ../pages/meeting.php');
+	if($query->execute($execute_query) && $sth->execute()){
+			header('Location: ../pages/meetings.php?success=1');
+	}else{
+			header('Location: ../pages/meetings.php?error');
 	}
+
+}
 
 if(isset($_POST['submitstudent'])){ //Register Student
 	$fname = $_POST['fname'];
@@ -33,7 +35,7 @@ if(isset($_POST['submitstudent'])){ //Register Student
 			header('Location: student.php?error=1');
 		}
 		else{
-		$query = $db->prepare("INSERT INTO student SET 
+		$query = $db->prepare("INSERT INTO student SET
 			                 		name = ?,
 			                 		year = ?,
 			                 		cpnum = ?");

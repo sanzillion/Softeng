@@ -1,3 +1,5 @@
+//This is for homepage scroll and resize
+
 $(document).ready(function(){
    $(window).scroll(function (){
      //everytime i scroll this function executes
@@ -29,6 +31,8 @@ $(document).ready(function(){
     });
 });
 
+//for easing through page from navigation bar
+//About and Contact
 (function($) {
     "use strict"; // Start of use strict
     $('.page-scroll a').bind('click', function(event) {
@@ -39,5 +43,84 @@ $(document).ready(function(){
         event.preventDefault();
     });
 
-    
+
 })(jQuery);
+
+//Modal for editing students
+$(document).on("click", ".editStudents", function () {
+   var id = $(this).data('id');
+   if(id != '')
+     {
+          $.ajax({
+               url:"editstudents.php",
+               method:"POST",
+               data:{view:id},
+               success:function(data){
+                    $('#students_details').html(data);
+                    $('#edit-students').modal('show');
+               }
+          });
+     }
+});
+
+//Modal for editing meetings
+$(document).on("click", ".editMeeting", function () {
+   var id = $(this).data('id');
+   if(id != '')
+     {
+          $.ajax({
+               url:"editmeetings.php",
+               method:"POST",
+               data:{view:id},
+               success:function(data){
+                    $('#event_details').html(data);
+                    $('#edit-meeting').modal('show');
+               }
+          });
+     }
+});
+
+//for deleting students individually
+$(document).on("click", ".deleteStudent", function () {
+   var id = $(this).data('id');
+   var con = confirm("Are you sure?");
+   if (con) {
+     if(id != '')
+       {
+            $.ajax({
+                 url:"editstudents.php",
+                 method:"POST",
+                 data:{delete:id},
+                 success:function(data){
+                      $('#students-table').html(data);
+                 }
+            });
+       }
+   }
+});
+
+$(document).on("click", ".deleteMeeting", function () {
+   var id = $(this).data('id');
+   var con = confirm("Are you sure?");
+   if (con) {
+     if(id != '')
+       {
+            $.ajax({
+                 url:"editmeetings.php",
+                 method:"POST",
+                 data:{delete:id},
+                 success:function(data){
+                      $('#meetings-table').html(data);
+                 }
+            });
+       }
+   }
+});
+// $(function(){
+//     $('#searchname').keyup(function(event){
+//         console.log("Im in here!");
+//         var keyCode = event.which; // check which key was pressed
+//         var term = $(this).val();
+//         console.log(keyCode + " " + term);
+//     });
+// });

@@ -5,27 +5,36 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../pages/login.php?error2');
 }
 
+$admin = $_SESSION['admin'];
+$account = getadmin($admin);
+
+//default bulletin properties
 $loc = "../uploads/";
 $src = "../img/slide-1";
 $title = 'Title Here';
-$par = 'The boxes used in this template are nested inbetween a
-	normal Bootstrap row and the start of your column layout.
-	The boxes will be full-width boxes, so if you want to make
-	them smaller then you will need to customize. <br>
+$par = 'This bulletin board can be a purpose for announcement,
+	statement or notice to the students. The "Delete Bulletin" button
+	will only be activated once a bulletin posts is made as
+	the input for bulletin will be disabled. In order to change the
+	bulletin posts, the admin must first delete the current post.
+	<br><br>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 	Nunc placerat diam quis nisl vestibulum dignissim. In hac
 	habitasse platea dictumst. Interdum et malesuada fames ac
 	ante ipsum primis in faucibus. Pellentesque habitant morbi
 	tristique senectus et netus et malesuada fames ac turpis egestas.';
-$dis = "";
 
-if(!empty(getbulletin())){
+$dis = ""; //enable bulletin registration
+$dis2 = "disabled"; //disable delete bulletin when no bulletin is added
+
+if(!empty(getbulletin())){ //bulletin control
 	$results = getbulletin();
-	$src = $loc.$results->imgname;
+	$src = $loc.$results->imgname; //show image
 	$_SESSION['src'] = $src;
-	$title = $results->title;
-	$par = $results->post;
-	$dis = "disabled";
+	$title = $results->title; //show title
+	$par = $results->post; //show paragraph
+	$dis = "disabled"; //disable bulletin registration
+	$dis2 = ""; //enable delete bulletin
 }
 
  ?>
@@ -165,7 +174,7 @@ if(!empty(getbulletin())){
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user">
-                    </i> <?php echo $_SESSION['admin']; ?><b class="caret"></b></a>
+                    </i> <?php echo $_SESSION['admin']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -190,7 +199,7 @@ if(!empty(getbulletin())){
                         <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="students.php"><i class="fa fa-fw fa-edit"></i> Students</a>
+                        <a href="students.php"><i class="fa fa-fw fa-group"></i> Students</a>
                     </li>
                     <li>
                         <a href="meetings.php"><i class="fa fa-fw fa-bar-chart-o"></i> Meetings</a>
@@ -225,7 +234,7 @@ if(!empty(getbulletin())){
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
+                            Dashboard <small>Overview</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
@@ -246,6 +255,74 @@ if(!empty(getbulletin())){
                 </div>
                 <!-- /.row -->
 
+								<div class="row">
+									<div class="col-lg-5">
+											<div class="panel panel-default">
+													<div class="panel-heading">
+														<a href="javascript:;" data-toggle="collapse" class="bggray cblack"
+														data-target="#pass-form" style="text-decoration: none; color: black;">
+															<h3 class="panel-title"><i class="fa fa-lock fa-fw"></i> Change Password
+															<i class="fa fa-fw fa-caret-down"></i></h3>
+													</a></div>
+													<div id="pass-form" class="collapse panel-body">
+															<div class="container-fluid">
+																<form class="form-group" action="../process/adminpass.php" method="POST">
+																	<h3>Admin no.<?php echo $account->id; ?> </h3>
+																	<input required="Required Field" type="hidden" name="id"
+																		value="<?php echo $account->id;?>">
+																		<label>Old password:</label>
+																		<input class="form-control" type="password" name="old" required>
+																		<label>New Password:</label>
+																		<input class="form-control" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+																		title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+																		<label>Confirm Password:</label>
+																		<input class="form-control" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+																		title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+																		<div class="text-right" style="margin-top: 10px;">
+																			<input class="btn btn-default" type="submit" name="change" value="Save Password">
+																		</div>
+																	</form>
+															</div>
+													</div>
+											</div>
+									</div>
+                    <div class="col-lg-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+															<a href="javascript:;" data-toggle="collapse" class="bggray cblack"
+															data-target="#recordtable" style="text-decoration: none; color: black;">
+																<h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Login Records
+																<i class="fa fa-fw fa-caret-down"></i></h3>
+                            </a></div>
+                            <div  id="recordtable" class="collapse panel-body">
+																<table class="table table-bordered table-hover table-striped">
+																	<thead>
+																		<tr>
+																			<th>User</th>
+																			<th>Date</th>
+																			<th>Time</th>
+																			<th>Day</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<?php foreach(getrecord() as $g): ?>
+																			<tr>
+																				<td><?php echo  $g->name; ?></td>
+																				<td><?php echo  $g->dates; ?></td>
+																				<td><?php echo  $g->time; ?></td>
+																				<td><?php echo  $g->day; ?></td>
+																			</tr>
+																		<?php endforeach; ?>
+																	</tbody>
+																</table>
+                                <div class="text-right">
+                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -269,12 +346,8 @@ if(!empty(getbulletin())){
 																			<input class="btn btn-default" style="margin-top: 10px; width: 120px;"
 																			 type="submit" name="submit" value="Submit" <?php echo $dis; ?>>
 																		</form>
-																		<form class="" action="../process/delete.php" method="post">
-																			<button type="submit" class="btn btn-danger"
-																			name="delete">Delete Bulletin</button>
-																		</form>
-
 																	</div>
+
 																	<div class="col-lg-8">
 																		<hr width="250px">
 																		<h6 class="intro-text text-center">
@@ -294,144 +367,15 @@ if(!empty(getbulletin())){
 																		</div>
 																	</div>
 																	<!-- end of col-8-->
+																	<div class="row">
+																		<div class="container-fluid">
+																			<form class="text-right" action="../process/delete.php" method="post">
+																				<button type="submit" class="btn btn-danger"
+																				name="delete" <?php echo $dis2; ?>>Delete Bulletin</button>
+																			</form>
+																		</div>
+																	</div>
 																</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">just now</span>
-                                        <i class="fa fa-fw fa-calendar"></i> Calendar updated
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">4 minutes ago</span>
-                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">23 minutes ago</span>
-                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">46 minutes ago</span>
-                                        <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has been added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">2 hours ago</span>
-                                        <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">yesterday</span>
-                                        <i class="fa fa-fw fa-globe"></i> Saved the world
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">two days ago</span>
-                                        <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
-                                    </a>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Order #</th>
-                                                <th>Order Date</th>
-                                                <th>Order Time</th>
-                                                <th>Amount (USD)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>3326</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:29 PM</td>
-                                                <td>$321.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3325</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:20 PM</td>
-                                                <td>$234.34</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3324</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:03 PM</td>
-                                                <td>$724.17</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3323</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:00 PM</td>
-                                                <td>$23.71</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3322</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:49 PM</td>
-                                                <td>$8345.23</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3321</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:23 PM</td>
-                                                <td>$245.12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3320</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:15 PM</td>
-                                                <td>$5663.54</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3319</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:13 PM</td>
-                                                <td>$943.45</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
