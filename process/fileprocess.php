@@ -29,7 +29,7 @@ if(isset($_POST['sub'])){
 			if($query->execute()){
 				echo 'successfully uploaded <br>';
 
-				foreach(disname2() as $name){
+				foreach(disname() as $name){
 					$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?");
 					$query2->bindParam(1,$name->name);
 					$query2->execute();

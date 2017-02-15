@@ -54,7 +54,7 @@ if(isset($_POST['submitstudent'])){ //Register Student
 		$query->bindParam(3,$cpnum);
 
 		$query->execute();
-		header('Location: ../pages/student.php');
+		header('Location: ../pages/students.php');
 
 		}
 	}

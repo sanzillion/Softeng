@@ -139,14 +139,6 @@ function disname(){
 	$db = connect();
 	$stmt2 = $db->prepare("SELECT distinct name from student");
 	$stmt2->execute();
-	$data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-	return $data;
-}
-//CLEAN THIS
-function disname2(){
-	$db = connect();
-	$stmt2 = $db->prepare("SELECT distinct name from student");
-	$stmt2->execute();
 	$data = $stmt2->fetchAll(PDO::FETCH_OBJ);
 	return $data;
 }
@@ -227,6 +219,20 @@ function searchstudent($name){ //getemp2
 	return $results;
 }
 
+function searchsanction($name){
+	$names = "";
+	$names.= '%';
+	$names.= $name;
+	$names.= '%';
+	$db = connect();
+	$query = $db->prepare("SELECT * From sanction
+		WHERE s_name LIKE ? ");
+	$query->bindParam(1,$names);
+	$query->execute();
+	$results = $query->fetchAll(PDO::FETCH_OBJ);
+	return $results;
+}
+
  function findname($name){
  	$names = "";
  	$names.= '%';
@@ -268,7 +274,7 @@ function searchstudent($name){ //getemp2
     }
 	}
 
- function deleteone($id){
+ function deletesanctionbyid($id){
  	$db = connect();
 	$sth = $db->prepare("DELETE FROM sanction Where sanc_id = :id");
 	$sth->bindValue('id',$id);

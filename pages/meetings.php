@@ -301,7 +301,7 @@ else{
 																		<i class="fa fa-exclamation-circle"
 																		style="font-size: 1.5em; color: #BB1A1A; margin-left: 10px;"></i></a>
 																	</div>
-																	</div>
+																</div>
                             </div>
                         </div>
                     </div>

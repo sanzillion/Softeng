@@ -74,18 +74,25 @@ if(isset($_POST['searchname'])){
   $output .= '<table class="table table-hover table-striped">
       <tbody>';
 
-      foreach(searchstudent($_POST['searchname']) as $g){
-        $output .= '<tr>
-          <td class="indent">'.$g->name.'</td>
-          <td>'.$g->year.'</td>
-          <td class="text-center">'.$g->cpnum.'</td>
-          <td class="text-center"><a data-toggle="modal" data-id="'.$g->s_id.'" title="Add this item"
-            class="editStudents btn btn-primary" href="#edit-students" data-target="#edit-students">
-          <i class="fa fa-edit"></i></a>
-          <a class="deleteStudent btn btn-danger" data-id="'.$g->s_id.'"
-          onclick="return confirm("Are you sure?")">
-          <i class="fa fa-trash"></i></a></td>
-        </tr>';
+      $results = searchstudent($_POST['searchname']);
+          if($results){
+            foreach($results as $g){
+              $output .= '<tr>
+                <td class="indent">'.$g->name.'</td>
+                <td>'.$g->year.'</td>
+                <td class="text-center">'.$g->cpnum.'</td>
+                <td class="text-center"><a data-toggle="modal" data-id="'.$g->s_id.'" title="Add this item"
+                  class="editStudents btn btn-primary" href="#edit-students" data-target="#edit-students">
+                <i class="fa fa-edit"></i></a>
+                <a class="deleteStudent btn btn-danger" data-id="'.$g->s_id.'"
+                onclick="return confirm("Are you sure?")">
+                <i class="fa fa-trash"></i></a></td>
+              </tr>';
+            }
+      }
+      else{
+        $output .= '<tr><td colspan="10"><div class="text-center"
+        <p style="font-size: 1.5em !important;"> No results found </p></div></td></tr>';
       }
 
   $output .= '</tbody></table>';

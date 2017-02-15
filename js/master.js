@@ -80,6 +80,23 @@ $(document).on("click", ".editMeeting", function () {
      }
 });
 
+//Modal for editing Student-sanctions
+$(document).on("click", ".editSanction", function () {
+   var id = $(this).data('id');
+   if(id != '')
+     {
+          $.ajax({
+               url:"editsanctions.php",
+               method:"POST",
+               data:{view:id},
+               success:function(data){
+                    $('#sanction_details').html(data);
+                    $('#edit-sanction').modal('show');
+               }
+          });
+     }
+});
+
 //for deleting students individually
 $(document).on("click", ".deleteStudent", function () {
    var id = $(this).data('id');
@@ -99,6 +116,7 @@ $(document).on("click", ".deleteStudent", function () {
    }
 });
 
+//for deleting meeting individually
 $(document).on("click", ".deleteMeeting", function () {
    var id = $(this).data('id');
    var con = confirm("Are you sure?");
@@ -116,6 +134,26 @@ $(document).on("click", ".deleteMeeting", function () {
        }
    }
 });
+
+//for deleting student-sanction individually
+$(document).on("click", ".deleteSanction", function () {
+   var id = $(this).data('id');
+   var con = confirm("Are you sure?");
+   if (con) {
+     if(id != '')
+       {
+            $.ajax({
+                 url:"editsanctions.php",
+                 method:"POST",
+                 data:{delete:id},
+                 success:function(data){
+                      $('#sanctions-table').html(data);
+                 }
+            });
+       }
+   }
+});
+
 // $(function(){
 //     $('#searchname').keyup(function(event){
 //         console.log("Im in here!");

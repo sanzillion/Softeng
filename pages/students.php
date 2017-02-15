@@ -450,7 +450,7 @@ if(isset($_SESSION['QUE_ERROR'])){
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default"
 													data-dismiss="modal">Cancel</button>
-													<button type="submit" class="btn btn-primary" name="update">Submit Form</button>
+													<button type="submit" class="btn btn-primary" name="submitstudent">Submit Form</button>
 												</div>
 											</form>
 										</div>

@@ -8,15 +8,13 @@ if(!isset($_SESSION['admin'])){
 $db = connect();
 
 if(isset($_GET['action']) && $_GET['action']=='deleteall'){
-	$getmeet = getdescription();
 
   $meet = [];
-  foreach (getdescription() as $g) {
-    $meet[] = $g->description;
+  foreach (getdescription2() as $g) {
+    $meet[] = $g['description'];
   }
-      //CLEAN THESE
-  $arraycount = count($getmeet);
 
+  $arraycount = count(getdescription();
 	for ($x = 0; $x < $arraycount; $x++){
 		$query = $db->prepare("ALTER TABLE `sanction` DROP `$meet[$x]`");
 		$query->execute();

@@ -5,7 +5,16 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error2');
 }
 
-$getdesc = getdescription2(); //CLEAN THIS!
+//convert dates
+$meetdate = [];
+foreach(getmeet() as $d){
+	$month = date('M', strtotime($d->m_date));
+	$day = date('d', strtotime($d->m_date));
+	$meetdate[] = $month." ".$day;
+}
+
+
+$getdesc = getdescription2(); //2 means FETCH_ASSOC
 $arraycount = count($getdesc);
 
 if($arraycount < 1 || $arraycount == 0){
@@ -20,9 +29,14 @@ for ($i = 0; $i <$arraycount; $i++){
 
 	$data = disname();
 	$option = "";
+
 	foreach ($data as $row) {
-        $name = $row['name'];
-        $option.='<option value="'.$name.'">'.$name.'</option>';
+		$name = $row->name;
+		if(find($name)){
+			continue;
+		}else{
+			$option.='<option value="'.$name.'">'.$name.'</option>';
+		}
   }
 
 
@@ -242,9 +256,74 @@ for ($i = 0; $i <$arraycount; $i++){
 												&nbsp <i class="fa fa-caret-down"></i></h3></a>
 											</div> <!-- End of panel heading -->
 											<div class="collapse panel-body" id="panelbody">
-												<div class="flot-chart">
+													<div class="row">
+														<div class="col-md-12">
+															<form class="form-group" method="POST" action="../process/sanctionprocess.php">
+																<h4>Add Student-Sanction</h4>
+																<select class="form-control" name="name" required="required"
+																style="margin-bottom: 10px;">
+																			<option disabled selected hidden value="">Student Name</option>
+														    				<?php echo $option?>
+																</select>
+																<div class="col-md-6">
+																	<?php if($arraycount >= 1)
+																	{echo '<select class="form-control"
+																		name="'.$desc[0].'" style="margin-bottom: 5px;" required>';
+																	 echo '<option disabled selected hidden value="">'.$desc[0].'</option>';
+																	 echo '<option>50</option><option>100</option><option>PAID</option>';
+																	 echo '<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																	 <?php if($arraycount >= 3)
+	 																{echo '<select class="form-control"
+																		name="'.$desc[2].'" style="margin-bottom: 5px;" required>';
+	 																 echo '<option disabled selected hidden value="">'.$desc[2].'</option>';
+	 																 echo '<option>50</option><option>100</option><option>PAID</option>';
+	 																 echo '<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	 																 <?php if($arraycount >= 5)
+	  																{echo '<select class="form-control"
+																			name="'.$desc[4].'" style="margin-bottom: 5px;" required>';
+	  																 echo '<option disabled selected hidden value="">'.$desc[4].'</option>';
+	  																 echo '<option>50</option><option>100</option><option>PAID</option>';
+	  																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	 																 <?php if($arraycount >= 7)
+	  																{echo '<select class="form-control"
+																			name="'.$desc[6].'" style="margin-bottom: 5px;" required>';
+	  																 echo '<option disabled selected hidden value="">'.$desc[6].'</option>';
+	  																 echo '<option>50</option><option>100</option><option>PAID</option>';
+	  																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																</div>
+																<div class="col-md-6" style="margin-bottom: 10px;">
+																	<?php if($arraycount >= 2)
+																	{echo '<select class="form-control"
+																		name="'.$desc[1].'" style="margin-bottom: 5px;" required>';
+																	 echo '<option disabled selected hidden value="">'.$desc[1].'</option>';
+																	 echo '<option>50</option><option>100</option><option>PAID</option>';
+																	 echo '<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																	 <?php if($arraycount >= 4)
+	 																{echo '<select class="form-control"
+																		name="'.$desc[3].'" style="margin-bottom: 5px;" required>';
+	 																 echo '<option disabled selected hidden value="">'.$desc[3].'</option>';
+	 																 echo '<option>50</option><option>100</option><option>PAID</option>';
+	 																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																	 <?php if($arraycount >= 6)
+																	 {echo '<select class="form-control"
+																		 name="'.$desc[5].'" style="margin-bottom: 5px;" required>';
+																		echo '<option disabled selected hidden value="">'.$desc[5].'</option>';
+																		echo '<option>50</option><option>100</option><option>PAID</option>';
+																		echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																		<?php if($arraycount >= 8)
+	 																{echo '<select class="form-control" name="'.$desc[7].'" required>';
+	 																 echo '<option disabled selected hidden value="">'.$desc[7].'</option>';
+	 																 echo '<option>50</option><option>100</option><option>PAID</option>';
+	 																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
 
-												</div>
+																</div>
+																<input class="btn btn-primary btn-block" style="margin-top: 15px;"
+																type="submit" name="addsanc" value="Submit Entry">
+																</form>
+														</div>
+													</div>
+													<!-- End of row for adding student-sanction -->
+
 											</div>
 										</div>
                   </div>
@@ -281,7 +360,7 @@ for ($i = 0; $i <$arraycount; $i++){
 																<span style="font-size: 10px;"
 																class="input-group-addon"><i class="fa fa-search"></i></span>
 																<input style="background-color: #F4F4F4; height: 25px;"
-																class="form-control" type="text" name="searchname2"
+																class="form-control" type="text" name="searchname"
 																value="" id="searchname" placeholder="Search here by name">
 														</div>
 													</div>
@@ -295,18 +374,18 @@ for ($i = 0; $i <$arraycount; $i++){
 											<div class="panel-body" style="padding-top: 0px;">
 												<div class="row" style="overflow: auto;">
 													<div class="flot-chart">
-														<table class="table table-responsive table-stripped">
+														<table class="table table-responsive table-striped">
 															<thead class="text-center">
 																<tr class="">
 																	<th>Student</th>
-																	<?php foreach (getmeet() as $g):?>
-																	<th><?php echo $g->description; ?></th>
+																	<?php foreach ($meetdate as $g): ?>
+																	<th><?php echo $g; ?></th>
 																	<?php endforeach;?>
 																	<th>Total</th>
 																	<th class="text-center">Option</th>
 																</tr>
 															</thead>
-															<tbody>
+															<tbody id="sanctions-table">
 																<?php foreach (getsanction() as $k):?>
 																	<tr>
 																		<td><?php echo $k->s_name ?></td>
@@ -321,10 +400,10 @@ for ($i = 0; $i <$arraycount; $i++){
 																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
 																		<?php }catch(exception $e){echo $e;}?>
 																		<td></td>
-																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $g->m_id;?>" title="Add this item"
-																			class="editMeeting btn btn-primary" data-target="#edit-meeting">
+																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
+																			class="editSanction btn btn-primary" data-target="#edit-sanction">
 																		<i class="fa fa-edit"></i></a>
-																		<a class="deleteMeeting btn btn-danger" data-id="<?php echo $g->m_id?>">
+																		<a class="deleteSanction btn btn-danger" data-id="<?php echo $k->sanc_id?>">
 																		<i class="fa fa-trash"></i></a></td>
 																	</tr>
 																	<?php endforeach;?>
@@ -333,10 +412,33 @@ for ($i = 0; $i <$arraycount; $i++){
 													</div>
 												</div>
 											</div>
-
 										</div>
 									</div>
 								</div>
+
+								<div class="modal fade" id="edit-sanction" role="dialog">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content form-group">
+											<form class="form-group" action="../process/sanctionprocess.php" method="post">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<div class="text-center">
+													<h3 class="modal-title font2"> <i class="fa fa-edit"></i> &nbspSanction Information</h3>
+												</div>
+											</div>
+											<div class="modal-body" id="sanction_details">
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" name="updatesanc">Save Changes</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- end of modal -->
 
             </div>
             <!-- /.container-fluid -->
@@ -352,6 +454,44 @@ for ($i = 0; $i <$arraycount; $i++){
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+
+		<!-- Custom JS -->
+		<script src="../js/master.js"></script>
+
+		<script type="text/javascript">
+		//i dont know why this code wont run on master.js (external source)
+		// take this PROBLEM up later
+		$(function(){
+				$('#searchname').keyup(function(event){
+						var keyCode = event.which; // check which key was pressed
+						var name = $(this).val(); // get the complete input
+						var nothing = 'nothingLOL';
+						if(name != '')
+							{
+									 $.ajax({
+												url:"editsanctions.php",
+												method:"POST",
+												data:{searchname:name},
+												success:function(data){
+														 $('#sanctions-table').html(data);
+														 console.log('success!');
+												}
+									 });
+							}
+						else{ //if he erases everythin, the table goes back to normal
+							$.ajax({
+									 url:"editsanctions.php",
+									 method:"POST",
+									 data:{show:nothing},
+									 success:function(data){
+												$('#sanctions-table').html(data);
+												console.log('success!');
+									 }
+							});
+						}
+				});
+		});
+		</script>
 
 </body>
 
