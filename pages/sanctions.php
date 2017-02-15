@@ -2,10 +2,33 @@
 session_start();
 include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
-	header('Location: ../pages/login.php?error2');
+	header('Location: ../index.php?error2');
 }
 
- ?>
+$getdesc = getdescription2(); //CLEAN THIS!
+$arraycount = count($getdesc);
+
+if($arraycount < 1 || $arraycount == 0){
+	header('Location: meetings.php?error=5');
+}
+
+$_SESSION['count']=$arraycount;
+
+for ($i = 0; $i <$arraycount; $i++){
+	$desc[] = implode(',', $getdesc[$i]);
+}
+
+	$data = disname();
+	$option = "";
+	foreach ($data as $row) {
+        $name = $row['name'];
+        $option.='<option value="'.$name.'">'.$name.'</option>';
+  }
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -196,9 +219,6 @@ if(!isset($_SESSION['admin'])){
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Sanctions
-                        </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
@@ -212,217 +232,111 @@ if(!isset($_SESSION['admin'])){
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-6">
+                  <div class="col-lg-4">
+										<div class="panel panel-yellow">
+											<div class="panel-heading">
+												<a href="javascript:;" data-toggle="collapse"
+												data-target="#panelbody" style="text-decoration: none;
+												color: black;">	<h3 class="panel-title">
+												<i class="fa fa-tasks"></i>	&nbsp Manage Sanction
+												&nbsp <i class="fa fa-caret-down"></i></h3></a>
+											</div> <!-- End of panel heading -->
+											<div class="collapse panel-body" id="panelbody">
+												<div class="flot-chart">
 
-                        <form role="form">
+												</div>
+											</div>
+										</div>
+                  </div>
+									<div class="col-lg-8">
+										<div class="panel panel-green">
+											<div class="panel-heading">
+												<a href="javascript:;" data-toggle="collapse"
+												data-target="#panelbody2" style="text-decoration: none;
+												color: white;"> <h3 class="panel-title">
+												<i class="fa fa-mortar-board"></i> &nbsp Edit by year
+												&nbsp <i class="fa fa-caret-down"></i></h3>	</a>
+											</div> <!-- End of panel heading -->
+											<div class="collapse panel-body" id="panelbody2">
+												<div class="flot-chart">
 
-                            <div class="form-group">
-                                <label>Text Input</label>
-                                <input class="form-control">
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Checkboxes</label>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 1
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 2
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 3
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Inline Checkboxes</label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">1
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">2
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">3
-                                </label>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Radio Buttons</label>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Inline Radio Buttons</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                </label>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-
-                        </form>
-
-                    </div>
-                    <div class="col-lg-6">
-                        <h1>Disabled Form States</h1>
-
-                        <form role="form">
-
-                            <fieldset disabled>
-
-                                <div class="form-group">
-                                    <label for="disabledSelect">Disabled input</label>
-                                    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="disabledSelect">Disabled select menu</label>
-                                    <select id="disabledSelect" class="form-control">
-                                        <option>Disabled select</option>
-                                    </select>
-                                </div>
-
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">Disabled Checkbox
-                                    </label>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Disabled Button</button>
-
-                            </fieldset>
-
-                        </form>
-
-                        <h1>Form Validation</h1>
-
-                        <form role="form">
-
-                            <div class="form-group has-success">
-                                <label class="control-label" for="inputSuccess">Input with success</label>
-                                <input type="text" class="form-control" id="inputSuccess">
-                            </div>
-
-                            <div class="form-group has-warning">
-                                <label class="control-label" for="inputWarning">Input with warning</label>
-                                <input type="text" class="form-control" id="inputWarning">
-                            </div>
-
-                            <div class="form-group has-error">
-                                <label class="control-label" for="inputError">Input with error</label>
-                                <input type="text" class="form-control" id="inputError">
-                            </div>
-
-                        </form>
-
-                        <h1>Input Groups</h1>
-
-                        <form role="form">
-
-                            <div class="form-group input-group">
-                                <span class="input-group-addon">@</span>
-                                <input type="text" class="form-control" placeholder="Username">
-                            </div>
-
-                            <div class="form-group input-group">
-                                <input type="text" class="form-control">
-                                <span class="input-group-addon">.00</span>
-                            </div>
-
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-eur"></i></span>
-                                <input type="text" class="form-control" placeholder="Font Awesome Icon">
-                            </div>
-
-                            <div class="form-group input-group">
-                                <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control">
-                                <span class="input-group-addon">.00</span>
-                            </div>
-
-                            <div class="form-group input-group">
-                                <input type="text" class="form-control">
-                                <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
-                            </div>
-
-                        </form>
-
-                        <p>For complete documentation, please visit <a href="http://getbootstrap.com/css/#forms">Bootstrap's Form Documentation</a>.</p>
-
-                    </div>
+												</div>
+											</div>
+										</div>
+									</div>
                 </div>
                 <!-- /.row -->
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="panel panel-primary">
+											<div class="panel-heading">
+												<div class="row">
+													<div class="col-lg-8">
+														<h1 style="font-size: 1.5em;" class="panel-title">
+														<i class="fa fa-th"></i>
+														&nbsp Sanction List</h1>
+													</div>
+													<div class="col-lg-4 text-right">
+														<div class="input-group">
+																<span style="font-size: 10px;"
+																class="input-group-addon"><i class="fa fa-search"></i></span>
+																<input style="background-color: #F4F4F4; height: 25px;"
+																class="form-control" type="text" name="searchname2"
+																value="" id="searchname" placeholder="Search here by name">
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+
+												</div>
+											</div>
+											<div class="panel-body" style="padding-top: 0px;">
+												<div class="row" style="overflow: auto;">
+													<div class="flot-chart">
+														<table class="table table-responsive table-stripped">
+															<thead class="text-center">
+																<tr class="">
+																	<th>Student</th>
+																	<?php foreach (getmeet() as $g):?>
+																	<th><?php echo $g->description; ?></th>
+																	<?php endforeach;?>
+																	<th>Total</th>
+																	<th class="text-center">Option</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php foreach (getsanction() as $k):?>
+																	<tr>
+																		<td><?php echo $k->s_name ?></td>
+																		<?php try{ ?>
+																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
+																		<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
+																		<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';} ?>
+																		<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';} ?>
+																		<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
+																		<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
+																		<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
+																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
+																		<?php }catch(exception $e){echo $e;}?>
+																		<td></td>
+																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $g->m_id;?>" title="Add this item"
+																			class="editMeeting btn btn-primary" data-target="#edit-meeting">
+																		<i class="fa fa-edit"></i></a>
+																		<a class="deleteMeeting btn btn-danger" data-id="<?php echo $g->m_id?>">
+																		<i class="fa fa-trash"></i></a></td>
+																	</tr>
+																	<?php endforeach;?>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
 
             </div>
             <!-- /.container-fluid -->

@@ -4,9 +4,9 @@ include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
 	header('Location: ../pages/login.php?error2');
 }
+$db = connect();
 
 $results = getdescription();
-
 $arraycount = count($results);
 if($arraycount > 7){
 	$dis = "disabled";
@@ -158,7 +158,8 @@ else{
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../process/logout.php">
+															<i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -227,11 +228,11 @@ else{
                                 <div class="row">
 																	<div class="col-md-12">
 																		<!-- PROBLEM DISABLE PROPERTY -->
-																		<form  <?php echo $dis;?> class="" method="POST" action="../process/registerprocess.php">
+																		<form class="" method="POST" action="../process/registerprocess.php">
 																			<h4><i class="fa fa-calendar-plus-o"></i> Register Event</h4>
 																				<div class="form-group input-group">
 																					<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-																					<input type="text" name="desc" placeholder="Description" required maxlength="11"
+																					<input type="text" name="desc" placeholder="Event Description" required maxlength="11"
 																					pattern="[a-zA-Z]{.11}" title="Format: aA" class="form-control">
 																				</div>
 																				<div class="form-group input-group">
@@ -240,8 +241,8 @@ else{
 																					maxlength="11" placeholder="yyyy-dd-mm">
 																				</div>
 																				<div class="col-md-12 text-right" style="margin-bottom: 10px;">
-																					<button class="btn btn-primary" type="submit" name="addmeeting">
-																					Add Event &nbsp  <i class="fa fa-send"></i></button>
+																					<button class="btn btn-primary" type="submit" name="addmeeting"
+																					<?php echo $dis;?>>	Add Event &nbsp  <i class="fa fa-send"></i></button>
 																				</div>
 																			</form>
 																	</div>
@@ -249,6 +250,7 @@ else{
                             </div>
                         </div>
                     </div>
+										<!-- End of manage meeting panel -->
 
 										<div class="col-lg-7">
                         <div class="panel panel-primary">
@@ -256,21 +258,7 @@ else{
                                 <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp Meetings List</h3>
                             </div>
 
-														<!-- <div class="row">
-															<div class="col-md-12">
-																<table class="table block" style="margin-bottom: 0px;">
-																	<thead class="text-center">
-																		<tr>
-																			<th width="25%" class="text-center">ID</th>
-																			<th width="25%" class="text-center">Description</th>
-																			<th width="15%" class="text-center">Date</th>
-																			<th width="35%" class="text-center">Option</th>
-																		</tr>
-																	</thead>
-																</table>
-															</div>
-														</div> -->
-														<!-- end of row table header -->
+														<!-- meeting list table -->
                             <div class="panel-body" style="padding-top: 0px;">
 															<div class="row" style="overflow: auto; height: 470px;">
 																<div class="flot-chart">
@@ -300,10 +288,18 @@ else{
 																	</table>
                                 </div>
 															</div>
+															<!-- delete all button -->
 																<div class="row">
-																	<div class="col-md-12 text-right">
-																		<button class="btn btn-danger" type="button"
-																		name="button"><i class="fa fa-warning"></i>&nbsp Delete All</button>
+																	<div class="col-md-12">
+																		<a href="../process/deletemeetings.php?action=deleteall"
+																		onclick="return confirm('Are you sure?')"
+																		class="btn btn-danger" type="button" data-toggle="tooltip"
+																		title="Proceed with caution!" name="button">
+																		<i class="fa fa-warning"></i>&nbsp Delete All</a>
+																		<a href="" class="danger" data-toggle="tooltip" data-placement="right"
+																		title="Warning! This will delete everything in the list">
+																		<i class="fa fa-exclamation-circle"
+																		style="font-size: 1.5em; color: #BB1A1A; margin-left: 10px;"></i></a>
 																	</div>
 																	</div>
                             </div>
@@ -319,7 +315,7 @@ else{
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<div class="text-center">
-													<h3 class="modal-title font2"> <i class="fa fa-edit"></i> &nbspRecord</h3>
+													<h3 class="modal-title font2"> <i class="fa fa-edit"></i> &nbspEvent Information</h3>
 												</div>
 											</div>
 											<div class="modal-body" id="event_details">
@@ -353,6 +349,13 @@ else{
 		<!-- Custom JS -->
 		<script src="../js/master.js"></script>
 
+		<!-- Activate bootstrap tooltip -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+					$('[data-toggle="tooltip"]').tooltip();
+			});
+		</script>
+
 		<?php
 		if(isset($_GET['success']) && $_GET['success'] == 1){
 				echo '<script type="text/javascript">
@@ -362,6 +365,11 @@ else{
 		if(isset($_GET['success']) && $_GET['success'] == 2){
 			echo '<script type="text/javascript">
 				alert("Updated Successfuly");
+			</script>';
+		}
+		if(isset($_GET['error']) && $_GET['error'] == 5){
+			echo '<script type="text/javascript">
+				alert("Add meetings first!");
 			</script>';
 		}
 		?>

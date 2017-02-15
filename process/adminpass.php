@@ -28,21 +28,21 @@ if(isset($_POST['change'])){
 				$stmt->bindValue('user_id',$id);
 				$stmt->bindValue('password',$conpass);
 				$stmt->execute();
-				header('Location:../pages/admin.php#popup3');
+				header('Location:../pages/index.php?success');
  			}
  			else{
  				$_SESSION['error']='3';
- 				header('Location:../pages/admin.php#popup');
+ 				header('Location:../pages/admin.php?error=3');
  			}
  		}
  		else{
  			$_SESSION['error']='2';
- 			header('Location:../pages/admin.php#popup');
+ 			header('Location:../pages/admin.php?error=2');
  		}
  	}
  	else{
  		$_SESSION['error']='1';
- 		header('Location:../pages/admin.php#popup');
+ 		header('Location:../pages/admin.php?error=1');
  	}}
 
 ?>

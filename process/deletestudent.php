@@ -18,9 +18,14 @@ if(isset($_GET['action']) && $_GET['action']=='delete'){
 }
 elseif(isset($_GET['action']) && $_GET['action']=='deleteall'){
 	//if click deleteALL then delete also all from sanction records
-	deleteall();
-	deleteallsanction();
-	header('Location:../pages/student.php');
+	if(deleteall() && deleteallsanction()){
+		header('Location:../pages/students.php?success');
+	}
+	else{
+		header('Location:../pages/students.php?error');
+	}
+
+
 }
 
 ?>

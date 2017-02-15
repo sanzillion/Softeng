@@ -113,6 +113,16 @@ function getdescription(){
 	$db = connect();
 	$sth = $db->prepare("SELECT DISTINCT description From meeting");
 	$sth->execute();
+	$results = $sth->fetchAll(PDO::FETCH_OBJ);
+	return $results;
+}
+
+//CLEAN THIS!
+
+function getdescription2(){
+	$db = connect();
+	$sth = $db->prepare("SELECT DISTINCT description From meeting");
+	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_ASSOC);
 	return $results;
 }
@@ -130,6 +140,14 @@ function disname(){
 	$stmt2 = $db->prepare("SELECT distinct name from student");
 	$stmt2->execute();
 	$data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+	return $data;
+}
+//CLEAN THIS
+function disname2(){
+	$db = connect();
+	$stmt2 = $db->prepare("SELECT distinct name from student");
+	$stmt2->execute();
+	$data = $stmt2->fetchAll(PDO::FETCH_OBJ);
 	return $data;
 }
 
@@ -232,33 +250,54 @@ function searchstudent($name){ //getemp2
  function deleteall(){
  	$db = connect();
 	$sth = $db->prepare("DELETE FROM student");
-	$sth->execute();
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
+
 	}
 
  function deleteallsanction(){
  	$db = connect();
 	$sth = $db->prepare("DELETE FROM sanction");
-	$sth->execute();
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
 	}
 
  function deleteone($id){
  	$db = connect();
 	$sth = $db->prepare("DELETE FROM sanction Where sanc_id = :id");
 	$sth->bindValue('id',$id);
-	$sth->execute();
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
  }
 
  function deleteallmeetings(){
  	$db = connect();
 	$sth = $db->prepare("DELETE FROM meeting");
-	$sth->execute();
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
 	}
 
 function deletefromsanc($name){
 	$db = connect();
 	$sth = $db->prepare("DELETE * From sanction WHERE s_name = ?");
 	$sth->bindParam(1,$name);
-	$sth->execute();
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
 }
 
 function getadmin($var){
@@ -272,7 +311,11 @@ function deleteonestudent($var){
 	$db = connect();
 	$sth = $db->prepare("DELETE FROM student Where s_id = :id");
 	$sth->bindValue('id',$var);
-	$sth->execute();
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
 }
 function getbulletin(){
 	$db = connect();
@@ -284,5 +327,9 @@ function getbulletin(){
 function deletebulletin(){
   $db = connect();
   $query = $db->prepare("DELETE FROM bulletin");
-  $query->execute();
+  if($query->execute()){
+      return true;
+    }else {
+      return false;
+    }
 }

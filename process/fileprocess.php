@@ -3,6 +3,9 @@
 session_start();
 include "functions.php";
 $db = connect();
+if(!isset($_SESSION['admin'])){
+	header('Location: ../index.php?error2');
+}
 
 if(isset($_POST['sub'])){
 	if(is_uploaded_file($_FILES['csv']['tmp_name'])){
@@ -25,23 +28,30 @@ if(isset($_POST['sub'])){
 
 			if($query->execute()){
 				echo 'successfully uploaded <br>';
-				$query->closeCursor();
-				header('Location: ../pages/admin.php');
+
+				foreach(disname2() as $name){
+					$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?");
+					$query2->bindParam(1,$name->name);
+					$query2->execute();
+				}
+						//CLEAN
+
+				header('Location: ../pages/students.php?success');
 			}
 			else{
 				echo 'failed! <br>';
 				$query->closeCursor();
 				$_SESSION['QUE_ERROR'] += 1;
-				header('Location: ../pages/admin.php?error=dberror');
+				header('Location: ../pages/students.php?error=dberror');
 			}
 		}
 		else{
-			echo "file type invalid";
+			header('Location: ../pages/students.php?filetypeinvalid');
 		}
 
 	}
 	else{
-		echo "no file uploaded";
+		header('Location: ../pages/students.php?error=nofile');
 	}
 
 }
@@ -98,7 +108,7 @@ if(isset($_POST['submit'])){
 				$query->bindParam(3,$cpnum[$i]);
 				$query->execute();
 					if($i == 49){
-						header('Location: ../pages/admin.php?error=none');
+						header('Location: ../pages/students.php?error=none');
 					}
 				}
 
@@ -113,7 +123,7 @@ if(isset($_POST['submit'])){
 	}
 }
 else{
-	//header('Location: ../pages/admin.php?error=nofiles');
+	//header('Location: ../pages/students.php?error=nofiles');
 }
 
  ?>

@@ -165,7 +165,8 @@ if(isset($_SESSION['QUE_ERROR'])){
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../process/logout.php">
+														<i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -245,7 +246,12 @@ if(isset($_SESSION['QUE_ERROR'])){
 																	<div class="col-md-12">
 																		<form class="upcsv" class="form-group" enctype="multipart/form-data"
 																		action="../process/fileprocess.php"	method="POST">
-																			<h4>CSV File Upload</h4>
+																			<h4>CSV File Upload
+																			<a href="" data-toggle="tooltip" data-placement="right"
+																			title="Download CSV file in settings for the format">
+																			<i class="fa fa-info-circle"
+																			style="font-size: 15px; color: black;
+																			margin-left: 10px;"></i></a></h4>
 																			<input class="form-control" name="csv" type="file"
 																			placeholder="asdfasdf" value="Names" required>
 																			<div class="text-right" style="margin-top: 10px;">
@@ -263,8 +269,16 @@ if(isset($_SESSION['QUE_ERROR'])){
 																		<form class="form-horizontal" enctype="multipart/form-data"
 																		action="../process/fileprocess.php"	method="POST"
 																		<?php echo $dis; ?> style=" <?php echo $color; ?> ">
-																						<a class="btn btn-default btn-block" href="javascript:;" data-toggle="collapse"
-																						data-target="#txtupload">Txt Files Upload <i class="fa fa-caret-down fa-fw"></i></a>
+																				<div class="input-group">
+																					<a class="btn btn-default btn-block" href="javascript:;"
+																					 data-toggle="collapse" style="border-radius: 0px;"
+																					data-target="#txtupload">Txt Files Upload <i class="fa fa-caret-down fa-fw"></i></a>
+																					<a href="" class="input-group-addon"
+																					style="border-radius: 0px;"	data-toggle="tooltip" data-placement="top"
+																					title="This will only be activated incase of CSV file upload error!">
+																					<i class="fa fa-info-circle" style="font-size: 15px; color: black;"></i></a></h4>
+																				</div>
+
 																						<div id="txtupload" class="collapse">
 																							<div class="form-group" style="margin-top: 10px;">
 																								<label for="names" class="col-sm-2">Name:</label>
@@ -308,21 +322,25 @@ if(isset($_SESSION['QUE_ERROR'])){
 									  <div class="col-lg-8">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-list"></i>&nbsp Students List</h3>
-                            </div>
-														<div class="row">
-															<div class="col-md-12">
-																<div class="input-group">
-																		<span style="border-radius: 0px;"
-																		class="input-group-addon"><i class="fa fa-search"></i></span>
-																		<input style="border-radius: 0px;
-																		background-color: #F4F4F4;"
-																		class="form-control" type="text" name="searchname"
-																		value="" id="searchname" placeholder="Search here by name">
+															<div class="row">
+																<div class="col-md-6">
+																	<h3 style="font-size: 1.5em;" class="panel-title">
+																		<i class="fa fa-list"></i>&nbsp Students List</h3>
 																</div>
+																<div class="col-md-6">
+																	<div class="input-group">
+																			<span style="font-size: 10px;"
+																			class="input-group-addon"><i class="fa fa-search"></i></span>
+																			<input style="background-color: #F4F4F4; height: 25px;"
+																			class="form-control" type="text" name="searchname2"
+																			value="" id="searchname" placeholder="Search here by name">
+																	</div>
+																</div>
+																<!-- end of search -->
 															</div>
-														</div>
-														<!-- end of row search -->
+															<!-- End of row -->
+                            </div>
+														<!-- end of panel heading -->
 														<div class="row">
 															<div class="col-md-12">
 																<table class="table block" style="margin-bottom: 0px;">
@@ -360,10 +378,15 @@ if(isset($_SESSION['QUE_ERROR'])){
 																</div>
 															</div> <!-- end of row -->
 																<div class="col-md-12" style="margin-top: 10px;">
-																	<a type="button" disabled href="../process/deletestudent.php?action=deleteall"
+																	<a type="button" href="../process/deletestudent.php?action=deleteall"
 																	onclick="return confirm('Sanction Records Will be deleted too!')"
-																	class="btn btn-danger" name="button">
+																	class="btn btn-danger" name="button" data-toggle="tooltip"
+																	title="Proceed with caution!">
 																	<i class="fa fa-warning"></i> &nbsp Delete All</a>
+																	<a href="" data-toggle="tooltip" data-placement="right"
+																	title="Warning! This will delete everything in the list">
+																	<i class="fa fa-exclamation-circle"
+																	style="font-size: 1.5em; color: #BB1A1A; margin-left: 10px;"></i></a>
 																</div>
                             </div>
                         </div>
@@ -486,6 +509,13 @@ if(isset($_SESSION['QUE_ERROR'])){
 						}
 				});
 		});
+		</script>
+
+		<!-- Activate bootstrap tooltip -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+					$('[data-toggle="tooltip"]').tooltip();
+			});
 		</script>
 
 <?php

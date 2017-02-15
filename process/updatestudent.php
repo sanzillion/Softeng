@@ -11,7 +11,7 @@ if(isset($_POST['update'])){
 	$year = $_POST['yr'];
 
 	$stmt = $db->prepare("UPDATE student SET
-								name = :name,
+												name = :name,
 		                 		year = :year,
 		                 		cpnum = :cpnum
 		                 		WHERE s_id = :id");
@@ -31,26 +31,22 @@ if(isset($_POST['updato'])){ //update meeting
  	$des = $_POST['des'];
 	$dat = $_POST['dat'];
 
-	$stmt = $db->prepare("SELECT * from meeting where m_id = :id");
-		$stmt->bindValue('id',$id);
-		$stmt->execute();
-		$account = $stmt->fetch(PDO::FETCH_OBJ);
-
+	$account = getmeetbyid($id); // get description name
 	$desc = $account->description;
 
 	$sth = $db->prepare("ALTER TABLE `sanction` CHANGE `$desc` `$des` VARCHAR(11) NOT NULL");
-	$sth->execute();
 
 	$stmt = $db->prepare("UPDATE meeting SET
-								description = :des,
-								m_date = :dat
-		                 		WHERE m_id = :id");
+												description = :des,
+												m_date = :dat
+						            WHERE m_id = :id");
 
 			$stmt->bindValue('des',$des);
 			$stmt->bindValue('dat',$dat);
 			$stmt->bindValue('id',$id);
 
-	if($stmt->execute()){
+			//the 2 must be executed properly or else update fail
+	if($stmt->execute() && $sth->execute()){
 		header('Location:../pages/meetings.php?success=2');
 	}else{
 		header('Location:../pages/meetings.php?error');

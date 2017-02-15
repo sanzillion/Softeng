@@ -4,23 +4,32 @@ include "../process/functions.php";
 $db = connect();
 
 if(isset($_POST['addmeeting'])){ //from meeting.php
-	$desc = $_POST['desc']; //description
-	$date = $_POST['dato']; //date
-
-	$query = $db->prepare("INSERT INTO meeting SET
-		                 		description = :descs,
-		                 		m_date = :datet");
-
-	$execute_query = [':descs' => $desc,
-						':datet' => $date];
-
-	$sth = $db->prepare("ALTER TABLE  `sanction` ADD  `$desc` VARCHAR(11) NOT NULL");
-
-	if($query->execute($execute_query) && $sth->execute()){
-			header('Location: ../pages/meetings.php?success=1');
-	}else{
-			header('Location: ../pages/meetings.php?error');
+	$results = getdescription();
+	$arraycount = count($results);
+	if($arraycount > 7){
+		header('Location: ../pages/meetings.php?unable');
 	}
+	else{
+		$desc = $_POST['desc']; //description
+		$date = $_POST['dato']; //date
+
+		$query = $db->prepare("INSERT INTO meeting SET
+													description = :descs,
+													m_date = :datet");
+
+		$execute_query = [':descs' => $desc,
+							':datet' => $date];
+
+		$sth = $db->prepare("ALTER TABLE  `sanction` ADD  `$desc` VARCHAR(11) NOT NULL");
+
+		if($query->execute($execute_query) && $sth->execute()){
+				header('Location: ../pages/meetings.php?success=1');
+		}else{
+				header('Location: ../pages/meetings.php?error');
+		}
+	}
+
+
 
 }
 
