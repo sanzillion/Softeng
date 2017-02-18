@@ -113,6 +113,7 @@ if(isset($_POST['delete'])){ //delete the student from the student roll
              if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
                  if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
               }catch(exception $e){echo $e;}
+              if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
             $output .= '<td>'.$total.'</td>
           <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
             class="editSanction btn btn-primary" data-target="#edit-sanction">
@@ -153,6 +154,7 @@ if(isset($_POST['searchname'])){
           if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
               if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
            }catch(exception $e){echo $e;}
+           if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
          $output .= '<td>'.$total.'</td>
          <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
            class="editSanction btn btn-primary" data-target="#edit-sanction">
@@ -190,6 +192,7 @@ if(isset($_POST['show'])){
         if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
             if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
          }catch(exception $e){echo $e;}
+         if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
        $output .= '<td>'.$total.'</td>
      <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
        class="editSanction btn btn-primary" data-target="#edit-sanction">
@@ -292,6 +295,7 @@ if(isset($_POST['searchnameindex'])){
           if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
               if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
            }catch(exception $e){echo $e;}
+           if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
          $output .= '<td>'.$total.'</td></tr>';
         }
       }else{
@@ -323,6 +327,7 @@ if(isset($_POST['showindex'])){
         if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
             if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
          }catch(exception $e){echo $e;}
+         if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
        $output .= '<td>'.$total.'</td>
      </tr>';
   }

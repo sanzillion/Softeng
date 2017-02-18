@@ -33,16 +33,9 @@ if(isset($_POST['submit'])){
 				$_SESSION['id']=$id;
 				header("Location:../pages/index.php");
 			}
-			// else{
-			// 	$stmt2 = $db->prepare("SELECT * from student where user = :user");
-			// 	$stmt2->bindValue(':user',$user);
-			// 	$stmt2->execute();
-			// 	$account2 = $stmt2->fetch(PDO::FETCH_OBJ);
-			// 	$id = $account2->emp_id;
-			// 	$_SESSION['id']=$id;
-			// 	$_SESSION['user']=$user;
-			// 	header("Location:../pages/user.php");
-			// }
+			else{
+				header("Location:../index.php?error=1");
+			}
 
 	}
 	else{

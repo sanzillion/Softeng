@@ -34,10 +34,6 @@ foreach(getmeet() as $d){
 $getdesc = getdescription2(); //2 means FETCH_ASSOC
 $arraycount = count($getdesc);
 
-if($arraycount < 1 || $arraycount == 0){
-	header('Location: meetings.php?error=5');
-}
-
 $_SESSION['count']=$arraycount;
 
 for ($i = 0; $i <$arraycount; $i++){
@@ -414,8 +410,8 @@ for ($i = 0; $i <$arraycount; $i++){
               <a href="#">
                 <i class="fa fa-twitter fa-2x sidemargin cwhite"></i>
               </a>
-              <a href="#">
-                <i class="fa fa-feed fa-2x sidemargin cwhite"></i>
+							<a href="#">
+                <i class="fa fa-github fa-2x sidemargin cwhite"></i>
               </a>
             </div>
           </div>
@@ -467,7 +463,8 @@ for ($i = 0; $i <$arraycount; $i++){
       <div class="modal-content">
         <div class="modal-header text-center">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title font2" style="font-size: 3em;">Record</h3>
+          <h3 class="modal-title font2" style="font-size: 3em;">
+						<i class="fa fa-th-list" style="font-size: 30px;"></i> SANCTION Record</h3>
         </div>
         <div class="modal-body">
 					<div class="row">
@@ -475,12 +472,7 @@ for ($i = 0; $i <$arraycount; $i++){
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<div class="row">
-										<div class="col-lg-8">
-											<h1 style="font-size: 1.5em;" class="panel-title">
-											<i class="fa fa-th"></i>
-											&nbsp Sanction List</h1>
-										</div>
-										<div class="col-lg-4 text-right">
+										<div class="col-lg-4">
 											<div class="input-group">
 													<span style="font-size: 10px;"
 													class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -530,7 +522,7 @@ for ($i = 0; $i <$arraycount; $i++){
 																			if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
 															<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
 																			if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
-															<td><?php echo $total; ?></td>
+															<td><?php if($total == 0){echo "CLEARED"; }else{echo $total;} ?></td>
 														</tr>
 														<?php endforeach;?>
 												</tbody>

@@ -93,59 +93,6 @@ for ($i = 0; $i <$arraycount; $i++){
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -174,7 +121,7 @@ for ($i = 0; $i <$arraycount; $i++){
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">
-                    </i> </i> <?php echo $_SESSION['admin']; ?> <b class="caret"></b></a>
+                    </i> &nbsp Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -208,18 +155,24 @@ for ($i = 0; $i <$arraycount; $i++){
                         <a href="#"><i class="fa fa-fw fa-table"></i> Sanctions</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-download"></i> Downloads <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
+													<li>
+															<a href="../process/filedownload.php?file=1">
+																<i class="fa fa-database"></i> &nbsp Sql File</a>
+													</li>
+													<li>
+															<a href="../process/filedownload.php?file=2">
+																<i class="fa fa-file-excel-o"></i> &nbsp CSV format</a>
+													</li>
+													<li>
+															<a href="../process/filedownload.php?file=3">
+																<i class="fa fa-file-text-o"></i> &nbsp Txt format</a>
+													</li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+										<li>
+                        <a href="#"><i class="fa fa-fw fa-file-text"></i> Documentation </a>
                     </li>
                 </ul>
             </div>
@@ -252,14 +205,13 @@ for ($i = 0; $i <$arraycount; $i++){
 												<a href="javascript:;" data-toggle="collapse"
 												data-target="#panelbody" style="text-decoration: none;
 												color: black;">	<h3 class="panel-title">
-												<i class="fa fa-tasks"></i>	&nbsp Manage Sanction
+												<i class="fa fa-tasks"></i>	&nbsp Add Student-Sanction
 												&nbsp <i class="fa fa-caret-down"></i></h3></a>
 											</div> <!-- End of panel heading -->
 											<div class="collapse panel-body" id="panelbody">
 													<div class="row">
 														<div class="col-md-12">
 															<form class="form-group" method="POST" action="../process/sanctionprocess.php">
-																<h4>Add Student-Sanction</h4>
 																<select class="form-control" name="name" required="required"
 																style="margin-bottom: 10px;">
 																			<option disabled selected hidden value="">Student Name</option>
@@ -341,22 +293,22 @@ for ($i = 0; $i <$arraycount; $i++){
 													<div class="col-lg-3" style="margin-bottom: 10px;">
 														<a data-toggle="modal" data-id="1st" title="Add this item"
 															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
-														<i class="fa fa-edit"></i>1st Year</a>
+														<i class="fa fa-edit"></i> 1st Year</a>
 													</div>
 													<div class="col-lg-3" style="margin-bottom: 10px;">
 														<a data-toggle="modal" data-id="2nd" title="Add this item"
-															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
-														<i class="fa fa-edit"></i>2nd Year</a>
+															class="editSanctionyear btn btn-success btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i> 2nd Year</a>
 													</div>
 													<div class="col-lg-3" style="margin-bottom: 10px;">
 														<a data-toggle="modal" data-id="3rd" title="Add this item"
-															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
-														<i class="fa fa-edit"></i>3rd Year</a>
+															class="editSanctionyear btn btn-warning btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i> 3rd Year</a>
 													</div>
 													<div class="col-lg-3" style="margin-bottom: 10px;">
 														<a data-toggle="modal" data-id="4th" title="Add this item"
-															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
-														<i class="fa fa-edit"></i>4th Year</a>
+															class="editSanctionyear btn btn-danger btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i> 4th Year</a>
 													</div>
 												</div>
 											</div>
@@ -425,7 +377,7 @@ for ($i = 0; $i <$arraycount; $i++){
 																						if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
 																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
 																						if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
-																		<td><?php echo $total; ?></td>
+																		<td><?php if($total == 0){ echo "CLEARED";}else{echo $total;} ?></td>
 																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
 																			class="editSanction btn btn-primary" data-target="#edit-sanction">
 																		<i class="fa fa-edit"></i></a>
