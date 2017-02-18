@@ -187,7 +187,7 @@ for ($i = 0; $i <$arraycount; $i++){
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../index.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -337,8 +337,27 @@ for ($i = 0; $i <$arraycount; $i++){
 												&nbsp <i class="fa fa-caret-down"></i></h3>	</a>
 											</div> <!-- End of panel heading -->
 											<div class="collapse panel-body" id="panelbody2">
-												<div class="flot-chart">
-
+												<div class="row">
+													<div class="col-lg-3" style="margin-bottom: 10px;">
+														<a data-toggle="modal" data-id="1st" title="Add this item"
+															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i>1st Year</a>
+													</div>
+													<div class="col-lg-3" style="margin-bottom: 10px;">
+														<a data-toggle="modal" data-id="2nd" title="Add this item"
+															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i>2nd Year</a>
+													</div>
+													<div class="col-lg-3" style="margin-bottom: 10px;">
+														<a data-toggle="modal" data-id="3rd" title="Add this item"
+															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i>3rd Year</a>
+													</div>
+													<div class="col-lg-3" style="margin-bottom: 10px;">
+														<a data-toggle="modal" data-id="4th" title="Add this item"
+															class="editSanctionyear btn btn-primary btn-block" data-target="#edit-sanction-by-year">
+														<i class="fa fa-edit"></i>4th Year</a>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -389,17 +408,24 @@ for ($i = 0; $i <$arraycount; $i++){
 																<?php foreach (getsanction() as $k):?>
 																	<tr>
 																		<td><?php echo $k->s_name ?></td>
-																		<?php try{ ?>
-																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
-																		<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
-																		<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';} ?>
-																		<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';} ?>
-																		<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
-																		<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
-																		<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
-																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
-																		<?php }catch(exception $e){echo $e;}?>
-																		<td></td>
+																		<?php $total = 0;?>
+																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
+																						if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
+																		<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';
+																						if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}} ?>
+																		<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';
+																						if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}} ?>
+																		<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';
+																						if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}} ?>
+																		<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';
+																						if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}} ?>
+																		<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';
+																						if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}} ?>
+																		<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';
+																						if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
+																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
+																						if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
+																		<td><?php echo $total; ?></td>
 																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
 																			class="editSanction btn btn-primary" data-target="#edit-sanction">
 																		<i class="fa fa-edit"></i></a>
@@ -433,6 +459,31 @@ for ($i = 0; $i <$arraycount; $i++){
 												<button type="button" class="btn btn-default"
 												data-dismiss="modal">Close</button>
 												<button type="submit" class="btn btn-primary" name="updatesanc">Save Changes</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<!-- end of modal -->
+
+								<div class="modal fade" id="edit-sanction-by-yr" role="dialog">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content form-group" style="">
+											<form class="form-group" action="../process/sanctionprocess.php" method="post">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<div class="text-center">
+													<h3 class="modal-title font2"> <i class="fa fa-edit"></i> &nbspSanction Information</h3>
+												</div>
+											</div>
+											<div class="modal-body" id="sanction_details-by-yr"
+											style="overflow: auto; height: 450px;">
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" name="updatebyyr">Save Changes</button>
 											</div>
 											</form>
 										</div>

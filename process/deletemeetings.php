@@ -14,7 +14,7 @@ if(isset($_GET['action']) && $_GET['action']=='deleteall'){
     $meet[] = $g['description'];
   }
 
-  $arraycount = count(getdescription();
+  $arraycount = count(getdescription());
 	for ($x = 0; $x < $arraycount; $x++){
 		$query = $db->prepare("ALTER TABLE `sanction` DROP `$meet[$x]`");
 		$query->execute();

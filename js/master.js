@@ -154,6 +154,23 @@ $(document).on("click", ".deleteSanction", function () {
    }
 });
 
+//Modal for editing Student-sanctions by year
+$(document).on("click", ".editSanctionyear", function () {
+   var id = $(this).data('id');
+   if(id != '')
+     {
+          $.ajax({
+               url:"editsanctions.php",
+               method:"POST",
+               data:{yr:id},
+               success:function(data){
+                    $('#sanction_details-by-yr').html(data);
+                    $('#font2').append("1st");
+                    $('#edit-sanction-by-yr').modal('show');
+               }
+          });
+     }
+});
 // $(function(){
 //     $('#searchname').keyup(function(event){
 //         console.log("Im in here!");

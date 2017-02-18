@@ -12,11 +12,13 @@ if(isset($_POST["view"])){
            $output .= '
                 <tr>
                      <td width="30%"><label>ID :</label></td>
-                     <td width="70%">'.$res->s_id.'<input type="hidden" name="id" value="'.$res->s_id.'"></td>
+                     <td width="70%">'.$res->s_id.'<input type="hidden"
+                     name="id" value="'.$res->s_id.'"></td>
                 </tr>
                 <tr>
                      <td width="30%"><label>Name :</label></td>
-                     <td width="70%"><input class="form-control" type="text" name="name" value="'.$res->name.'"></td>
+                     <td width="70%"><input class="form-control" type="text"
+                     name="name" value="'.$res->name.'"></td>
                 </tr>
                 <tr>
                      <td width="30%"><label>Year :</label></td>

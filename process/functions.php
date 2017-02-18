@@ -145,7 +145,7 @@ function disname(){
 
 function getsanction(){
 	$db = connect();
-	$sth = $db->prepare("SELECT * From sanction");
+	$sth = $db->prepare("SELECT * From sanction ORDER BY s_name");
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
 	return $results;

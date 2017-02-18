@@ -10,6 +10,8 @@ for ($i = 0; $i <$arraycount; $i++){
 	$desc[] = implode(',', $getdesc[$i]);
 }
 
+print_r($desc);
+
 if($arraycount >= 1){$meet1 = $desc[0];}
 if($arraycount >= 2){$meet2 = $desc[1];}
 if($arraycount >= 3){$meet3 = $desc[2];}
@@ -227,8 +229,106 @@ if(isset($_POST['updatesanc'])){
 	}
 	else{
 		echo "db error";
-		header('Location: ../pages/sanction.php?error=dberror');
+		header('Location: ../pages/sanctions.php?error=dberror');
 	}
+
+}
+
+if(isset($_POST['updatebyyr'])){
+
+	foreach($_POST['meeting'] as $g){
+		if($arraycount >= 1){ $r1 = $g['m1'];	}
+		if($arraycount >= 2){ $r2 = $g['m2'];	}
+		if($arraycount >= 3){ $r3 = $g['m3'];	}
+		if($arraycount >= 4){ $r4 = $g['m4'];	}
+		if($arraycount >= 5){ $r5 = $g['m5'];	}
+		if($arraycount >= 6){ $r6 = $g['m6'];	}
+		if($arraycount >= 7){ $r7 = $g['m7'];	}
+		if($arraycount >= 8){ $r8 = $g['m8'];	}
+		$id = $g['m0'];
+
+		if($arraycount == 1){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 2){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 3){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 4){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3, $meet4 = :m4 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':m4', $r4);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 5){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3,
+									$meet4 = :m4, $meet5 = :m5 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':m4', $r4);
+				$stmt->bindParam(':m5', $r5);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 6){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3,
+								$meet4 = :m4, $meet5 = :m5, $meet6 = :m6 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':m4', $r4);
+				$stmt->bindParam(':m5', $r5);
+				$stmt->bindParam(':m6', $r6);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 7){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3,
+								$meet4 = :m4, $meet5 = :m5, $meet6 = :m6, $meet7 = :m7 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':m4', $r4);
+				$stmt->bindParam(':m5', $r5);
+				$stmt->bindParam(':m6', $r6);
+				$stmt->bindParam(':m7', $r7);
+				$stmt->bindParam(':id', $id);
+		}
+		elseif($arraycount == 8){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3,
+								$meet4 = :m4, $meet5 = :m5, $meet6 = :m6, $meet7 = :m7, $meet8 = :m8 WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':m4', $r4);
+				$stmt->bindParam(':m5', $r5);
+				$stmt->bindParam(':m6', $r6);
+				$stmt->bindParam(':m7', $r7);
+				$stmt->bindParam(':m8', $r8);
+				$stmt->bindParam(':id', $id);
+		}
+
+		if($stmt->execute()){
+			echo "Query executed!";
+		}
+		else{
+			echo "db error";
+		}
+	}
+
+	header('Location: ../pages/sanctions.php?success');
 
 }
 

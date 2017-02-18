@@ -8,6 +8,14 @@ for ($i = 0; $i <$arraycount; $i++){
   $desc[] = implode(',', $getdesc[$i]);
 }
 
+//convert dates
+$meetdate = [];
+foreach(getmeet() as $d){
+	$month = date('M', strtotime($d->m_date));
+	$day = date('d', strtotime($d->m_date));
+	$meetdate[] = $month." ".$day;
+}
+
 if(isset($_POST["view"])){
       $output = '';
       $res = getsanctionbyid($_POST["view"]);
@@ -87,17 +95,25 @@ if(isset($_POST['delete'])){ //delete the student from the student roll
     if(deletesanctionbyid($_POST['delete'])){ //if delete successful
        foreach(getsanction() as $k){
            $output .= '<tr><td>'.$k->s_name.'</td>';
-           try{
-           if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
-           if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}
-           if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';}
-           if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';}
-           if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';}
-           if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';}
-           if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';}
-           if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';}
-            }catch(exception $e){echo $e;}
-          $output .= '<td></td>
+           try{ $total = 0;
+             if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
+                 if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
+             if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
+                 if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+             if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
+                 if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+             if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
+                 if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+             if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
+                 if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+             if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
+                 if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+             if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
+                 if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+             if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
+                 if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+              }catch(exception $e){echo $e;}
+            $output .= '<td>'.$total.'</td>
           <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
             class="editSanction btn btn-primary" data-target="#edit-sanction">
           <i class="fa fa-edit"></i></a>
@@ -119,17 +135,25 @@ if(isset($_POST['searchname'])){
     if($results){
         foreach($results as $k){
           $output .= '<tr><td>'.$k->s_name.'</td>';
-          try{
-          if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
-          if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}
-          if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';}
-          if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';}
-          if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';}
-          if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';}
-          if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';}
-          if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';}
+          try{  $total = 0;
+          if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
+              if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
+          if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
+              if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+          if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
+              if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+          if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
+              if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+          if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
+              if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+          if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
+              if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+          if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
+              if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+          if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
+              if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
            }catch(exception $e){echo $e;}
-         $output .= '<td></td>
+         $output .= '<td>'.$total.'</td>
          <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
            class="editSanction btn btn-primary" data-target="#edit-sanction">
          <i class="fa fa-edit"></i></a>
@@ -148,22 +172,158 @@ if(isset($_POST['show'])){
   $output = '';
   foreach(getsanction() as $k){
       $output .= '<tr><td>'.$k->s_name.'</td>';
-      try{
-      if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
-      if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}
-      if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';}
-      if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';}
-      if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';}
-      if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';}
-      if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';}
-      if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';}
-       }catch(exception $e){echo $e;}
-     $output .= '<td></td>
+      try{ $total = 0;
+        if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
+            if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
+        if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
+            if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+        if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
+            if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+        if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
+            if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+        if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
+            if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+        if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
+            if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+        if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
+            if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+        if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
+            if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+         }catch(exception $e){echo $e;}
+       $output .= '<td>'.$total.'</td>
      <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
        class="editSanction btn btn-primary" data-target="#edit-sanction">
      <i class="fa fa-edit"></i></a>
      <a class="deleteSanction btn btn-danger" data-id="'.$k->sanc_id.'">
      <i class="fa fa-trash"></i></a></td>
+     </tr>';
+  }
+  echo $output;
+}
+
+if(isset($_POST["yr"])){
+      $output = '';
+      $res = sancbyyear($_POST["yr"]);
+
+        $output .= '<table class="table table-responsive table-striped">
+                    <thead class="text-center">
+                      <tr class="">
+                        <th>Student</th>';
+            foreach ($meetdate as $g){
+              $output .= '<th>'.$g.'</th>';
+            }
+            $output .= '</tr></thead>
+          <tbody>';
+          $i = 0;
+        foreach ($res as $k){
+          $output .= '<tr>
+            <td>'.$k->s_name.'<input type="hidden" name="meeting['.$i.'][m0]"
+                value="'.$k->sanc_id.'"></td>';
+            if($arraycount >= 1){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m1]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[0].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 2){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m2]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[1].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 3){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m3]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[2].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 4){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m4]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[3].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 5){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m5]" style="margin-bottom: 5px;" required>
+              <option>'.$k->$desc[4].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 6){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m6]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[5].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 7){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m7]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[6].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            if($arraycount >= 8){  $output .= '<td><select class="form-control"
+              name="meeting['.$i.'][m8]" style="margin-bottom: 5px;" required>
+              <option >'.$k->$desc[7].'</option>
+              <option>50</option><option>100</option><option>PAID</option>
+              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+            $output .=  '</tr>';
+            $i++;
+        }
+
+        $output .= '</tbody></table>';
+        echo $output;
+}
+
+if(isset($_POST['searchnameindex'])){
+
+  $output = '';
+  $results = searchsanction($_POST['searchnameindex']);
+    if($results){
+        foreach($results as $k){
+          $output .= '<tr><td>'.$k->s_name.'</td>';
+          try{  $total = 0;
+          if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
+              if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
+          if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
+              if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+          if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
+              if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+          if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
+              if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+          if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
+              if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+          if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
+              if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+          if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
+              if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+          if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
+              if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+           }catch(exception $e){echo $e;}
+         $output .= '<td>'.$total.'</td></tr>';
+        }
+      }else{
+        $output .= '<tr><td colspan="12"><div class="text-center"
+    		<p style="font-size: 1.5em !important;"> No results found </p></div></td></tr>';
+      }
+  echo $output;
+}
+
+if(isset($_POST['showindex'])){
+  $output = '';
+  foreach(getsanction() as $k){
+      $output .= '<tr><td>'.$k->s_name.'</td>';
+      try{ $total = 0;
+        if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
+            if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
+        if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
+            if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+        if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
+            if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+        if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
+            if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+        if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
+            if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+        if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
+            if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+        if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
+            if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+        if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
+            if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+         }catch(exception $e){echo $e;}
+       $output .= '<td>'.$total.'</td>
      </tr>';
   }
   echo $output;

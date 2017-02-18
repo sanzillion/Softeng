@@ -21,6 +21,29 @@ if(!empty(getbulletin())){
 	$title = $results->title;
 	$par = $results->post;
 }
+
+//convert dates
+$meetdate = [];
+foreach(getmeet() as $d){
+	$month = date('M', strtotime($d->m_date));
+	$day = date('d', strtotime($d->m_date));
+	$meetdate[] = $month." ".$day;
+}
+
+
+$getdesc = getdescription2(); //2 means FETCH_ASSOC
+$arraycount = count($getdesc);
+
+if($arraycount < 1 || $arraycount == 0){
+	header('Location: meetings.php?error=5');
+}
+
+$_SESSION['count']=$arraycount;
+
+for ($i = 0; $i <$arraycount; $i++){
+	$desc[] = implode(',', $getdesc[$i]);
+}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -442,15 +465,82 @@ if(!empty(getbulletin())){
   <div class="modal fade" id="record" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-center">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title font2">Record</h3>
+          <h3 class="modal-title font2" style="font-size: 3em;">Record</h3>
         </div>
         <div class="modal-body">
-          <p>This is a large modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-lg-8">
+											<h1 style="font-size: 1.5em;" class="panel-title">
+											<i class="fa fa-th"></i>
+											&nbsp Sanction List</h1>
+										</div>
+										<div class="col-lg-4 text-right">
+											<div class="input-group">
+													<span style="font-size: 10px;"
+													class="input-group-addon"><i class="fa fa-search"></i></span>
+													<input style="background-color: #F4F4F4; height: 25px;"
+													class="form-control" type="text" name="searchname"
+													value="" id="searchname" placeholder="Search here by name">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+
+									</div>
+								</div>
+								<div class="panel-body" style="padding-top: 0px;">
+									<div class="row">
+										<div class="flot-chart" style="overflow: auto;">
+											<table class="table table-responsive table-striped">
+												<thead class="text-center">
+													<tr class="">
+														<th>Student</th>
+														<?php foreach ($meetdate as $g): ?>
+														<th><?php echo $g; ?></th>
+														<?php endforeach;?>
+														<th>Total</th>
+													</tr>
+												</thead>
+												<tbody id="sanctions-table">
+													<?php foreach (getsanction() as $k):?>
+														<tr>
+															<td><?php echo $k->s_name ?></td>
+															<?php $total = 0;?>
+															<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
+																			if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
+															<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';
+																			if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}} ?>
+															<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';
+																			if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}} ?>
+															<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';
+																			if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}} ?>
+															<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';
+																			if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}} ?>
+															<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';
+																			if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}} ?>
+															<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';
+																			if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
+															<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
+																			if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
+															<td><?php echo $total; ?></td>
+														</tr>
+														<?php endforeach;?>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
         </div>
       </div>
     </div>
@@ -476,11 +566,40 @@ if(!empty(getbulletin())){
     <script src="js/master.js"></script>
 
     <!-- Script to Activate the Carousel -->
-    <script>
+    <script type="text/javascript">
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
-
+		$(function(){
+				$('#searchname').keyup(function(event){
+						var keyCode = event.which; // check which key was pressed
+						var name = $(this).val(); // get the complete input
+						var nothing = 'nothingLOL';
+						if(name != '')
+							{
+									 $.ajax({
+												url:"pages/editsanctions.php",
+												method:"POST",
+												data:{searchnameindex:name},
+												success:function(data){
+														 $('#sanctions-table').html(data);
+														 console.log('success!');
+												}
+									 });
+							}
+						else{ //if he erases everythin, the table goes back to normal
+							$.ajax({
+									 url:"pages/editsanctions.php",
+									 method:"POST",
+									 data:{showindex:nothing},
+									 success:function(data){
+												$('#sanctions-table').html(data);
+												console.log('success!');
+									 }
+							});
+						}
+				});
+		});
     </script>
 
     <?php

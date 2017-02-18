@@ -366,7 +366,8 @@ if(isset($_SESSION['QUE_ERROR'])){
 																				<td class="indent"><?php echo  $g->name; ?></td>
 																				<td><?php echo  $g->year; ?></td>
 																				<td class="text-center"><?php echo  $g->cpnum; ?></td>
-																				<td class="text-center"><a data-toggle="modal" data-id="<?php echo $g->s_id;?>" title="Add this item"
+																				<td class="text-center"><a data-toggle="modal"
+																					data-id="<?php echo $g->s_id;?>" title="Add this item"
 																					class="editStudents btn btn-primary" href="#edit-students" data-target="#edit-students">
 																				<i class="fa fa-edit"></i></a>
 																				<a class="deleteStudent btn btn-danger" data-id="<?php echo $g->s_id?>">
