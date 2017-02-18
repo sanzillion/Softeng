@@ -34,15 +34,34 @@ if(isset($_POST['sub'])){
 					$query2->bindParam(1,$name->name);
 					$query2->execute();
 				}
+				echo "Attempt 1 Success";
 						//CLEAN
 
-				header('Location: ../pages/students.php?success');
+				//header('Location: ../pages/students.php?success');
 			}
 			else{
 				echo 'failed! <br>';
+				$name = $_FILES['csv']['name'];
+				$query = $db->prepare("LOAD DATA INFILE '$uploadfile' INTO TABLE `student` FIELDS
+				TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `year`, `cpnum`)");
+
+				if($query->execute()){
+					echo 'successfully uploaded <br>';
+
+					foreach(disname() as $name){
+						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?");
+						$query2->bindParam(1,$name->name);
+						$query2->execute();
+					}
+							//CLEAN
+
+					//header('Location: ../pages/students.php?success');
+				}else{
+					echo "Attempt 2 Still fail!";
+				}
 				$query->closeCursor();
 				$_SESSION['QUE_ERROR'] += 1;
-				header('Location: ../pages/students.php?error=dberror');
+				//header('Location: ../pages/students.php?error=dberror');
 			}
 		}
 		else{
