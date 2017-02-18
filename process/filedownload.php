@@ -11,7 +11,7 @@ if(isset($_GET['file'])){
 	}
 
 	if($_GET['file'] == 3){
-		$file = '../files/names.txt';
+		$file = '../files/txt.rar';
 	}
 
 	if (file_exists($file)) {
