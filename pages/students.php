@@ -7,15 +7,16 @@ if(!isset($_SESSION['admin'])){
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "disabled";
+$dis = "";
 $color = "color: gray;";
+
 if(isset($_SESSION['QUE_ERROR'])){
 		if($_SESSION['QUE_ERROR'] > 3){
 		$dis = " ";
 		$color = " ";
 	}
 	else{
-		$dis = "disabled";
+		$dis = "";
 	}
 }
 
@@ -477,6 +478,13 @@ if(isset($_GET['success']) && $_GET['success'] == 1){
 	echo ' <script type="text/javascript">
 			$(document).ready(function(){
 				alert("Update Success");
+			});
+	 </script>';
+}
+if(isset($_GET['error']) && $_GET['error'] == 1){
+	echo ' <script type="text/javascript">
+			$(document).ready(function(){
+				alert("Delete meetings first");
 			});
 	 </script>';
 }

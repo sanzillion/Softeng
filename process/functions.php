@@ -66,7 +66,7 @@ function findstudents($name){
 
 function getstudents(){
 	$db = connect();
-	$sth = $db->prepare("SELECT * From student");
+	$sth = $db->prepare("SELECT * From student ORDER BY name");
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
 	return $results;
