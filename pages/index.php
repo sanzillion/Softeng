@@ -10,7 +10,7 @@ $account = getadmin($admin);
 
 //default bulletin properties
 $loc = "../uploads/";
-$src = "../img/slide-1";
+$src = "../img/slide-1.jpg";
 $title = 'Title Here';
 $par = 'This bulletin board can be a purpose for announcement,
 	statement or notice to the students. The "Delete Bulletin" button
@@ -63,7 +63,7 @@ if(!empty(getbulletin())){ //bulletin control
 
     <!-- Custom Fonts -->
     <link href="../icons/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
