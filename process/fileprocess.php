@@ -34,8 +34,10 @@ if(isset($_POST['sub'])){
 					echo 'successfully uploaded <br>';
 
 					foreach(disname() as $name){
-						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?");
+						$clear = 0;
+						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?, total = ?");
 						$query2->bindParam(1,$name->name);
+						$query2->bindParam(2,$clear);
 						$query2->execute();
 						echo "inside";
 					}

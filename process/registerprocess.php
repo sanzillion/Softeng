@@ -20,7 +20,17 @@ if(isset($_POST['addmeeting'])){ //from meeting.php
 		$execute_query = [':descs' => $desc,
 							':datet' => $date];
 
-		$sth = $db->prepare("ALTER TABLE  `sanction` ADD  `$desc` VARCHAR(11) NOT NULL");
+		if(empty(getmeet())){
+			$beforetotal = "s_name";
+		}else{
+			$result = getdescription();
+			foreach ($result as $d) {
+				$beforetotal = $d->description;
+			}
+		}
+
+		$sth = $db->prepare("ALTER TABLE  `sanction` ADD  `$desc` VARCHAR(11) NOT NULL
+												AFTER `$beforetotal`");
 
 		if($query->execute($execute_query) && $sth->execute()){
 				header('Location: ../pages/meetings.php?success=1');

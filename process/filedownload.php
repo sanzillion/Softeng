@@ -1,4 +1,5 @@
 <?php
+include "functions.php";
 
 if(isset($_GET['file']) && $_GET['file'] == 1
 || $_GET['file'] == 2|| $_GET['file'] == 3){
@@ -35,7 +36,7 @@ if(isset($_GET['file']) && $_GET['file'] == 1
 }
 
 if(isset($_GET['file']) && $_GET['file']== 4){
-	if(!empty(getmeet()) && !empty(getsanction())){
+	if(empty(getmeet()) || empty(getsanction())){
 		//if meeting and sanction fields are empty, you cannot download this file
 		header('Location: ../pages/index.php?error=3');
 
@@ -54,6 +55,7 @@ if(isset($_GET['file']) && $_GET['file']== 4){
 			$day = date('d', strtotime($d->m_date));
 			$meetdate[] = $month." ".$day;
 		}
+		$meetdate[] = "Total";
 
 		//open file to write
 		$fp = fopen('php://output', 'w');
