@@ -277,25 +277,17 @@ if(isset($_POST['searchnameindex'])){
     if($results){
         foreach($results as $k){
           $output .= '<tr><td>'.$k->s_name.'</td>';
-          try{  $total = 0;
-          if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
-              if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
-          if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
-              if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
-          if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
-              if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
-          if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
-              if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
-          if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
-              if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
-          if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
-              if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
-          if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
-              if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
-          if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
-              if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+          try{
+          if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
+          if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}
+          if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';}
+          if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';}
+          if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';}
+          if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';}
+          if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';}
+          if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';}
            }catch(exception $e){echo $e;}
-           if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
+        if($k->total == 0){$total = "CLEARED";}else{$total = $k->total;}
          $output .= '<td>'.$total.'</td></tr>';
         }
       }else{
@@ -309,25 +301,17 @@ if(isset($_POST['showindex'])){
   $output = '';
   foreach(getsanction() as $k){
       $output .= '<tr><td>'.$k->s_name.'</td>';
-      try{ $total = 0;
-        if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
-            if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
-        if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
-            if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
-        if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
-            if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
-        if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
-            if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
-        if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
-            if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
-        if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
-            if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
-        if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
-            if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
-        if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
-            if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+      try{
+        if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
+        if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}
+        if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';}
+        if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';}
+        if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';}
+        if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';}
+        if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';}
+        if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';}
          }catch(exception $e){echo $e;}
-         if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
+         if($k->total == 0){$total = "CLEARED";}else{$total = $k->total;}
        $output .= '<td>'.$total.'</td>
      </tr>';
   }

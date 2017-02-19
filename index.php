@@ -506,23 +506,15 @@ for ($i = 0; $i <$arraycount; $i++){
 														<tr>
 															<td><?php echo $k->s_name ?></td>
 															<?php $total = 0;?>
-															<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
-																			if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
-															<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';
-																			if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}} ?>
-															<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';
-																			if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}} ?>
-															<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';
-																			if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}} ?>
-															<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';
-																			if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}} ?>
-															<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';
-																			if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}} ?>
-															<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';
-																			if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
-															<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
-																			if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
-															<td><?php if($total == 0){echo "CLEARED"; }else{echo $total;} ?></td>
+															<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
+															<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
+															<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';} ?>
+															<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';} ?>
+															<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
+															<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
+															<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
+															<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
+															<td><?php if($k->total == 0){echo "CLEARED";}else{echo $k->total;}?></td>
 														</tr>
 														<?php endforeach;?>
 												</tbody>
