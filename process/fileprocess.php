@@ -33,38 +33,39 @@ if(isset($_POST['sub'])){
 				if($query->execute()){
 					echo 'successfully uploaded <br>';
 
+					//get names from recently uploaded csv
 					foreach(disname() as $name){
-						$clear = 0;
-						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?, total = ?");
+						//loop into sanction the names and with a total default value
+						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?, total = 0");
 						$query2->bindParam(1,$name->name);
-						$query2->bindParam(2,$clear);
 						$query2->execute();
-						echo "inside";
 					}
-					echo "Attempt 1 Success";
 							//CLEAN
 					header('Location: ../pages/students.php?success');
 				}
 				else{
+					//if failed, try this
 					echo 'failed! <br>';
 					$name = $_FILES['csv']['name'];
 					$query = $db->prepare("LOAD DATA INFILE '$uploadfile' INTO TABLE `student` FIELDS
 					TERMINATED BY ',' LINES TERMINATED BY '\n' (`name` , `year`, `cpnum`)");
 
-					if($query->execute()){
-						echo 'successfully uploaded <br>';
+						if($query->execute()){
+							echo 'successfully uploaded <br>';
 
-						foreach(disname() as $name){
-							$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?");
-							$query2->bindParam(1,$name->name);
-							$query2->execute();
+							//get names from recently uploaded csv
+							foreach(disname() as $name){
+								//loop into sanction the names and with a total default value
+								$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?, total = 0");
+								$query2->bindParam(1,$name->name);
+								$query2->execute();
+							}
+									//CLEAN
+							header('Location: ../pages/students.php?success');
+						}else{
+							echo "Attempt 2 Still fail!";
 						}
-								//CLEAN
 
-						header('Location: ../pages/students.php?success');
-					}else{
-						echo "Attempt 2 Still fail!";
-					}
 					$query->closeCursor();
 					$_SESSION['QUE_ERROR'] += 1;
 					header('Location: ../pages/students.php?error=dberror');
@@ -139,7 +140,7 @@ if(isset($_POST['submit'])){
 					}
 
 					foreach(disname() as $name){
-						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?");
+						$query2 = $db->prepare("INSERT INTO sanction SET s_name = ?, total = 0");
 						$query2->bindParam(1,$name->name);
 						$query2->execute();
 					}
