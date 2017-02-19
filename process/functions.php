@@ -66,7 +66,7 @@ function findstudents($name){
 
 function getstudents(){
 	$db = connect();
-	$sth = $db->prepare("SELECT * From student ORDER BY name");
+	$sth = $db->prepare("SELECT * From student ORDER BY year,name");
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
 	return $results;
@@ -148,6 +148,13 @@ function getsanction(){
 	$sth = $db->prepare("SELECT * From sanction ORDER BY s_name");
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
+	return $results;
+}
+function getsanction2(){
+	$db = connect();
+	$sth = $db->prepare("SELECT * From sanction");
+	$sth->execute();
+	$results = $sth->fetchAll(PDO::FETCH_ASSOC);
 	return $results;
 }
 
@@ -297,7 +304,7 @@ function searchsanction($name){
 
 function deletefromsanc($name){
 	$db = connect();
-	$sth = $db->prepare("DELETE * From sanction WHERE s_name = ?");
+	$sth = $db->prepare("DELETE FROM sanction WHERE s_name = ?");
 	$sth->bindParam(1,$name);
   if($sth->execute()){
       return true;
@@ -313,6 +320,7 @@ function getadmin($var){
 	$stmt->execute();
 	return $account = $stmt->fetch(PDO::FETCH_OBJ);
 }
+
 function deleteonestudent($var){
 	$db = connect();
 	$sth = $db->prepare("DELETE FROM student Where s_id = :id");

@@ -171,6 +171,10 @@ if(!empty(getbulletin())){ //bulletin control
 																<a href="../process/filedownload.php?file=3">
 																	<i class="fa fa-file-text-o"></i> &nbsp Txt format</a>
 														</li>
+														<li>
+																<a href="../process/filedownload.php?file=4">
+																	<i class="fa fa-list-alt"></i> &nbsp Sanction Record</a>
+														</li>
 												</ul>
 										</li>
 										<li>
@@ -363,6 +367,13 @@ if(!empty(getbulletin())){ //bulletin control
 			echo '<script type="text/javascript">
 				$(document).ready(function(){
         alert("Error uploading info in database");
+				})(jQuery);
+      </script>';
+		}
+		elseif(isset($_GET['error']) && $_GET['error'] == 3){
+			echo '<script type="text/javascript">
+				$(document).ready(function(){
+        alert("Fill up sanction first!");
 				})(jQuery);
       </script>';
 		}

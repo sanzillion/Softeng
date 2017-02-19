@@ -31,58 +31,58 @@ if(isset($_POST["view"])){
             $output .= '<select class="form-control"
               name="'.$desc[0].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[0].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
           if($arraycount >= 3){
             $output .= '<select class="form-control"
               name="'.$desc[2].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[2].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
           if($arraycount >= 5){
             $output .= '<select class="form-control"
               name="'.$desc[4].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[4].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
           if($arraycount >= 7){
             $output .= '<select class="form-control"
               name="'.$desc[6].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[6].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
            $output .= '</div><div class="col-md-6" style="margin-bottom: 10px;">';
           if($arraycount >= 2){
             $output .= '<select class="form-control"
               name="'.$desc[1].'" style="margin-bottom: 5px;" required>
               <option>'.$res->$desc[1].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
           if($arraycount >= 4){
             $output .= '<select class="form-control"
               name="'.$desc[3].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[3].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
           if($arraycount >= 6){
             $output .= '<select class="form-control"
               name="'.$desc[5].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[5].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
           if($arraycount >= 8){
             $output .= '<select class="form-control"
               name="'.$desc[7].'" style="margin-bottom: 5px;" required>
               <option >'.$res->$desc[7].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select>';
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select>';
           }
            $output .= '</div></div></div>';
         echo $output;
@@ -140,19 +140,19 @@ if(isset($_POST['searchname'])){
           if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
               if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
           if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
-              if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}}
           if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
-              if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}}
           if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
-              if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}}
           if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
-              if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}}
           if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
-              if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}}
           if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
-              if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}}
           if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
-              if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+              if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}}
            }catch(exception $e){echo $e;}
            if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
          $output .= '<td>'.$total.'</td>
@@ -178,19 +178,19 @@ if(isset($_POST['show'])){
         if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
             if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
         if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';
-            if(is_numeric($k->$desc[1])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}}
         if($arraycount >= 3){  $output .= '<td>'.$k->$desc[2].'</td>';
-            if(is_numeric($k->$desc[2])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}}
         if($arraycount >= 4){  $output .= '<td>'.$k->$desc[3].'</td>';
-            if(is_numeric($k->$desc[3])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}}
         if($arraycount >= 5){  $output .= '<td>'.$k->$desc[4].'</td>';
-            if(is_numeric($k->$desc[4])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}}
         if($arraycount >= 6){  $output .= '<td>'.$k->$desc[5].'</td>';
-            if(is_numeric($k->$desc[5])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}}
         if($arraycount >= 7){  $output .= '<td>'.$k->$desc[6].'</td>';
-            if(is_numeric($k->$desc[6])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}}
         if($arraycount >= 8){  $output .= '<td>'.$k->$desc[7].'</td>';
-            if(is_numeric($k->$desc[7])){$total += $k->$desc[0];}}
+            if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}}
          }catch(exception $e){echo $e;}
          if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
        $output .= '<td>'.$total.'</td>
@@ -225,43 +225,43 @@ if(isset($_POST["yr"])){
             if($arraycount >= 1){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m1]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[0].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 2){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m2]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[1].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 3){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m3]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[2].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 4){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m4]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[3].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 5){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m5]" style="margin-bottom: 5px;" required>
               <option>'.$k->$desc[4].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 6){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m6]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[5].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 7){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m7]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[6].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             if($arraycount >= 8){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m8]" style="margin-bottom: 5px;" required>
               <option >'.$k->$desc[7].'</option>
-              <option>50</option><option>100</option><option>PAID</option>
-              <option>CLEARED</option><option>PRESENT</option></select></td>';}
+              <option>15</option><option>20</option><option>50</option>
+              <option>PRESENT</option><option>CLEARED</option></select></td>';}
             $output .=  '</tr>';
             $i++;
         }

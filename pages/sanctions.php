@@ -169,6 +169,10 @@ for ($i = 0; $i <$arraycount; $i++){
 															<a href="../process/filedownload.php?file=3">
 																<i class="fa fa-file-text-o"></i> &nbsp Txt format</a>
 													</li>
+													<li>
+															<a href="../process/filedownload.php?file=4">
+																<i class="fa fa-list-alt"></i> &nbsp Sanction Record</a>
+													</li>
                         </ul>
                     </li>
 										<li>
