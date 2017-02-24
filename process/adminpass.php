@@ -32,17 +32,17 @@ if(isset($_POST['change'])){
  			}
  			else{
  				$_SESSION['error']='3';
- 				header('Location:../pages/admin.php?error=3');
+ 				header('Location:../pages/index.php?error=3');
  			}
  		}
  		else{
  			$_SESSION['error']='2';
- 			header('Location:../pages/admin.php?error=2');
+ 			header('Location:../pages/index.php?error=2');
  		}
  	}
  	else{
  		$_SESSION['error']='1';
- 		header('Location:../pages/admin.php?error=1');
+ 		header('Location:../pages/index.php?error=1');
  	}}
 
 ?>

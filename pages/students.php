@@ -7,16 +7,16 @@ if(!isset($_SESSION['admin'])){
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "";
-$color = "color: gray;";
+$dis = "disabled";
+$btn = "btn-default";
 
 if(isset($_SESSION['QUE_ERROR'])){
 		if($_SESSION['QUE_ERROR'] > 3){
-		$dis = " ";
-		$color = " ";
+		$dis = "";
+		$btn = "btn-success";
 	}
 	else{
-		$dis = "";
+		$dis = "disabled";
 	}
 }
 
@@ -226,15 +226,15 @@ if(isset($_SESSION['QUE_ERROR'])){
 																	<div class="col-md-12">
 																		<form class="form-horizontal" enctype="multipart/form-data"
 																		action="../process/fileprocess.php"	method="POST"
-																		<?php echo $dis; ?> style=" <?php echo $color; ?> ">
+																		<?php echo $dis; ?> style="">
 																				<div class="input-group">
-																					<a class="btn btn-default btn-block" href="javascript:;"
+																					<a class="btn <?php echo $btn; ?> btn-block" href="javascript:;"
 																					 data-toggle="collapse" style="border-radius: 0px;"
 																					data-target="#txtupload">Txt Files Upload <i class="fa fa-caret-down fa-fw"></i></a>
-																					<a href="" class="input-group-addon"
+																					<p class="input-group-addon"
 																					style="border-radius: 0px;"	data-toggle="tooltip" data-placement="top"
 																					title="This will only be activated incase of CSV file upload error!">
-																					<i class="fa fa-info-circle" style="font-size: 15px; color: black;"></i></a></h4>
+																					<i class="fa fa-info-circle" style="font-size: 15px; color: black;"></i></p></h4>
 																				</div>
 
 																						<div id="txtupload" class="collapse">

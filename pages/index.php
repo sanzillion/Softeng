@@ -204,14 +204,14 @@ if(!empty(getbulletin())){ //bulletin control
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /.row -->
 
 								<div class="row">
@@ -228,15 +228,27 @@ if(!empty(getbulletin())){ //bulletin control
 																<form class="form-group" action="../process/adminpass.php" method="POST">
 																	<h3>Admin no.<?php echo $account->id; ?> </h3>
 																	<input required="Required Field" type="hidden" name="id"
-																		value="<?php echo $account->id;?>">
-																		<label>Old password:</label>
-																		<input class="form-control" type="password" name="old" required>
-																		<label>New Password:</label>
-																		<input class="form-control" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-																		title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
-																		<label>Confirm Password:</label>
-																		<input class="form-control" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-																		title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+																		value="<?php echo $account->id;?>" id="idadmin">
+																		<input required="Required Field" type="hidden" name="name"
+																			value="<?php echo $account->user;?>" id="admin">
+																		<label>Old password:
+																		<p style="display: inline; color: red;" id="olderror"></p></label>
+																		<div class="" id="operror">
+																			<input class="form-control" type="password" name="old"
+																			required id="old-pass">
+																		</div>
+																		<label>New Password:
+																		<p style="display: inline; color: red;" id="newerror"></p></label>
+																		<div class="" id="nperror">
+																			<input class="form-control" id="new-pass" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+																		</div>
+																		<label>Confirm Password:
+																		<p style="display: inline; color: red;" id="conerror"></p></label>
+																		<div class="cperror">
+																			<input class="form-control" id="con-pass" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+																		</div>
 																		<div class="text-right" style="margin-top: 10px;">
 																			<input class="btn btn-default" type="submit" name="change" value="Save Password">
 																		</div>
@@ -275,7 +287,8 @@ if(!empty(getbulletin())){ //bulletin control
 																	</tbody>
 																</table>
                                 <div class="text-right">
-                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="#">View All Activity
+																			<i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -292,18 +305,29 @@ if(!empty(getbulletin())){ //bulletin control
                             <div class="panel-body">
                                 <div id="bulletin-area">
 																	<div class="col-lg-4">
-																		<form class="form-group" action="../process/bulletin.php" method="post"
+																		<form class="form-group" id="bulletin-form" action="../process/bulletin.php" method="post"
 																		 enctype="multipart/form-data">
-																		 <label for="image"><i class="fa fa-picture-o"></i> Image :</label>
-																			<input id="image" name="image" type="file" required <?php echo $dis; ?>><br>
-																			<label for=""> <i class="fa fa-user"></i> Title :</label><br>
-																			<input class="form-control" id="title" type="text" name="title"
-																			value="" required <?php echo $dis; ?>>
-																			<label for="post"><i class="fa fa-comments"></i> Post :</label><br>
-																			<textarea class="form-control" id="post" name="post" rows="5" required
-																			<?php echo $dis; ?>></textarea>
+
+																		 <label for="image"><i class="fa fa-picture-o"></i> Image :
+																		 <p style="display: inline; color: red;" id="imgerror"></p></label>
+																	 		<input id="image" name="image" type="file" <?php echo $dis; ?> required><br>
+
+																		<label for=""> <i class="fa fa-user"></i> Title :
+																		<p style="display: inline; color: red;" id="titleerror"></p></label><br>
+																			<div class="" id="errortitle">
+																				<input class="has-error form-control" id="title" type="text" name="title"
+																				value="" <?php echo $dis; ?> required>
+																			</div>
+
+																		<label for="post"><i class="fa fa-comments"></i> Post :
+																		<p style="display: inline; color: red;" id="posterror"></p></label><br>
+																			<div class="" id="errorpost">
+																				<textarea class="form-control" id="post" name="post" rows="5"
+																				<?php echo $dis; ?> required></textarea>
+																			</div>
+
 																			<input class="btn btn-default" style="margin-top: 10px; width: 120px;"
-																			 type="submit" name="submit" value="Submit" <?php echo $dis; ?>>
+																			 type="submit" name="submit" value="Submit" id="bulletin" <?php echo $dis; ?>>
 																		</form>
 																	</div>
 
@@ -355,18 +379,23 @@ if(!empty(getbulletin())){ //bulletin control
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../js/try.js"></script>
+
+
 		<?php
 		if(isset($_GET['error']) && $_GET['error'] == 1){
       echo '<script type="text/javascript">
 				$(document).ready(function(){
-        alert("There was an error uploading your file!");
+        alert("'.$_SESSION['error'].'");
 				})(jQuery);
       </script>';
     }
 		elseif(isset($_GET['error']) && $_GET['error'] == 2){
 			echo '<script type="text/javascript">
 				$(document).ready(function(){
-        alert("Error uploading info in database");
+        alert("'.$_SESSION['error'].'");
 				})(jQuery);
       </script>';
 		}
@@ -377,15 +406,6 @@ if(!empty(getbulletin())){ //bulletin control
 				})(jQuery);
       </script>';
 		}
-
-		if(isset($_GET['success'])){
-			echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("Execution Successful!");
-				})(jQuery);
-      </script>';
-		}
-
 		 ?>
 
 </body>

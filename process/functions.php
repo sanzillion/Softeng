@@ -1,12 +1,20 @@
 <?php
  function connect(){
- 	$db = new PDO("mysql:host=localhost;dbname=sad","root","", array(
- 		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
- 		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
- 		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
- 		PDO::MYSQL_ATTR_LOCAL_INFILE => TRUE,
- 		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
- 	return $db;
+   try {
+     $db = new PDO("mysql:host=localhost;dbname=srs","root","", array(
+    		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
+    		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
+    		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    		PDO::MYSQL_ATTR_LOCAL_INFILE => TRUE,
+    		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY));
+    	return $db;
+   } catch (Exception $e) {
+     //this catches the error upon deployment when the Database
+     //is not installed yet in the server... proceeds and
+     //creates its own DB and tables and the default admin values
+     header('Location: process/index.php');
+   }
+
  }
 
   function finduser($user, $password){
@@ -346,4 +354,14 @@ function deletebulletin(){
     }else {
       return false;
     }
+}
+
+//normalizing options for changes
+function options(){
+  $output = '<option>15</option>
+  <option>20</option>
+  <option>30</option>
+  <option>PRESENT</option>
+  <option>CLEARED</option>';
+  return $output;
 }

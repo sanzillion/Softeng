@@ -13,6 +13,7 @@ foreach(getmeet() as $d){
 	$meetdate[] = $month." ".$day;
 }
 
+$options = options();
 
 $getdesc = getdescription2(); //2 means FETCH_ASSOC
 $arraycount = count($getdesc);
@@ -226,51 +227,43 @@ for ($i = 0; $i <$arraycount; $i++){
 																	{echo '<select class="form-control"
 																		name="'.$desc[0].'" style="margin-bottom: 5px;" required>';
 																	 echo '<option disabled selected hidden value="">'.$desc[0].'</option>';
-																	 echo '<option>50</option><option>100</option><option>PAID</option>';
-																	 echo '<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																	 echo $options.'</select>';}?>
 																	 <?php if($arraycount >= 3)
 	 																{echo '<select class="form-control"
 																		name="'.$desc[2].'" style="margin-bottom: 5px;" required>';
 	 																 echo '<option disabled selected hidden value="">'.$desc[2].'</option>';
-	 																 echo '<option>50</option><option>100</option><option>PAID</option>';
-	 																 echo '<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	 																 echo $options.'</select>';}?>
 	 																 <?php if($arraycount >= 5)
 	  																{echo '<select class="form-control"
 																			name="'.$desc[4].'" style="margin-bottom: 5px;" required>';
 	  																 echo '<option disabled selected hidden value="">'.$desc[4].'</option>';
-	  																 echo '<option>50</option><option>100</option><option>PAID</option>';
-	  																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	  																 echo $options.'</select>';}?>
 	 																 <?php if($arraycount >= 7)
 	  																{echo '<select class="form-control"
 																			name="'.$desc[6].'" style="margin-bottom: 5px;" required>';
 	  																 echo '<option disabled selected hidden value="">'.$desc[6].'</option>';
-	  																 echo '<option>50</option><option>100</option><option>PAID</option>';
-	  																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	  																 echo $options.'</select>';}?>
 																</div>
 																<div class="col-md-6" style="margin-bottom: 10px;">
 																	<?php if($arraycount >= 2)
 																	{echo '<select class="form-control"
 																		name="'.$desc[1].'" style="margin-bottom: 5px;" required>';
 																	 echo '<option disabled selected hidden value="">'.$desc[1].'</option>';
-																	 echo '<option>50</option><option>100</option><option>PAID</option>';
-																	 echo '<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																	 echo $options.'</select>';}?>
 																	 <?php if($arraycount >= 4)
 	 																{echo '<select class="form-control"
 																		name="'.$desc[3].'" style="margin-bottom: 5px;" required>';
 	 																 echo '<option disabled selected hidden value="">'.$desc[3].'</option>';
-	 																 echo '<option>50</option><option>100</option><option>PAID</option>';
-	 																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	 																 echo $options.'</select>';}?>
 																	 <?php if($arraycount >= 6)
 																	 {echo '<select class="form-control"
 																		 name="'.$desc[5].'" style="margin-bottom: 5px;" required>';
 																		echo '<option disabled selected hidden value="">'.$desc[5].'</option>';
-																		echo '<option>50</option><option>100</option><option>PAID</option>';
-																		echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+																		echo $options.'</select>';}?>
 																		<?php if($arraycount >= 8)
 	 																{echo '<select class="form-control" name="'.$desc[7].'" required>';
 	 																 echo '<option disabled selected hidden value="">'.$desc[7].'</option>';
-	 																 echo '<option>50</option><option>100</option><option>PAID</option>';
-	 																 echo'<option>CLEARED</option><option>PRESENT</option></select>';}?>
+	 																 echo $options.'</select>';}?>
 
 																</div>
 																<input class="btn btn-primary btn-block" style="margin-top: 15px;"

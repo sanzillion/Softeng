@@ -236,18 +236,18 @@ for ($i = 0; $i <$arraycount; $i++){
                       <form class="" id="contact-form" action="form-handler-nodb.php" method="post">
                         <div class="form-group">
                           <label for="name">Name :</label>
-                          <input type="text" class="form-control" id="name"
+                          <input type="text" disabled class="form-control" id="name"
                           name="name" value="" required>
                           <label for="email">Email :</label>
                           <input type="text" class="form-control" id="email"
-                          name="email" value="" required>
+                          name="email" value="" required disabled >
                           <label for="comment">Comment :</label>
                           <textarea class="form-control" rows="5"
-                          name="comment" id="comment" required>
+                          name="comment" id="comment" required disabled >
                           </textarea>
                           <div class="text-right">
                             <button class="btn btn-default" type="submit"
-                            name="submitform" style="width: 100%;
+                            name="submitform" disabled style="width: 100%;
                             margin-top: 10px;">Submit Form</button>
                           </div>
                             <p class="pull-right">Or you can contact us thru the links below.</p>

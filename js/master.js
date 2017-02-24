@@ -171,6 +171,11 @@ $(document).on("click", ".editSanctionyear", function () {
           });
      }
 });
+
+
+
+
+
 // $(function(){
 //     $('#searchname').keyup(function(event){
 //         console.log("Im in here!");

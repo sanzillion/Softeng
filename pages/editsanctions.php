@@ -16,6 +16,8 @@ foreach(getmeet() as $d){
 	$meetdate[] = $month." ".$day;
 }
 
+$options = options();
+
 if(isset($_POST["view"])){
       $output = '';
       $res = getsanctionbyid($_POST["view"]);
@@ -30,59 +32,43 @@ if(isset($_POST["view"])){
           if($arraycount >= 1){
             $output .= '<select class="form-control"
               name="'.$desc[0].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[0].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[0].'</option>'.$options.'</select>';
           }
           if($arraycount >= 3){
             $output .= '<select class="form-control"
               name="'.$desc[2].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[2].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[2].'</option>'.$options.'</select>';
           }
           if($arraycount >= 5){
             $output .= '<select class="form-control"
               name="'.$desc[4].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[4].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[4].'</option>'.$options.'</select>';
           }
           if($arraycount >= 7){
             $output .= '<select class="form-control"
               name="'.$desc[6].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[6].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[6].'</option>'.$options.'</select>';
           }
            $output .= '</div><div class="col-md-6" style="margin-bottom: 10px;">';
           if($arraycount >= 2){
             $output .= '<select class="form-control"
               name="'.$desc[1].'" style="margin-bottom: 5px;" required>
-              <option>'.$res->$desc[1].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option>'.$res->$desc[1].'</option>'.$options.'</select>';
           }
           if($arraycount >= 4){
             $output .= '<select class="form-control"
               name="'.$desc[3].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[3].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[3].'</option>'.$options.'</select>';
           }
           if($arraycount >= 6){
             $output .= '<select class="form-control"
               name="'.$desc[5].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[5].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[5].'</option>'.$options.'</select>';
           }
           if($arraycount >= 8){
             $output .= '<select class="form-control"
               name="'.$desc[7].'" style="margin-bottom: 5px;" required>
-              <option >'.$res->$desc[7].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select>';
+              <option >'.$res->$desc[7].'</option>'.$options.'</select>';
           }
            $output .= '</div></div></div>';
         echo $output;
@@ -224,44 +210,28 @@ if(isset($_POST["yr"])){
                 value="'.$k->sanc_id.'"></td>';
             if($arraycount >= 1){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m1]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[0].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[0].'</option>'.$options.'</select></td>';}
             if($arraycount >= 2){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m2]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[1].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[1].'</option>'.$options.'</select></td>';}
             if($arraycount >= 3){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m3]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[2].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[2].'</option>'.$options.'</select></td>';}
             if($arraycount >= 4){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m4]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[3].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[3].'</option>'.$options.'</select></td>';}
             if($arraycount >= 5){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m5]" style="margin-bottom: 5px;" required>
-              <option>'.$k->$desc[4].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option>'.$k->$desc[4].'</option>'.$options.'</select></td>';}
             if($arraycount >= 6){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m6]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[5].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[5].'</option>'.$options.'</select></td>';}
             if($arraycount >= 7){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m7]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[6].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[6].'</option>'.$options.'</select></td>';}
             if($arraycount >= 8){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m8]" style="margin-bottom: 5px;" required>
-              <option >'.$k->$desc[7].'</option>
-              <option>15</option><option>20</option><option>50</option>
-              <option>PRESENT</option><option>CLEARED</option></select></td>';}
+              <option >'.$k->$desc[7].'</option>'.$options.'</select></td>';}
             $output .=  '</tr>';
             $i++;
         }

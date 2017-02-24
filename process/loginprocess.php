@@ -13,10 +13,10 @@ if($db = connect()){
 			if(finduser($user,$password)){
 
 				$query = $db->prepare("INSERT INTO record SET
-									name = :fname,
-			                 		dates = curdate(),
-			                 		time = curtime(),
-			                 		day = dayname(curdate())");
+															name = :fname,
+					                 		dates = curdate(),
+					                 		time = curtime(),
+					                 		day = dayname(curdate())");
 
 				$execute_query = [':fname' => $user];
 
