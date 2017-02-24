@@ -38,7 +38,7 @@ $(document).ready(function(){
        event.preventDefault();
   });
 
-  $("#pass-form").submit(function (event){
+  $("#p-form").submit(function (event){
     var oldpass = $("#old-pass").val();
     var newpass = $("#new-pass").val();
     var conpass = $("#con-pass").val();
@@ -159,10 +159,22 @@ $(function (){
   var oldpass = '';
   var newpass = '';
   var conpass = '';
+  var error = true;
+  var error1 = true;
+  var error2 = true;
 
   $('#old-pass').focusout(function(){
     oldpass = $(this).val();
     var name = $('#admin').val();
+    if(oldpass == ''){
+      $('#olderror').text("Required Field");
+      $('#operror').addClass("has-error");
+      error = true;
+    }else{
+      $('#olderror').empty();
+      $('#operror').removeClass("has-error");
+      error = false;
+    }
     if(name != '' && oldpass != '')
       {
            $.ajax({
@@ -174,9 +186,11 @@ $(function (){
                   if(data == "false"){
                     $('#olderror').text("Password Incorrect");
                     $('#operror').addClass("has-error");
+                    error = true;
                   }else{
                     $('#olderror').empty();
                     $('#operror').removeClass("has-error");
+                    error = false;
                   }
                 }
            });
@@ -184,41 +198,85 @@ $(function (){
       else{
         $('#olderror').text("Password Required!");
         $('#operror').addClass("has-error");
+        error = false;
+      }
+
+      if(error == false && error1 == false && error2 == false){
+        $("#p-form").unbind('change').submit();
+        $("#pbutton").prop('disabled', false);
+      }else{
+        $("#pbutton").prop('disabled', true);
       }
   });
 
   $('#new-pass').focusout(function(){
     newpass = $(this).val();
-    if(oldpass != ''){
-      if(newpass == oldpass){
-        $('#newerror').text("Password Incorrect");
-        $('#nperror').addClass("has-error");
-        console.log("Same");
-      }
-      else{
-        console.log("Not the same");
-        $('#newerror').empty();
-        $('#nperror').removeClass("has-error");
-      }
-    }
     if(newpass == ''){
-      $('#newerror').text("Required Field!");
+      $('#newerror').text("Required Field");
       $('#nperror').addClass("has-error");
-    }
-    else{
+      error1 = true;
+    }else{
       $('#newerror').empty();
       $('#nperror').removeClass("has-error");
+      error1 = false;
     }
     var rgx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if(rgx.test(newpass)){
-      $('#newerror').text("Must contain a number, an uppercase and a lowercase and atleast 8 minimum characters!");
+    if(newpass == oldpass){
+      $('#newerror').text("New ganee!");
       $('#nperror').addClass("has-error");
+      error1 = true;
     }
+    else if(!rgx.test(newpass)){
+        $('#newerror').text("Must contain #,A,a & 8 minimum char");
+        $('#nperror').addClass("has-error");
+        error1 = true;
+      }
     else{
       $('#newerror').empty();
       $('#nperror').removeClass("has-error");
+      error1 = false;
+    }
+
+    if(error == false && error1 == false && error2 == false){
+      $("#p-form").unbind('submit').submit();
+      $("#pbutton").prop('disabled', false);
+    }else{
+      $("#pbutton").prop('disabled', true);
     }
   });
+
+  $('#con-pass').focusout(function(){
+    conpass = $(this).val();
+    if(conpass == ''){
+      $('#conerror').text("Required Field");
+      $('#cperror').addClass("has-error");
+      error2 = true;
+    }
+    else{
+      $('#conerror').empty();
+      $('#cperror').removeClass("has-error");
+      error2 = false;
+    }
+
+    if(conpass != newpass){
+      $('#conerror').text("Re-type the password correctly!");
+      $('#cperror').addClass("has-error");
+      error2 = true;
+    }
+    else{
+      $('#conerror').empty();
+      $('#cperror').removeClass("has-error");
+      error2 = false;
+    }
+
+    if(error == false && error1 == false && error2 == false){
+      $("#p-form").unbind('submit').submit();
+      $("#pbutton").prop('disabled', false);
+    }else{
+      $("#pbutton").prop('disabled', true);
+    }
+  });
+
 });
 
 // $('#image').bind('change', function(){

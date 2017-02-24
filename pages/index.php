@@ -225,7 +225,7 @@ if(!empty(getbulletin())){ //bulletin control
 													</a></div>
 													<div id="pass-form" class="collapse panel-body">
 															<div class="container-fluid">
-																<form class="form-group" action="../process/adminpass.php" method="POST">
+																<form id="p-form" class="form-group" action="../process/adminpass.php" method="POST">
 																	<h3>Admin no.<?php echo $account->id; ?> </h3>
 																	<input required="Required Field" type="hidden" name="id"
 																		value="<?php echo $account->id;?>" id="idadmin">
@@ -245,12 +245,12 @@ if(!empty(getbulletin())){ //bulletin control
 																		</div>
 																		<label>Confirm Password:
 																		<p style="display: inline; color: red;" id="conerror"></p></label>
-																		<div class="cperror">
+																		<div class="" id="cperror">
 																			<input class="form-control" id="con-pass" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
 																		</div>
 																		<div class="text-right" style="margin-top: 10px;">
-																			<input class="btn btn-default" type="submit" name="change" value="Save Password">
+																			<input class="btn btn-default" type="submit" name="submit" value="Save Password" id="pbutton">
 																		</div>
 																	</form>
 															</div>
@@ -382,7 +382,6 @@ if(!empty(getbulletin())){ //bulletin control
 
     <!-- Custom JS -->
     <script src="../js/try.js"></script>
-
 
 		<?php
 		if(isset($_GET['error']) && $_GET['error'] == 1){

@@ -3,7 +3,7 @@ session_start();
 include "functions.php";
 $db = connect();
 
-if(isset($_POST['change'])){
+if(isset($_POST['submit'])){
 		 $_SESSION['error']='none';
 		 $stmt = $db->prepare("SELECT * from admin
 		 		where id = :id");
