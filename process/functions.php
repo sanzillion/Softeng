@@ -12,9 +12,8 @@
      //this catches the error upon deployment when the Database
      //is not installed yet in the server... proceeds and
      //creates its own DB and tables and the default admin values
-     header('Location: process/index.php');
+     header('Location: process/installdb.php');
    }
-
  }
 
   function finduser($user, $password){

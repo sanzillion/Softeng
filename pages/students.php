@@ -2,7 +2,7 @@
 session_start();
 include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
-	header('Location: ../pages/login.php?error2');
+	header('Location: ../index.php?error=2');
 }
 
 $admin = $_SESSION['admin'];
@@ -440,8 +440,10 @@ if(isset($_SESSION['QUE_ERROR'])){
 		// take this problem up later PROBLEM
 		$(function(){
 				$('#searchname').keyup(function(event){
+
 						var keyCode = event.which; // check which key was pressed
 						var name = $(this).val(); // get the complete input
+						console.log(name);
 						var nothing = 'nothingLOL';
 						if(name != '')
 							{
@@ -492,6 +494,14 @@ if(isset($_GET['error']) && $_GET['error'] == 1){
 			});
 	 </script>';
 }
+if(isset($_GET['error']) && $_GET['error'] == 5){
+	echo ' <script type="text/javascript">
+			$(document).ready(function(){
+				alert("Register a student first");
+			});
+	 </script>';
+}
+
  ?>
 
 </body>

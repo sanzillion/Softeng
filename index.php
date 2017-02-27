@@ -1,4 +1,6 @@
 <?php
+session_start();
+session_destroy();
 
 include "process/functions.php";
 
@@ -33,8 +35,6 @@ foreach(getmeet() as $d){
 
 $getdesc = getdescription2(); //2 means FETCH_ASSOC
 $arraycount = count($getdesc);
-
-$_SESSION['count']=$arraycount;
 
 for ($i = 0; $i <$arraycount; $i++){
 	$desc[] = implode(',', $getdesc[$i]);
@@ -587,9 +587,15 @@ for ($i = 0; $i <$arraycount; $i++){
     </script>
 
     <?php
-    if(isset($_GET['error'])){
+    if(isset($_GET['error']) && $_GET['error'] == 1){
       echo '<script type="text/javascript">
         alert("Invalid user or password");
+      </script>';
+    }
+
+    if(isset($_GET['error']) && $_GET['error'] == 2){
+      echo '<script type="text/javascript">
+        alert("You need to login first!");
       </script>';
     }
      ?>

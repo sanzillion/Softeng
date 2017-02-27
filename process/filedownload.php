@@ -5,7 +5,7 @@ if(isset($_GET['file']) && $_GET['file'] == 1
 || $_GET['file'] == 2|| $_GET['file'] == 3){
 
 	if($_GET['file'] == 1){
-		$file = '../files/sad.sql';
+		$file = '../files/srs.sql';
 	}
 
 	if($_GET['file'] == 2){

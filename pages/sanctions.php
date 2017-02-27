@@ -2,7 +2,7 @@
 session_start();
 include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
-	header('Location: ../index.php?error2');
+	header('Location: ../index.php?error=2');
 }
 
 //convert dates
@@ -17,9 +17,15 @@ $options = options();
 
 $getdesc = getdescription2(); //2 means FETCH_ASSOC
 $arraycount = count($getdesc);
+$studentcount = count(getstudents());
 
 if($arraycount < 1 || $arraycount == 0){
+	//if no meeting yet redirect to meetings page
 	header('Location: meetings.php?error=5');
+}
+elseif ($studentcount < 1 || $studentcount == 0) {
+	//if no students yet, redirect to students page
+	header('location: students.php?error=5');
 }
 
 $_SESSION['count']=$arraycount;

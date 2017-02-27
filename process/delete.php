@@ -1,9 +1,8 @@
 <?php
-
 session_start();
-include "functions.php";
+include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
-	header('Location: ../pages/login.php?error2');
+	header('Location: ../index.php?error=2');
 }
 
 $db = connect();

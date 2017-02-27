@@ -2,7 +2,7 @@
 session_start();
 include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
-	header('Location: ../pages/login.php?error2');
+	header('Location: ../index.php?error=2');
 }
 
 $admin = $_SESSION['admin'];
@@ -381,7 +381,7 @@ if(!empty(getbulletin())){ //bulletin control
     <script src="../js/bootstrap.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="../js/try.js"></script>
+    <script src="../js/myownvalidation.js"></script>
 
 		<?php
 		if(isset($_GET['error']) && $_GET['error'] == 1){

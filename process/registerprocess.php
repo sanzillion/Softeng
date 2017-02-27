@@ -35,7 +35,7 @@ if(isset($_POST['addmeeting'])){ //from meeting.php
 		if($query->execute($execute_query) && $sth->execute()){
 				header('Location: ../pages/meetings.php?success=1');
 		}else{
-				header('Location: ../pages/meetings.php?error');
+				//header('Location: ../pages/meetings.php?error');
 		}
 	}
 
