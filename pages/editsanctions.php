@@ -101,9 +101,9 @@ if(isset($_POST['delete'])){ //delete the student from the student roll
               }catch(exception $e){echo $e;}
               if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
             $output .= '<td>'.$total.'</td>
-          <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
-            class="editSanction btn btn-primary" data-target="#edit-sanction">
-          <i class="fa fa-edit"></i></a>
+          <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id
+          .'" title="Add this item" class="editSanction btn btn-primary"
+          data-target="#edit-sanction"> <i class="fa fa-edit"></i></a>
           <a class="deleteSanction btn btn-danger" data-id="'.$k->sanc_id.'">
           <i class="fa fa-trash"></i></a></td>
           </tr>';
@@ -142,8 +142,9 @@ if(isset($_POST['searchname'])){
            }catch(exception $e){echo $e;}
            if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
          $output .= '<td>'.$total.'</td>
-         <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
-           class="editSanction btn btn-primary" data-target="#edit-sanction">
+         <td class="text-center"><a data-toggle="modal" data-id="'.
+         $k->sanc_id.'" title="Add this item" class="editSanction btn
+         btn-primary" data-target="#edit-sanction">
          <i class="fa fa-edit"></i></a>
          <a class="deleteSanction btn btn-danger" data-id="'.$k->sanc_id.'">
          <i class="fa fa-trash"></i></a></td>
@@ -151,7 +152,8 @@ if(isset($_POST['searchname'])){
         }
       }else{
         $output .= '<tr><td colspan="12"><div class="text-center"
-    		<p style="font-size: 1.5em !important;"> No results found </p></div></td></tr>';
+    		<p style="font-size: 1.5em !important;"> No results found </p></div>
+        </td></tr>';
       }
   echo $output;
 }
@@ -180,8 +182,9 @@ if(isset($_POST['show'])){
          }catch(exception $e){echo $e;}
          if($total == 0){ echo $total = "CLEARED";}else{echo $total;}
        $output .= '<td>'.$total.'</td>
-     <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'" title="Add this item"
-       class="editSanction btn btn-primary" data-target="#edit-sanction">
+     <td class="text-center"><a data-toggle="modal" data-id="'.$k->sanc_id.'"
+     title="Add this item" class="editSanction btn btn-primary"
+     data-target="#edit-sanction">
      <i class="fa fa-edit"></i></a>
      <a class="deleteSanction btn btn-danger" data-id="'.$k->sanc_id.'">
      <i class="fa fa-trash"></i></a></td>

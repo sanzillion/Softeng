@@ -23,3 +23,14 @@ include "process/functions.php";
     </form>
   </body>
 </html>
+
+<script type="text/javascript">
+  var name = "<input";
+  var rgx = /^([a-zA-Z0-9 _-]+)$/;
+  if(rgx.test(name)){
+    console.log("True");
+  }
+  else{
+    console.log("False");
+  }
+</script>

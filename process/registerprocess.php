@@ -48,6 +48,7 @@ if(isset($_POST['submitstudent'])){ //Register Student
 	$lname = $_POST['lname'];
 	$cpnum = $_POST['cpnum'];
 	$name = $fname." ".$lname;
+	$name = htmlspecialchars($name, ENT_QUOTES);
 	$yr = $_POST['yr'];
 
 		if(findstudents($name)){
@@ -63,8 +64,12 @@ if(isset($_POST['submitstudent'])){ //Register Student
 		$query->bindParam(2,$yr);
 		$query->bindParam(3,$cpnum);
 
-		$query->execute();
-		header('Location: ../pages/students.php');
+		if($query->execute()){
+			header('Location: ../pages/students.php?succes');
+		}else{
+			header('Location: ../pages/students.php?error');
+		}
+
 
 		}
 	}

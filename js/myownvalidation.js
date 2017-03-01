@@ -279,6 +279,56 @@ $(function (){
 
 });
 
+$(function (){
+
+var nameerror = true;
+var dateerror = true;
+
+  $('#event').focusout(function(){
+    console.log("inside");
+    var eventname = $("#eventname").val();
+    console.log(eventname);
+    var rgx = /^([a-zA-Z0-9 _-]+)$/;
+    if(!rgx.test(eventname)){
+      console.log("here");
+      $("#event").addClass("has-error");
+      nameerror = true;
+    }
+    else {
+      $("#event").removeClass("has-error");
+      nameerror = false;
+    }
+
+    if(nameerror == false && dateerror == false){
+      $("#eventsubmit").prop('disabled', false);
+    }
+    else{
+      $("#eventsubmit").prop('disabled', true);
+    }
+  })
+
+  $('#eventdate').focusout(function(){
+    var eventdate = $("#dateevent").val();
+    var dateReg = /^\d{4}([-/])\d{2}\1\d{2}$/
+    if(!dateReg.test(eventdate)){
+      $("#eventdate").addClass("has-error");
+      dateerror = true;
+    }
+    else{
+      $("#eventdate").removeClass("has-error");
+      dateerror = false;
+    }
+
+    if(nameerror == false && dateerror == false){
+      $("#eventsubmit").prop('disabled', false);
+    }
+    else{
+      $("#eventsubmit").prop('disabled', true);
+    }
+  })
+
+});
+
 // $('#image').bind('change', function(){
 //   alert('this file size is: ' + this.files[0].size/1024/1024 + "MB");
 // });

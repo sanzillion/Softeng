@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2017 at 08:47 AM
+-- Generation Time: Mar 01, 2017 at 03:40 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -61,8 +61,8 @@ CREATE TABLE `bulletin` (
 
 CREATE TABLE `meeting` (
   `m_id` int(11) NOT NULL,
-  `description` varchar(11) NOT NULL,
-  `m_date` varchar(11) NOT NULL
+  `description` varchar(50) NOT NULL,
+  `m_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -157,27 +157,27 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bulletin`
 --
 ALTER TABLE `bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `r_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=399;
+  MODIFY `r_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `sanction`
 --
 ALTER TABLE `sanction`
-  MODIFY `sanc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+  MODIFY `sanc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=446;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

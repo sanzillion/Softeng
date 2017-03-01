@@ -187,18 +187,18 @@ else{
 																		<!-- PROBLEM DISABLE PROPERTY -->
 																		<form class="" method="POST" action="../process/registerprocess.php">
 																			<h4><i class="fa fa-calendar-plus-o"></i> Register Event</h4>
-																				<div class="form-group input-group">
+																				<div class="form-group input-group" id="event">
 																					<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-																					<input type="text" name="desc" placeholder="Event Description" required maxlength="11"
-																					pattern="[a-zA-Z]{.11}" title="Format: aA" class="form-control">
+																					<input type="text" name="desc" placeholder="Event Description" required maxlength="50"
+																					id="eventname" title="Format: aA" class="form-control">
 																				</div>
-																				<div class="form-group input-group">
+																				<div class="form-group input-group" id="eventdate">
 																					<span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
 																					<input type="date" name="dato"  required="required" class="form-control"
-																					maxlength="11" placeholder="yyyy-dd-mm">
+																					maxlength="11" placeholder="yyyy-dd-mm" id="dateevent">
 																				</div>
 																				<div class="col-md-12 text-right" style="margin-bottom: 10px;">
-																					<button class="btn btn-primary" type="submit" name="addmeeting"
+																					<button id="eventsubmit" class="btn btn-primary" type="submit" name="addmeeting"
 																					<?php echo $dis;?>>	Add Event &nbsp  <i class="fa fa-send"></i></button>
 																				</div>
 																			</form>
@@ -305,6 +305,9 @@ else{
 
 		<!-- Custom JS -->
 		<script src="../js/master.js"></script>
+
+		<!-- Validation JS -->
+		<script src="../js/myownvalidation.js"></script>
 
 		<!-- Activate bootstrap tooltip -->
 		<script type="text/javascript">

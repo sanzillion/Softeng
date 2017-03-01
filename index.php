@@ -216,7 +216,9 @@ for ($i = 0; $i <$arraycount; $i++){
                     <div class="col-lg-6 text-justify">
                       <hr class="visible-xs">
                       <h3 class="no-margin" style="margin-bottom: 10px;"><?php echo $title; ?></h3>
-                      <p><?php echo $par; ?></p>
+											<div class="" id="paragraph" style="overflow-y: auto; height: 280px;">
+												<p><?php echo $par; ?></p>
+											</div>
                     </div>
                 </div>
             </div>
