@@ -5,6 +5,12 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error=2');
 }
 
+$super = "";
+if($_SESSION['admin'] == "dean"){
+	$super = '<li id="superuser">
+							<a href="superuser.php"><i class="fa fa-fw fa-lock"></i> Superuser</a>
+						</li>';
+}
 $admin = $_SESSION['admin'];
 $account = getadmin($admin);
 
@@ -139,9 +145,11 @@ if(!empty(getbulletin())){ //bulletin control
                     </ul>
                 </li>
             </ul>
+
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
+										<?php echo $super; ?>
                     <li class="active">
                         <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>

@@ -600,6 +600,12 @@ for ($i = 0; $i <$arraycount; $i++){
         alert("You need to login first!");
       </script>';
     }
+
+    if(isset($_GET['error']) && $_GET['error'] == 3){
+      echo '<script type="text/javascript">
+        alert("You need super user privileges");
+      </script>';
+    }
      ?>
 
 </body>

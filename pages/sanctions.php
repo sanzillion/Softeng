@@ -5,6 +5,12 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error=2');
 }
 
+$super = "";
+if($_SESSION['admin'] == "dean"){
+	$super = '<li id="superuser">
+							<a href="superuser.php"><i class="fa fa-fw fa-lock"></i> Superuser</a>
+						</li>';
+}
 //convert dates
 $meetdate = [];
 foreach(getmeet() as $d){
@@ -149,6 +155,7 @@ for ($i = 0; $i <$arraycount; $i++){
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
+										<?php echo $super; ?>
                     <li>
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>

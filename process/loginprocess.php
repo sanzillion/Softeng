@@ -22,7 +22,7 @@ if($db = connect()){
 
 				$query->execute($execute_query);
 
-				if($user == "admin" || $user == "admin2" || $user == "admin3"){
+				if($user == "admin" || $user == "admin2" || $user == "dean"){
 					$stmt2 = $db->prepare("SELECT * from admin where user = :user");
 					$stmt2->bindValue(':user',$user);
 					$stmt2->execute();
