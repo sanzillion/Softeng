@@ -8,7 +8,7 @@ if(!isset($_SESSION['admin'])){
 $super = "";
 if($_SESSION['admin'] == "dean"){
 	$super = '<li id="superuser">
-							<a href="superuser.php"><i class="fa fa-fw fa-lock"></i> Superuser</a>
+							<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
 						</li>';
 }
 $admin = $_SESSION['admin'];

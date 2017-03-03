@@ -16,9 +16,14 @@ if(isset($_POST["view"])){
                      name="id" value="'.$res->s_id.'"></td>
                 </tr>
                 <tr>
-                     <td width="30%"><label>Name :</label></td>
+                     <td width="30%"><label>Given name :</label></td>
                      <td width="70%"><input class="form-control" type="text"
-                     name="name" value="'.$res->name.'"></td>
+                     name="fname" value="'.$res->firstname.'"></td>
+                </tr>
+                <tr>
+                     <td width="30%"><label>Last name :</label></td>
+                     <td width="70%"><input class="form-control" type="text"
+                     name="sname" value="'.$res->surname.'"></td>
                 </tr>
                 <tr>
                      <td width="30%"><label>Year :</label></td>
@@ -43,15 +48,15 @@ if(isset($_POST['delete'])){ //delete the student from the student roll
 
     $output = ''; //initialize output
     $a = getstudentsbyid($_POST['delete']);
-    $name = $a->name;
+    $id = $a->s_id;
     //as well as delete the student from the sanction record
     //case probably a drop out
-    if(deletefromsanc($name) && deleteonestudent($_POST['delete'])){
+    if(deletefromsanc($id) && deleteonestudent($_POST['delete'])){
       $output .= '<table class="table table-hover table-striped">
         <tbody>';
        foreach(getstudents() as $g){
            $output .= '<tr>
-             <td class="indent">'.$g->name.'</td>
+             <td class="indent">'.$g->surname.', '.$g->firstname.'</td>
              <td>'.$g->year.'</td>
              <td class="text-center">'.$g->cpnum.'</td>
              <td class="text-center"><a data-toggle="modal" data-id="'.$g->s_id.'" title="Add this item"
@@ -80,7 +85,7 @@ if(isset($_POST['searchname'])){
           if($results){
             foreach($results as $g){
               $output .= '<tr>
-                <td class="indent">'.$g->name.'</td>
+                <td class="indent">'.$g->surname.' '.$g->firstname.'</td>
                 <td>'.$g->year.'</td>
                 <td class="text-center">'.$g->cpnum.'</td>
                 <td class="text-center"><a data-toggle="modal" data-id="'.$g->s_id.'" title="Add this item"
@@ -108,7 +113,7 @@ if(isset($_POST['show'])){
               <tbody>';
   foreach(getstudents() as $g){
         $output .= '<tr>
-          <td class="indent">'.$g->name.'</td>
+          <td class="indent">'.$g->surname.' '.$g->firstname.'</td>
           <td>'.$g->year.'</td>
           <td class="text-center">'.$g->cpnum.'</td>
           <td class="text-center"><a data-toggle="modal" data-id="'.$g->s_id.'" title="Add this item"

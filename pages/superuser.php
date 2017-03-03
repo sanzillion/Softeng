@@ -10,19 +10,11 @@ elseif($_SESSION['admin'] != "dean") {
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "disabled";
-$btn = "btn-default";
 
-if(isset($_SESSION['QUE_ERROR'])){
-		if($_SESSION['QUE_ERROR'] > 3){
-		$dis = "";
-		$btn = "btn-success";
-	}
-	else{
-		$dis = "disabled";
-	}
+$var = "disabled";
+if(isset($_GET['enable'])){
+	$var = "";
 }
-
  ?>
 
 <!DOCTYPE html>
@@ -36,7 +28,7 @@ if(isset($_SESSION['QUE_ERROR'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Students</title>
+    <title>Superadmin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -126,13 +118,13 @@ if(isset($_SESSION['QUE_ERROR'])){
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active" id="superuser">
-                				<a href="superuser.php"><i class="fa fa-fw fa-lock"></i> Superuser</a>
+                				<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
         						</li>
                     <li>
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-group"></i> Students</a>
+                        <a href="students.php"><i class="fa fa-fw fa-group"></i> Students</a>
                     </li>
                     <li>
                         <a href="meetings.php"><i class="fa fa-fw fa-bar-chart-o"></i> Meetings</a>
@@ -181,7 +173,7 @@ if(isset($_SESSION['QUE_ERROR'])){
                                 <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> Students
+                                <i class="fa fa-edit"></i> Dean
                             </li>
                         </ol>
                     </div>
@@ -193,112 +185,67 @@ if(isset($_SESSION['QUE_ERROR'])){
 									<div class="col-lg-4">
 											<div class="panel panel-green">
 													<div class="panel-heading">
-															<h3 class="panel-title"><i class="fa fa-user"></i>&nbsp Manage Students</h3>
+															<h3 class="panel-title"><i class="fa fa-user-circle-o"></i>&nbsp Manage Admins</h3>
 													</div>
 													<div class="panel-body" style="overflow-x: hidden;">
-															<div class="" style="margin-bottom: 10px;">
-																<div class="row">
-																	<div class="col-md-6" style="margin-bottom: 10px;">
-																		<button type="button" data-toggle="modal" data-target="#register-student"
-																		class="btn btn-success btn-block" name="button">
-																		<i class="fa fa-user-plus"></i>&nbsp Register</button>
-																	</div>
+														<div class="text-center">
+																<h4 style="margin-top: 0px;"><strong>Register Admin</strong>
+																	<a href="" data-toggle="tooltip" data-placement="right"
+																	title="Maximum of 3 admins">
+																	<i class="fa fa-info-circle"
+																	style="font-size: 15px; color: black;
+																	margin-left: 10px;"></i></a></h4>
+														</div>
+														<div class="form-group">
+															<form class="" action="../process/registerprocess.php" method="post">
+																<label for="#user">Admin Name: </label>
+																<input id="user" class="form-control" type="text" name="name" value="">
+																<label for="pw">Password: </label>
+																<input id="pw" class="form-control" type="password" name="pass" value="">
+																<div class="text-right">
+																	<button style="margin-top: 10px;"
+																	type="submit" name="add-admin" class="btn btn-default">Submit New Admin</button>
 																</div>
-																<hr>
-																<!-- row end -->
- 																<div class="row" style="margin-bottom: 10px;">
-																	<div class="col-md-12">
-																		<form class="upcsv" class="form-group" enctype="multipart/form-data"
-																		action="../process/fileprocess.php"	method="POST">
-																			<h4>CSV File Upload
-																			<a href="" data-toggle="tooltip" data-placement="right"
-																			title="Download CSV file in settings for the format">
-																			<i class="fa fa-info-circle"
-																			style="font-size: 15px; color: black;
-																			margin-left: 10px;"></i></a></h4>
-																			<input class="form-control" name="csv" type="file"
-																			placeholder="asdfasdf" value="Names" required>
-																			<div class="text-right" style="margin-top: 10px;">
-																				<button class="btn btn-primary"
-																				type="submit" name="sub"> Submit File &nbsp<i class="fa fa-send">
-																				</i></button>
-																			</div>
-																		</form>
-																	</div>
-																</div>
-																<hr>
-																<!-- row end -->
-																<div class="row">
-																	<div class="col-md-12">
-																		<form class="form-horizontal" enctype="multipart/form-data"
-																		action="../process/fileprocess.php"	method="POST"
-																		<?php echo $dis; ?> style="">
-																				<div class="input-group">
-																					<a class="btn <?php echo $btn; ?> btn-block" href="javascript:;"
-																					 data-toggle="collapse" style="border-radius: 0px;"
-																					data-target="#txtupload">Txt Files Upload <i class="fa fa-caret-down fa-fw"></i></a>
-																					<p class="input-group-addon"
-																					style="border-radius: 0px;"	data-toggle="tooltip" data-placement="top"
-																					title="This will only be activated incase of CSV file upload error!">
-																					<i class="fa fa-info-circle" style="font-size: 15px; color: black;"></i></p></h4>
-																				</div>
-
-																						<div id="txtupload" class="collapse">
-																							<div class="form-group" style="margin-top: 10px;">
-																								<label for="names" class="col-sm-2">Name:</label>
-																								<div class="col-sm-10">
-																									<input id="names" name="userfile" type="file"
-																									class="" placeholder="Names" required <?php echo $dis; ?>>
-																								</div>
-																							</div>
-																							<div class="form-group">
-																								<label for="year" class="col-sm-2">Year:</label>
-																								<div class="col-sm-10">
-																									<input type="file" name="yrs" id="year"
-																									placeholder="Year" required <?php echo $dis; ?>>
-																								</div>
-																							</div>
-																							<div class="form-group">
-																								<label for="cpnum" class="col-sm-2">CP:</label>
-																								<div class="col-sm-10">
-																									<input id="cpnum" type="file" name="cpnum" placeholder="Mobile"
-																									required <?php echo $dis; ?>>
-																								</div>
-																							</div>
-																							<div class="text-right" style="margin-bottom: 10px;">
-																								<button class="btn btn-default" type="submit"
-																								value="Submit File" name="submit"
-																								<?php echo $dis; ?>> Submit File
-																								 <i class="fa fa-send"></i> </button>
-																							</div>
-																						</div>
-																						<!-- div collapse -->
-																			</form>
-																	</div>
-																</div>
-																<!-- row end -->
-
-															</div>
-															<!-- panel end -->
+															</form>
+														</div>
 													</div>
-											</div>
-									</div>
+											</div> <!--End Panel -->
+											<div class="panel panel-red">
+													<div class="panel-heading">
+															<h3 class="panel-title"><i class="fa fa-refresh"></i>&nbsp System Refresh
+																<a href="" data-toggle="tooltip" data-placement="right"
+																title="Proceed with caution!">
+																<i class="fa fa-info-circle"
+																style="font-size: 15px; color: black;
+																margin-left: 10px;"></i></a></h3>
+													</div>
+													<div class="panel-body" style="overflow-x: hidden;">
+														<div class="text-center">
+
+														</div>
+														<div class="form-group">
+															<form class="" action="../process/delete.php" method="post">
+																<div class="text-center">
+																	<label>Note: There is no recovery option.
+																	<a href="superuser.php?enable">Enable</a></label>
+																	<button type="submit" class="btn btn-warning" <?php echo $var; ?>
+																	name="d-log" style="margin-bottom: 10px;">Delete Login Records</button>
+																	<button type="submit" class="btn btn-danger" <?php echo $var; ?>
+																	name="d-system">Delete System Records</button>
+																</div>
+															</form>
+														</div>
+													</div>
+											</div> <!--Panel End -->
+									</div><!-- end of column 4 -->
+
 									  <div class="col-lg-8">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
 															<div class="row">
 																<div class="col-md-6">
 																	<h3 style="font-size: 1.5em;" class="panel-title">
-																		<i class="fa fa-list"></i>&nbsp Students List</h3>
-																</div>
-																<div class="col-md-6">
-																	<div class="input-group">
-																			<span style="font-size: 10px;"
-																			class="input-group-addon"><i class="fa fa-search"></i></span>
-																			<input style="background-color: #F4F4F4; height: 25px;"
-																			class="form-control" type="text" name="searchname2"
-																			value="" id="searchname" placeholder="Search here by name">
-																	</div>
+																		<i class="fa fa-list"></i>&nbsp Admins List</h3>
 																</div>
 																<!-- end of search -->
 															</div>
@@ -310,10 +257,10 @@ if(isset($_SESSION['QUE_ERROR'])){
 																<table class="table block" style="margin-bottom: 0px;">
 																	<thead class="text-center">
 																		<tr>
-																			<th width="30%" class="indent">Name</th>
-																			<th width="20%" class="text-center">Year</th>
-																			<th width="20%" class="text-center">Mobile No.</th>
-																			<th width="30%" class="text-center">Option</th>
+																			<th width="10%" class="indent">Id</th>
+																			<th width="30%" class="text-center">User</th>
+																			<th width="20%" class="text-center">Pass</th>
+																			<th width="40%" class="text-center">Option</th>
 																		</tr>
 																	</thead>
 																</table>
@@ -322,19 +269,19 @@ if(isset($_SESSION['QUE_ERROR'])){
 														<!-- end of row table header -->
                             <div class="panel-body" style="padding-top: 0px;">
 															<div class="row"style="overflow: auto;">
-																<div  id="students-table" class="flot-chart"																>
+																<div  id="admins-table" class="flot-chart"																>
 																	<table class="table table-hover table-striped">
 																		<tbody>
-																			<?php foreach(getstudents() as $g): ?>
+																			<?php foreach(getadmins() as $g): ?>
 																			<tr>
-																				<td class="indent"><?php echo  $g->name; ?></td>
-																				<td><?php echo  $g->year; ?></td>
-																				<td class="text-center"><?php echo  $g->cpnum; ?></td>
+																				<td class="indent"><?php echo  $g->id; ?></td>
+																				<td class="text-center"><?php echo  $g->user; ?></td>
+																				<td class="text-center"><?php echo  $g->pass; ?></td>
 																				<td class="text-center"><a data-toggle="modal"
-																					data-id="<?php echo $g->s_id;?>" title="Add this item"
-																					class="editStudents btn btn-primary" href="#edit-students" data-target="#edit-students">
+																					data-id="<?php echo $g->id;?>" title="Add this item"
+																					class="editAdmin btn btn-primary" data-target="#edit-admin">
 																				<i class="fa fa-edit"></i></a>
-																				<a class="deleteStudent btn btn-danger" data-id="<?php echo $g->s_id?>">
+																				<a class="deleteAdmin btn btn-danger" data-id="<?php echo $g->id?>">
 																				<i class="fa fa-trash"></i></a></td>
 																			</tr>
 																		<?php endforeach; ?>
@@ -343,8 +290,8 @@ if(isset($_SESSION['QUE_ERROR'])){
 																</div>
 															</div> <!-- end of row -->
 																<div class="col-md-12" style="margin-top: 10px;">
-																	<a type="button" href="../process/deletestudent.php?action=deleteall"
-																	onclick="return confirm('Sanction Records Will be deleted too!')"
+																	<a type="button" href="../process/delete.php?action=deleteadmins"
+																	onclick="return confirm('Are you sure?')"
 																	class="btn btn-danger" name="button" data-toggle="tooltip"
 																	title="Proceed with caution!">
 																	<i class="fa fa-warning"></i> &nbsp Delete All</a>
@@ -355,11 +302,11 @@ if(isset($_SESSION['QUE_ERROR'])){
 																</div>
                             </div>
                         </div>
-                    </div>
+                    </div> <!--Column End -->
                 </div>
                 <!-- /.row -->
 
-								<div class="modal fade" id="edit-students" role="dialog">
+								<div class="modal fade" id="edit-admin" role="dialog">
 									<div class="modal-dialog modal-md">
 										<div class="modal-content form-group">
 											<form class="" action="../process/updatestudent.php" method="post">
@@ -367,56 +314,13 @@ if(isset($_SESSION['QUE_ERROR'])){
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title font2">Record</h3>
 											</div>
-											<div class="modal-body" id="students_details">
+											<div class="modal-body" id="admin-details">
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default"
 												data-dismiss="modal">Close</button>
-												<button type="submit" class="btn btn-primary" name="update">Save Changes</button>
+												<button type="submit" class="btn btn-primary" name="updateadmin">Save Changes</button>
 											</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<!-- end of modal -->
-
-								<div class="modal fade" id="register-student" role="dialog">
-									<div class="modal-dialog modal-sm">
-										<div class="modal-content form-group">
-											<form class="form-group" action="../process/registerprocess.php" method="post">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 class="modal-title font2"><i class="fa fa-user-plus"></i>&nbsp Register Student</h3>
-												</div>
-												<div class="modal-body">
-													<input class="form-control" type="text" name="fname"
-													placeholder="firstname" style="margin-bottom: 10px;" required>
-														<input class="form-control" type="text" name="lname"
-														placeholder="lastname" style="margin-bottom: 10px;" required>
-														<input class="form-control" type="text" name="cpnum"
-														placeholder="cp number | ex: 63907..." style="margin-bottom: 10px;"
-														required>
-													<div class="row">
-														<div class="col-sm-3 text-center">
-															<h5>Year : </h5>
-														</div>
-														<div class="col-sm-9">
-															<select class="form-control" id="yr"
-															 name="yr" required>
-																<option></option>
-																<option>1st</option>
-																<option>2nd</option>
-																<option>3rd</option>
-																<option>4th</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default"
-													data-dismiss="modal">Cancel</button>
-													<button type="submit" class="btn btn-primary" name="submitstudent">Submit Form</button>
-												</div>
 											</form>
 										</div>
 									</div>
@@ -441,43 +345,6 @@ if(isset($_SESSION['QUE_ERROR'])){
 		<!-- Custom JS -->
 		<script src="../js/master.js"></script>
 
-		<script type="text/javascript">
-		//i dont know why this code wont run on master.js (external source)
-		// take this problem up later PROBLEM
-		$(function(){
-				$('#searchname').keyup(function(event){
-
-						var keyCode = event.which; // check which key was pressed
-						var name = $(this).val(); // get the complete input
-						console.log(name);
-						var nothing = 'nothingLOL';
-						if(name != '')
-							{
-									 $.ajax({
-												url:"editstudents.php",
-												method:"POST",
-												data:{searchname:name},
-												success:function(data){
-														 $('#students-table').html(data);
-														 console.log('success!');
-												}
-									 });
-							}
-						else{
-							$.ajax({
-									 url:"editstudents.php",
-									 method:"POST",
-									 data:{show:nothing},
-									 success:function(data){
-												$('#students-table').html(data);
-												console.log('success!');
-									 }
-							});
-						}
-				});
-		});
-		</script>
-
 		<!-- Activate bootstrap tooltip -->
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -493,10 +360,24 @@ if(isset($_GET['success']) && $_GET['success'] == 1){
 			});
 	 </script>';
 }
+if(isset($_GET['success']) && $_GET['success'] == 2){
+	echo ' <script type="text/javascript">
+			$(document).ready(function(){
+				alert("Successfully deleted!");
+			});
+	 </script>';
+}
 if(isset($_GET['error']) && $_GET['error'] == 1){
 	echo ' <script type="text/javascript">
 			$(document).ready(function(){
 				alert("Delete meetings first");
+			});
+	 </script>';
+}
+if(isset($_GET['error']) && $_GET['error'] == 2){
+	echo ' <script type="text/javascript">
+			$(document).ready(function(){
+				alert("Something went wrong!");
 			});
 	 </script>';
 }

@@ -8,13 +8,13 @@ if(!isset($_SESSION['admin'])){
 $super = "";
 if($_SESSION['admin'] == "dean"){
 	$super = '<li id="superuser">
-							<a href="superuser.php"><i class="fa fa-fw fa-lock"></i> Superuser</a>
+							<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
 						</li>';
 }
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "disabled";
+$dis = "";
 $btn = "btn-default";
 
 if(isset($_SESSION['QUE_ERROR'])){
@@ -247,9 +247,16 @@ if(isset($_SESSION['QUE_ERROR'])){
 
 																						<div id="txtupload" class="collapse">
 																							<div class="form-group" style="margin-top: 10px;">
-																								<label for="names" class="col-sm-2">Name:</label>
+																								<label for="names" class="col-sm-2">Sname:</label>
 																								<div class="col-sm-10">
-																									<input id="names" name="userfile" type="file"
+																									<input id="names" name="userlast" type="file"
+																									class="" placeholder="Names" required <?php echo $dis; ?>>
+																								</div>
+																							</div>
+																							<div class="form-group" style="margin-top: 10px;">
+																								<label for="names" class="col-sm-2">Gname:</label>
+																								<div class="col-sm-10">
+																									<input id="names" name="userfirst" type="file"
 																									class="" placeholder="Names" required <?php echo $dis; ?>>
 																								</div>
 																							</div>
@@ -329,7 +336,7 @@ if(isset($_SESSION['QUE_ERROR'])){
 																		<tbody>
 																			<?php foreach(getstudents() as $g): ?>
 																			<tr>
-																				<td class="indent"><?php echo  $g->name; ?></td>
+																				<td class="indent"><?php echo  $g->surname.', '.$g->firstname; ?></td>
 																				<td><?php echo  $g->year; ?></td>
 																				<td class="text-center"><?php echo  $g->cpnum; ?></td>
 																				<td class="text-center"><a data-toggle="modal"
@@ -499,6 +506,13 @@ if(isset($_GET['error']) && $_GET['error'] == 1){
 	echo ' <script type="text/javascript">
 			$(document).ready(function(){
 				alert("Delete meetings first");
+			});
+	 </script>';
+}
+if(isset($_GET['error']) && $_GET['error'] == 2){
+	echo ' <script type="text/javascript">
+			$(document).ready(function(){
+				alert("Name already exist");
 			});
 	 </script>';
 }

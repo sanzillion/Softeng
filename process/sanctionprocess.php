@@ -40,7 +40,9 @@ if(isset($_POST['addsanc'])){
 			if(is_numeric($r7)){$total += $r7;} }
 	if($arraycount >= 8){ $r8 = $_POST["$meet8"];
 			if(is_numeric($r8)){$total += $r8;} }
-	$name = $_POST['name'];
+
+	$student = getstudentsbyname($_POST['name']);
+	$name = $student->s_id;
 
 	if(find($name)){
 		header('Location: ../pages/sanction.php?error=1');
@@ -48,7 +50,7 @@ if(isset($_POST['addsanc'])){
 	else{
 
 		if($arraycount == 1){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, total)
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, total)
 		    VALUES (:name, :m1, :total)");
 		    $stmt->bindParam(':name', $name);
 		    $stmt->bindParam(':m1', $r1);
@@ -56,7 +58,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 2){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, total)
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, total)
 		    VALUES (:name, :m1, :m2, :total)");
 		    $stmt->bindParam(':name', $name);
 		    $stmt->bindParam(':m1', $r1);
@@ -65,7 +67,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 3){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, $meet3, total)
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3, total)
 		    VALUES (:name, :m1, :m2, :m3, :total)");
 		    $stmt->bindParam(':name', $name);
 		    $stmt->bindParam(':m1', $r1);
@@ -75,7 +77,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 4){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, $meet3, $meet4, total)
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3, $meet4, total)
 		    VALUES (:name, :m1, :m2, :m3, :m4, :total)");
 		    $stmt->bindParam(':name', $name);
 		    $stmt->bindParam(':m1', $r1);
@@ -86,7 +88,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 5){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, $meet3, $meet4, $meet5, total)
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3, $meet4, $meet5, total)
 		    VALUES (:name, :m1, :m2, :m3, :m4, :m5, :total)");
 		    $stmt->bindParam(':name', $name);
 		    $stmt->bindParam(':m1', $r1);
@@ -98,7 +100,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 6){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, $meet3,
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3,
 															$meet4, $meet5, $meet6, total)
 		    VALUES (:name, :m1, :m2, :m3, :m4, :m5, :m6, :total)");
 		    $stmt->bindParam(':name', $name);
@@ -112,7 +114,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 7){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, $meet3,
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3,
 															$meet4, $meet5, $meet6, $meet7, total)
 		    VALUES (:name, :m1, :m2, :m3, :m4, :m5, :m6, :m7, :total)");
 		    $stmt->bindParam(':name', $name);
@@ -127,7 +129,7 @@ if(isset($_POST['addsanc'])){
 
 		}
 		elseif($arraycount == 8){
-			$stmt = $db->prepare("INSERT INTO sanction (s_name, $meet1, $meet2, $meet3, $meet4,
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3, $meet4,
 														$meet5, $meet6, $meet7, $meet8, total)
 		    VALUES (:name, :m1, :m2, :m3, :m4, :m5, :m6, :m7, :m8, :total)");
 		    $stmt->bindParam(':name', $name);
@@ -175,6 +177,7 @@ if(isset($_POST['updatesanc'])){
 			if(is_numeric($r7)){$total += $r7;} }
 	if($arraycount >= 8){ $r8 = $_POST["$meet8"];
 			if(is_numeric($r8)){$total += $r8;} }
+
 	$id = $_POST['id'];
 
 	if($arraycount == 1){

@@ -34,7 +34,9 @@
 
 function find($name){
 	$db = connect();
-	$query = $db->prepare("SELECT * From sanction WHERE s_name = ?");
+	$query = $db->prepare("SELECT * From sanction
+    INNER JOIN student ON sanction.s_id=student.s_id
+    WHERE name = ?");
 	$query->bindParam(1,$name);
 	if($query->execute()){
 		if($query->rowCount() > 0){
@@ -55,11 +57,39 @@ function getstudentsbyid($id){
 	return $results;
 }
 
-function findstudents($name){
+function getstudentsbyname($name){
 	$db = connect();
-	$query = $db->prepare("SELECT * From student WHERE name ?");
-	$query->bindParam(1,$name);
+	$sth = $db->prepare("SELECT * From student WHERE name = ?");
+	$sth->bindParam(1,$name);
+	$sth->execute();
+	$results = $sth->fetch(PDO::FETCH_OBJ);
+	return $results;
+}
 
+function findstudents($fname,$lname){
+	$db = connect();
+	$query = $db->prepare("SELECT * From student WHERE
+    surname = ? AND firstname = ?");
+	$query->bindParam(1,$lname);
+	$query->bindParam(2,$fname);
+
+	if($query->execute()){
+		if($query->rowCount() > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+}
+
+function samename($fname,$lname,$id){
+	$db = connect();
+	$query = $db->prepare("SELECT * From student WHERE
+    surname = ? AND firstname = ? AND s_id <> ?");
+	$query->bindParam(1,$lname);
+	$query->bindParam(2,$fname);
+	$query->bindParam(3,$id);
 	if($query->execute()){
 		if($query->rowCount() > 0){
 			return true;
@@ -73,7 +103,7 @@ function findstudents($name){
 
 function getstudents(){
 	$db = connect();
-	$sth = $db->prepare("SELECT * From student ORDER BY year,name");
+	$sth = $db->prepare("SELECT * From student ORDER BY year,surname");
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
 	return $results;
@@ -125,7 +155,6 @@ function getdescription(){
 }
 
 //CLEAN THIS!
-
 function getdescription2(){
 	$db = connect();
 	$sth = $db->prepare("SELECT DISTINCT description From meeting");
@@ -150,13 +179,32 @@ function disname(){
 	return $data;
 }
 
+function disid(){
+	$db = connect();
+	$stmt2 = $db->prepare("SELECT distinct s_id from student");
+	$stmt2->execute();
+	$data = $stmt2->fetchAll(PDO::FETCH_OBJ);
+	return $data;
+}
+
+function disfullname(){
+	$db = connect();
+	$stmt2 = $db->prepare("SELECT s_id,surname,firstname from student");
+	$stmt2->execute();
+	$data = $stmt2->fetchAll(PDO::FETCH_OBJ);
+	return $data;
+}
+
 function getsanction(){
 	$db = connect();
-	$sth = $db->prepare("SELECT * From sanction ORDER BY s_name");
+	$sth = $db->prepare("SELECT * From sanction
+    INNER JOIN student ON sanction.s_id = student.s_id
+    ORDER BY student.year,student.surname");
 	$sth->execute();
 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
 	return $results;
 }
+
 function getsanction2(){
 	$db = connect();
 	$sth = $db->prepare("SELECT * From sanction");
@@ -165,14 +213,14 @@ function getsanction2(){
 	return $results;
 }
 
-function getsanctionbyname($name){
-	$db = connect();
-	$sth = $db->prepare("SELECT * From sanction WHERE s_name = ?");
-	$sth->bindParam(1,$name);
-	$sth->execute();
-	$results = $sth->fetchAll(PDO::FETCH_OBJ);
-	return $results;
-}
+// function getsanctionbyname($name){
+// 	$db = connect();
+// 	$sth = $db->prepare("SELECT * From sanction WHERE s_name = ?");
+// 	$sth->bindParam(1,$name);
+// 	$sth->execute();
+// 	$results = $sth->fetchAll(PDO::FETCH_OBJ);
+// 	return $results;
+// }
 
 function getsanctionbyid($id){
 	$db = connect();
@@ -188,7 +236,7 @@ function sancbyyear($yr){
 	$sth = $db->prepare("SELECT *
 						FROM sanction
 						INNER JOIN student
-						ON sanction.s_name = student.name
+						ON sanction.s_id = student.s_id
 						WHERE student.year = ?");
 
 	$sth->bindParam(1,$yr);
@@ -240,22 +288,28 @@ function searchsanction($name){
 	$names.= '%';
 	$db = connect();
 	$query = $db->prepare("SELECT * From sanction
-		WHERE s_name LIKE ? ");
+    INNER JOIN student ON sanction.s_id=student.s_id
+		WHERE student.name LIKE ? ");
 	$query->bindParam(1,$names);
 	$query->execute();
 	$results = $query->fetchAll(PDO::FETCH_OBJ);
 	return $results;
 }
 
- function findname($name){
- 	$names = "";
- 	$names.= '%';
- 	$names.= $name;
- 	$names.= '%';
+ function findname($fname,$lname){
+ 	$fnames = "";
+ 	$fnames.= '%';
+ 	$fnames.= $fname;
+ 	$fnames.= '%';
+ 	$lnames = "";
+ 	$lnames.= '%';
+ 	$lnames.= $lname;
+ 	$lnames.= '%';
  	$db = connect();
 	$query = $db->prepare("SELECT * From student
-		WHERE name LIKE ? ");
-	$query->bindParam(1,$names);
+		WHERE surname LIKE ? OR firstname LIKE ? ");
+	$query->bindParam(1,$lnames);
+  $query->bindParam(2,$fnames);
 
 		if($query->execute()){
 			if($query->rowCount() > 0){
@@ -275,7 +329,16 @@ function searchsanction($name){
     }else {
       return false;
     }
+	}
 
+ function dLog(){
+ 	$db = connect();
+	$sth = $db->prepare("DELETE FROM record");
+  if($sth->execute()){
+      return true;
+    }else {
+      return false;
+    }
 	}
 
  function deleteallsanction(){
@@ -309,10 +372,10 @@ function searchsanction($name){
     }
 	}
 
-function deletefromsanc($name){
+function deletefromsanc($id){
 	$db = connect();
-	$sth = $db->prepare("DELETE FROM sanction WHERE s_name = ?");
-	$sth->bindParam(1,$name);
+	$sth = $db->prepare("DELETE FROM sanction WHERE s_id = ?");
+	$sth->bindParam(1,$id);
   if($sth->execute()){
       return true;
     }else {
@@ -356,11 +419,66 @@ function deletebulletin(){
 }
 
 //normalizing options for changes
+//you can add another options here
+//a feature will be added later
 function options(){
-  $output = '<option>15</option>
-  <option>20</option>
-  <option>30</option>
+  $output = '
+  <option>50</option>
+  <option>PAID</option>
   <option>PRESENT</option>
   <option>CLEARED</option>';
   return $output;
+}
+
+function getadmins(){
+	$db = connect();
+	$sth = $db->prepare("SELECT * From admin WHERE user <> 'dean'");
+	$sth->execute();
+	$results = $sth->fetchAll(PDO::FETCH_OBJ);
+	return $results;
+}
+
+function findadmin($name){
+  $db = connect();
+  $q = $db->prepare("SELECT * FROM admin WHERE user = :user");
+  $q->bindValue('user',$name);
+  if($q->execute()){
+      if($q->rowCount() > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+}
+
+function deleteadmin($id){
+  $db = connect();
+  $query = $db->prepare("DELETE FROM admin WHERE id = :id");
+  $query->bindValue('id',$id);
+  if($query->execute()){
+      return true;
+    }else {
+      return false;
+    }
+}
+function deleteadmins(){
+  $id = 1;
+  $db = connect();
+  $query = $db->prepare("DELETE FROM admin WHERE id <> :id");
+  $query->bindValue('id',$id);
+  if($query->execute()){
+      return true;
+    }else {
+      return false;
+    }
+}
+
+function getadminbyid($id){
+  $db = connect();
+  $sth = $db->prepare("SELECT * From admin WHERE id = ?");
+  $sth->bindParam(1,$id);
+  $sth->execute();
+  $result = $sth->fetch(PDO::FETCH_OBJ);
+  return $result;
 }

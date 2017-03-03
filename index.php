@@ -506,7 +506,7 @@ for ($i = 0; $i <$arraycount; $i++){
 												<tbody id="sanctions-table">
 													<?php foreach (getsanction() as $k):?>
 														<tr>
-															<td><?php echo $k->s_name ?></td>
+															<td><?php echo $k->name ?></td>
 															<?php $total = 0;?>
 															<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
 															<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>

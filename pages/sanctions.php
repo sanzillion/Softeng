@@ -8,7 +8,7 @@ if(!isset($_SESSION['admin'])){
 $super = "";
 if($_SESSION['admin'] == "dean"){
 	$super = '<li id="superuser">
-							<a href="superuser.php"><i class="fa fa-fw fa-lock"></i> Superuser</a>
+							<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
 						</li>';
 }
 //convert dates
@@ -35,14 +35,12 @@ elseif ($studentcount < 1 || $studentcount == 0) {
 }
 
 $_SESSION['count']=$arraycount;
-
 for ($i = 0; $i <$arraycount; $i++){
 	$desc[] = implode(',', $getdesc[$i]);
 }
-
+	//for name options in add student-sanction
 	$data = disname();
 	$option = "";
-
 	foreach ($data as $row) {
 		$name = $row->name;
 		if(find($name)){
@@ -369,7 +367,7 @@ for ($i = 0; $i <$arraycount; $i++){
 															<tbody id="sanctions-table">
 																<?php foreach (getsanction() as $k):?>
 																	<tr>
-																		<td><?php echo $k->s_name ?></td>
+																		<td><?php echo $k->name ?></td>
 																		<?php $total = 0;?>
 																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
 																						if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>

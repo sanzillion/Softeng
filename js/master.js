@@ -172,7 +172,42 @@ $(document).on("click", ".editSanctionyear", function () {
      }
 });
 
+//Modal for editing Admins by year
+$(document).on("click", ".editAdmin", function () {
+  console.log("clicked");
+   var id = $(this).data('id');
+   if(id != '')
+     {
+          $.ajax({
+               url:"editadmins.php",
+               method:"POST",
+               data:{edit:id},
+               success:function(data){
+                    $('#admin-details').html(data);
+                    $('#edit-admin').modal('show');
+               }
+          });
+     }
+});
 
+//for deleting admins individually
+$(document).on("click", ".deleteAdmin", function () {
+   var id = $(this).data('id');
+   var con = confirm("Are you sure?");
+   if (con) {
+     if(id != '')
+       {
+            $.ajax({
+                 url:"editadmins.php",
+                 method:"POST",
+                 data:{delete:id},
+                 success:function(data){
+                      $('#admins-table').html(data);
+                 }
+            });
+       }
+   }
+});
 
 
 

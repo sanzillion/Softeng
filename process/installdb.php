@@ -28,8 +28,9 @@ catch(PDOException $e)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
  $adminvalues = $con->prepare("INSERT INTO `admin` (`id`, `user`, `pass`) VALUES
- (1, 'admin', 'admin'),
- (2, 'admin2', 'admin2');");
+ (1, 'dean', 'dean'),
+ (2, 'admin', 'admin'),
+ (3, 'admin2', 'admin2');");
 
  $bulletin = $con->prepare("CREATE TABLE `bulletin` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -41,8 +42,8 @@ catch(PDOException $e)
 
  $meeting = $con->prepare("CREATE TABLE `meeting` (
    `m_id` int(11) NOT NULL AUTO_INCREMENT,
-   `description` varchar(11) NOT NULL,
-   `m_date` varchar(11) NOT NULL,
+   `description` varchar(50) NOT NULL,
+   `m_date` date NOT NULL,
    PRIMARY KEY (`m_id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
@@ -57,16 +58,18 @@ catch(PDOException $e)
 
  $sanction = $con->prepare("CREATE TABLE `sanction` (
    `sanc_id` int(11) NOT NULL AUTO_INCREMENT,
-   `s_name` varchar(50) NOT NULL,
+   `s_id` int(11) NOT NULL,
    `total` int(11) NOT NULL,
    PRIMARY KEY (`sanc_id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
  $student = $con->prepare("CREATE TABLE `student` (
    `s_id` int(11) NOT NULL AUTO_INCREMENT,
-   `name` varchar(50) NOT NULL,
+   `surname` varchar(50) NOT NULL,
+   `firstname` varchar(50) NOT NULL,
    `year` enum('1st','2nd','3rd','4th') NOT NULL,
    `cpnum` bigint(12) NOT NULL,
+   `name` varchar(100) NOT NULL,
    PRIMARY KEY (`s_id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
@@ -77,7 +80,9 @@ if($admin->execute() && $bulletin->execute()
   $adminvalues->execute();
   header('Location: ../index.php');
 }else{
-  echo "something went wrong, maybe PHP not parse";
+  echo "something went wrong!".'<br>'."
+  1: maybe PHP not parse.".'<br>'."
+  Solution: Run this file in dir www";
 }
 
 
