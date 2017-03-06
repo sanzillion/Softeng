@@ -16,7 +16,7 @@ $meetdate = [];
 foreach(getmeet() as $d){
 	$month = date('M', strtotime($d->m_date));
 	$day = date('d', strtotime($d->m_date));
-	$meetdate[] = $month." ".$day;
+	$meetdate[] = $d->description." (".$month." ".$day.")";
 }
 
 $options = options();

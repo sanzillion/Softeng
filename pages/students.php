@@ -319,10 +319,10 @@ if(isset($_SESSION['QUE_ERROR'])){
 																<table class="table block" style="margin-bottom: 0px;">
 																	<thead class="text-center">
 																		<tr>
-																			<th width="30%" class="indent">Name</th>
-																			<th width="20%" class="text-center">Year</th>
+																			<th width="40%" class="indent">Name</th>
+																			<th width="15%" class="text-center">Year</th>
 																			<th width="20%" class="text-center">Mobile No.</th>
-																			<th width="30%" class="text-center">Option</th>
+																			<th width="20%" class="text-center">Option</th>
 																		</tr>
 																	</thead>
 																</table>

@@ -323,7 +323,7 @@ if(!empty(getbulletin())){ //bulletin control
 																		<label for=""> <i class="fa fa-user"></i> Title :
 																		<p style="display: inline; color: red;" id="titleerror"></p></label><br>
 																			<div class="" id="errortitle">
-																				<input class="has-error form-control" id="title" type="text" name="title"
+																				<input class="form-control" id="title" type="text" name="title"
 																				value="" <?php echo $dis; ?> required>
 																			</div>
 
@@ -414,7 +414,5 @@ if(!empty(getbulletin())){ //bulletin control
       </script>';
 		}
 		 ?>
-
 </body>
-
 </html>

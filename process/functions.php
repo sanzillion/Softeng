@@ -424,6 +424,7 @@ function deletebulletin(){
 function options(){
   $output = '
   <option>50</option>
+  <option>150</option>
   <option>PAID</option>
   <option>PRESENT</option>
   <option>CLEARED</option>';

@@ -23,29 +23,24 @@ if(!empty(getbulletin())){
 	$title = $results->title;
 	$par = $results->post;
 }
-
 //convert dates
 $meetdate = [];
 foreach(getmeet() as $d){
 	$month = date('M', strtotime($d->m_date));
 	$day = date('d', strtotime($d->m_date));
-	$meetdate[] = $month." ".$day;
+	$meetdate[] = $d->description.' <i class="fa fa-calendar" data-toggle="tooltip" 
+	data-placement="top" title="'.$month.' '.$day.'"></i>';
 }
-
-
 $getdesc = getdescription2(); //2 means FETCH_ASSOC
 $arraycount = count($getdesc);
 
 for ($i = 0; $i <$arraycount; $i++){
 	$desc[] = implode(',', $getdesc[$i]);
 }
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -586,6 +581,12 @@ for ($i = 0; $i <$arraycount; $i++){
 						}
 				});
 		});
+
+		<!-- Activate bootstrap tooltip -->
+			$(document).ready(function(){
+					$('[data-toggle="tooltip"]').tooltip();
+			});
+
     </script>
 
     <?php
@@ -609,5 +610,9 @@ for ($i = 0; $i <$arraycount; $i++){
      ?>
 
 </body>
-
 </html>
+<style media="screen" type="text/css">
+	.fa{
+		color: black !important;
+	}
+</style>
