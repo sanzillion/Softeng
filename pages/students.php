@@ -8,13 +8,13 @@ if(!isset($_SESSION['admin'])){
 $super = "";
 if($_SESSION['admin'] == "dean"){
 	$super = '<li id="superuser">
-							<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
+							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
 }
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "";
+$dis = "disabled";
 $btn = "btn-default";
 
 if(isset($_SESSION['QUE_ERROR'])){
@@ -110,13 +110,7 @@ if(isset($_SESSION['QUE_ERROR'])){
                       &nbsp Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -164,7 +158,7 @@ if(isset($_SESSION['QUE_ERROR'])){
 												</ul>
 										</li>
 										<li>
-												<a href="#"><i class="fa fa-fw fa-file-text"></i> Documentation </a>
+												<a href="help.php"><i class="fa fa-fw fa-file-text"></i> User's Manual </a>
 										</li>
                 </ul>
             </div>
@@ -173,7 +167,7 @@ if(isset($_SESSION['QUE_ERROR'])){
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fluid" style="height: 600px !important; overflow: auto;">
 
                 <!-- Page Heading -->
                 <div class="row">
@@ -214,7 +208,7 @@ if(isset($_SESSION['QUE_ERROR'])){
 																		action="../process/fileprocess.php"	method="POST">
 																			<h4>CSV File Upload
 																			<a href="" data-toggle="tooltip" data-placement="right"
-																			title="Download CSV file in settings for the format">
+																			title="Download CSV file in Help for the format">
 																			<i class="fa fa-info-circle"
 																			style="font-size: 15px; color: black;
 																			margin-left: 10px;"></i></a></h4>
@@ -322,7 +316,7 @@ if(isset($_SESSION['QUE_ERROR'])){
 																			<th width="40%" class="indent">Name</th>
 																			<th width="15%" class="text-center">Year</th>
 																			<th width="20%" class="text-center">Mobile No.</th>
-																			<th width="20%" class="text-center">Option</th>
+																			<th width="20%" class="text-center">Edit | Delete</th>
 																		</tr>
 																	</thead>
 																</table>

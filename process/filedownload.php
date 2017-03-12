@@ -48,14 +48,19 @@ if(isset($_GET['file']) && $_GET['file']== 4){
 
 		//set headings
 		$meetdate = [];
-		$meetdate[] = "Id";
-		$meetdate[] = "Name";
+		$meetdate[] = "Sanction ID";
+		$meetdate[] = "Student ID";
 		foreach(getmeet() as $d){
 			$month = date('M', strtotime($d->m_date));
 			$day = date('d', strtotime($d->m_date));
 			$meetdate[] = $month." ".$day;
 		}
 		$meetdate[] = "Total";
+		$meetdate[] = "Lastname";
+		$meetdate[] = "Firstname";
+		$meetdate[] = "Year";
+		$meetdate[] = "Number";
+		$meetdate[] = "Fullname";
 
 		//open file to write
 		$fp = fopen('php://output', 'w');
@@ -64,7 +69,7 @@ if(isset($_GET['file']) && $_GET['file']== 4){
 		fputcsv($fp, $meetdate);
 
 		//fetch assoc array
-		$results = getsanction2();
+		$results = getsanction3();
 
 		//put every row into the file
 		foreach ($results as $fields) {
@@ -76,7 +81,6 @@ if(isset($_GET['file']) && $_GET['file']== 4){
 	}
 
 }
-
 
 
 

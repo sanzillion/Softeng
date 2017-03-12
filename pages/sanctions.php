@@ -8,7 +8,7 @@ if(!isset($_SESSION['admin'])){
 $super = "";
 if($_SESSION['admin'] == "dean"){
 	$super = '<li id="superuser">
-							<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
+							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
 }
 //convert dates
@@ -135,13 +135,7 @@ for ($i = 0; $i <$arraycount; $i++){
                     </i> &nbsp Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -188,7 +182,7 @@ for ($i = 0; $i <$arraycount; $i++){
                         </ul>
                     </li>
 										<li>
-                        <a href="#"><i class="fa fa-fw fa-file-text"></i> Documentation </a>
+                        <a href="help.php"><i class="fa fa-fw fa-file-text"></i> User's Manual </a>
                     </li>
                 </ul>
             </div>
@@ -197,7 +191,7 @@ for ($i = 0; $i <$arraycount; $i++){
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fluid" style="height: 600px !important; overflow: auto;">
 
                 <!-- Page Heading -->
                 <div class="row">
@@ -329,10 +323,16 @@ for ($i = 0; $i <$arraycount; $i++){
 										<div class="panel panel-primary">
 											<div class="panel-heading">
 												<div class="row">
-													<div class="col-lg-8">
+													<div class="col-lg-4">
 														<h1 style="font-size: 1.5em;" class="panel-title">
 														<i class="fa fa-th"></i>
 														&nbsp Sanction List</h1>
+													</div>
+													<div class="col-lg-4 text-right">
+														<a class="btn btn-success btn-sm" href="../process/filedownload.php?file=4">
+															<i class="fa fa-download"></i></a>
+														<a class="btn btn-warning btn-sm" value="print"
+													 	onclick="PrintDiv();"><i class="fa fa-print"></i></a>
 													</div>
 													<div class="col-lg-4 text-right">
 														<div class="input-group">
@@ -352,7 +352,7 @@ for ($i = 0; $i <$arraycount; $i++){
 											</div>
 											<div class="panel-body" style="padding-top: 0px;">
 												<div class="row" style="overflow: auto;">
-													<div class="flot-chart">
+													<div class="flot-chart" id="divToPrint">
 														<table class="table table-responsive table-striped">
 															<thead class="text-center">
 																<tr class="">
@@ -502,6 +502,14 @@ for ($i = 0; $i <$arraycount; $i++){
 						}
 				});
 		});
+
+		function PrintDiv() {
+		   var divToPrint = document.getElementById('divToPrint');
+		   var popupWin = window.open('', '_blank', 'width=900,height=500');
+		   popupWin.document.open();
+		   popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+		   popupWin.document.close();
+		  }
 		</script>
 
 </body>

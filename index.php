@@ -28,7 +28,7 @@ $meetdate = [];
 foreach(getmeet() as $d){
 	$month = date('M', strtotime($d->m_date));
 	$day = date('d', strtotime($d->m_date));
-	$meetdate[] = $d->description.' <i class="fa fa-calendar" data-toggle="tooltip" 
+	$meetdate[] = $d->description.' <i class="fa fa-calendar" data-toggle="tooltip"
 	data-placement="top" title="'.$month.' '.$day.'"></i>';
 }
 $getdesc = getdescription2(); //2 means FETCH_ASSOC
@@ -611,8 +611,3 @@ for ($i = 0; $i <$arraycount; $i++){
 
 </body>
 </html>
-<style media="screen" type="text/css">
-	.fa{
-		color: black !important;
-	}
-</style>

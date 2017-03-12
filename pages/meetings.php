@@ -8,7 +8,7 @@ if(!isset($_SESSION['admin'])){
 $super = "";
 if($_SESSION['admin'] == "dean"){
 	$super = '<li id="superuser">
-							<a href="superuser.php"><i class="fa fa-fw fa-rocket"></i> Superuser</a>
+							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
 }
 
@@ -103,13 +103,7 @@ else{
                       </i> &nbsp Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -157,7 +151,7 @@ else{
                         </ul>
                     </li>
 										<li>
-                        <a href="#"><i class="fa fa-fw fa-file-text"></i> Documentation </a>
+                        <a href="help.php"><i class="fa fa-fw fa-file-text"></i> User's Manual </a>
                     </li>
                 </ul>
             </div>
@@ -166,7 +160,7 @@ else{
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fluid" style="height: 600px !important; overflow: auto;">
 
                 <!-- Page Heading -->
                 <div class="row">

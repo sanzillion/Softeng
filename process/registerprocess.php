@@ -38,9 +38,6 @@ if(isset($_POST['addmeeting'])){ //from meeting.php
 				header('Location: ../pages/meetings.php?error');
 		}
 	}
-
-
-
 }
 
 if(isset($_POST['submitstudent'])){ //Register Student

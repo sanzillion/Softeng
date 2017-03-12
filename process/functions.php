@@ -213,6 +213,16 @@ function getsanction2(){
 	return $results;
 }
 
+function getsanction3(){
+  $db = connect();
+	$sth = $db->prepare("SELECT * From sanction
+  INNER JOIN student ON sanction.s_id = student.s_id
+  ORDER BY student.year,student.surname");
+	$sth->execute();
+	$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+	return $results;
+}
+
 // function getsanctionbyname($name){
 // 	$db = connect();
 // 	$sth = $db->prepare("SELECT * From sanction WHERE s_name = ?");
@@ -224,7 +234,9 @@ function getsanction2(){
 
 function getsanctionbyid($id){
 	$db = connect();
-	$stmt = $db->prepare("SELECT * from sanction where sanc_id = :id");
+	$stmt = $db->prepare("SELECT * from sanction
+    INNER JOIN student ON sanction.s_id = student.s_id
+    where sanc_id = :id");
 	$stmt->bindValue('id',$id);
 	$stmt->execute();
 	$account = $stmt->fetch(PDO::FETCH_OBJ);

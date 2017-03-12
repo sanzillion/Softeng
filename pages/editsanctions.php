@@ -24,7 +24,7 @@ if(isset($_POST["view"])){
 
       $output .= '<div class="row">
         <div class="col-md-12 text-center">
-            <h4>'.$res->s_name.'</h4>
+            <h4>'.$res->name.'</h4>
               <div class="col-md-6">
               <input type="hidden" name="id"
                 value="'.$res->sanc_id.'"></td>';
@@ -80,7 +80,7 @@ if(isset($_POST['delete'])){ //delete the student from the student roll
 
     if(deletesanctionbyid($_POST['delete'])){ //if delete successful
        foreach(getsanction() as $k){
-           $output .= '<tr><td>'.$k->s_name.'</td>';
+           $output .= '<tr><td>'.$k->s_id.'</td>';
            try{ $total = 0;
              if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
                  if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
