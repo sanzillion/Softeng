@@ -197,19 +197,59 @@ if($_SESSION['admin'] == "dean"){
                             <i class="fa fa-fw fa-caret-down"></i>
                           </a>
                               <div class="row collapse" id="adminpage">
-                                <div class="col-lg-12">
-                                  <h1>Overview</h1>
-                                </div>
+                                <div class="col-lg-12" style="padding-left: 50px;">
+                                  <h2>System Overview</h2>
+																	<p>The Sanction Record System is a web application that processes, records and presents the sanctions of students in ICT department every end of semester. It does not have a student log-in, only a presentation of data in the homepage of the system. The functions and features can be accessed only by administrators through a login form, the administrator rights will be given to whomever the dean approves and it operates on any browser application.  </p>
+																	<h3>System Summary</h3>
+																	<p>System Summary section provides a general overview of the system. The summary outlines the uses of the system’s hardware and software requirements, system’s configuration, user access levels and system’s behaviour in case of any contingencies.</p>
+																		<div class="row" style="padding-left: 100px;">
+																			<h4>System Configuration</h4>
+																			<p>The system operates on any browser application. It is compatible with Microsoft Edge, Mozilla Firefox, Google Chrome and etc. Although the application required internet connection, there is no need for any installation only deployment and can be used immediately without any further configuration.</p>
+																			<h4>User access level</h4>
+																			<p>The system provides default administrators together with respective passwords. The Dean will be given the super-user privilege which can manage the admin accounts. The administrators have full access to systems basic features.</p>
+																			<h4>Contingencies</h4>
+																			<p>In case of power outage, the system will not be directly affected, unsaved data will be lost but the data already stored in the database is kept safe. In case there is no Internet connection available data cannot be saved in internal memory of the operating device.</p>
+																		</div>
+																</div>
                               </div>
                         </li>
+												<li>
+													<a href="javascript:;" data-toggle="collapse" data-target="#Downloads">
+														<i class="fa fa-dashboard"></i>&nbsp Admin Page
+														<i class="fa fa-fw fa-caret-down"></i>
+													</a>
+															<div class="row collapse" id="Downloads">
+																<div class="col-lg-12" style="padding-left: 50px;">
+																	<h3>Admin Dropdown</h3>
+																	<p>The admin button dropdown has 2 elements, help and logout. The help button is not yet functional. The Logout button log outs the current admin; It destroys the active session which disables all pages in the system as it requires an active admin session and returns to homepage.</p>
+																	<p>The bell icon beside the admin will be for another update. In the meantime, the administrators can ignore it.</p>
+																	<h3>Downloads</h3>
+																	<div class="row" style="padding-left: 70px;">
+																		<p><strong>SQL File</strong> - This is a copy of the MYSQL database for phpmyadmin advance users.</p>
+																		<p><strong>CSV Format</strong> - This is a sample format for CSV (Comma Separated Value) student bulk registration. Can be opened in Excel.</p>
+																		<p><strong>Txt Format</strong> - This is a sample format for Txt student bulk registration. This button contains 1 .rar file with 3 .txt files.</p>
+																		<p><strong>Sanction Record</strong> - This is an excel file of all the sanction records in the system.</p>
+																	</div>
+																</div>
+															</div>
+												</li>
                         <li>
                           <a href="javascript:;" data-toggle="collapse" data-target="#dashboard">
                             <i class="fa fa-dashboard"></i>&nbsp Dashboard
                             <i class="fa fa-fw fa-caret-down"></i>
                           </a>
                               <div class="row collapse" id="dashboard">
-                                <div class="col-lg-12">
-                                  <h1>Dashboard</h1>
+                                <div class="col-lg-12" style="padding-left: 50px;">
+                                  <h3>Dashboard</h3>
+																	<p>The Dashboard section has 3 divisions, 2 of which are collapsible panels, the “Change Password” panel and “Login Records” panel. </p>
+																	<div class="row" style="padding-left: 70px;">
+																		<h4>Change Password</h4>
+																		<p>This panel has 3 input fields, the old password, new password and confirm password, its’ validation is powered by Javascript and Ajax which makes error handling efficient. When an an error has occurred when an input field is focused-out, the ajax fires an element through Jquery and creates a red text error notification and the “save password” button will be disabled.</p>
+																		<h4>Login Records</h4>
+																		<p>This panel is a one-way reporting of Logs made into the system by administrators. Reporting the Admin name, the date time and day of when the logged-in was made.</p>
+																		<h4>Manage Bulletin</h4>
+																		<p>This panel is a multipart/form-data form which can post images and announcements on the homepage bulletin section. Once submitted, the input boxes inside the bulletin panel will be disabled allowing only one post at a time and the delete button inside the panel will be activated. When clicked, the post will be deleted and the input boxes will be reactivated. </p>
+																	</div>
                                 </div>
                               </div>
                         </li>
@@ -219,9 +259,25 @@ if($_SESSION['admin'] == "dean"){
                             <i class="fa fa-fw fa-caret-down"></i>
                           </a>
                               <div class="row collapse" id="students">
-                                <div class="col-lg-12">
-                                  <h1>Students</h1>
-                                </div>
+                                <div class="col-lg-12" style="padding-left: 50px;">
+                                  <h3>Students</h3>
+																	<p>This section has 2 panels, “Manage Students” and “Students List”. The 1st panel is for student registration.</p>
+																	<div class="row" style="padding-left: 70px;">
+																		<h4>Student Registration</h4>
+																		<p>This panel contains 3 functions, the "Register" button, "CSV uploads", and "Text uploads".</p>
+																		<div class="row" style="padding-left: 90px;">
+																			<p><strong>Register</strong></p>
+																			<p>This button activates a modal with 4 input fields. All these inputs are required. Once submitted, the data will be stored in the Student List table.</p>
+																			<p><strong>CSV file upload</strong></p>
+																			<p>The CSV file will be processed through the LOAD DATA LOCAL INFILE mysql query through PDO PHP and into the database. The format is downloadable in the downloads section. It is important that the format must be strictly followed. And all other files except CSV are prohibited.</p>
+																			<p><strong>Txt file uploads</strong></p>
+																			<p>The Text upload collapsible section will only be activated when the CSV format returns error 3-4 times. Once it activates, the button turns green and will show 3 txt file input fields, of which format can also be downloaded in the downloads section. The txt files are processed simultaneously into the database and the txt files must have the same number of lines or it will return an error.</p>
+																		</div>
+																		<h4>Student List</h4>
+																		<p>The Student List panel is basically a table of students registered in the system. It has search feature in the upper right corner of the table which can be used when searching a student through names and it automatically delivers the output upon key-press, a table inside the panel body with Edit and Delete options, and a “Delete All” button at the bottom of the table.</p>
+																		<p>The Edit button will trigger a modal with the specifics of the particular student which then can be updated once changes are made.</p>
+																	</div>
+																</div>
                               </div>
                         </li>
                         <li>
@@ -230,8 +286,15 @@ if($_SESSION['admin'] == "dean"){
                             <i class="fa fa-fw fa-caret-down"></i>
                           </a>
                               <div class="row collapse" id="meetings">
-                                <div class="col-lg-12">
-                                  <h1>Meetings</h1>
+                                <div class="col-lg-12" style="padding-left: 50px;">
+                                  <h3>Meetings</h3>
+																	<p>The image above shows the Meetings section of the navigation bar. With 2 panels namely, “Manage Meeting”, and “Meetings List”.</p>
+																	<div class="row" style="padding-left: 70px;">
+																		<h4>Manage Meetings</h4>
+																		<p>The former panel is a simple event registration with 2 input fields, Event description and Date of the event. Once submitted, it will be added automatically to the next panel. </p>
+																		<h4>Meetings List</h4>
+																		<p>Meetings List, with Edit and delete options and a Delete All button just like the the previous table for students without the search function. Since list are only limited up to 8 events. </p>
+																	</div>
                                 </div>
                               </div>
                         </li>
@@ -241,8 +304,17 @@ if($_SESSION['admin'] == "dean"){
                             <i class="fa fa-fw fa-caret-down"></i>
                           </a>
                               <div class="row collapse" id="sanction">
-                                <div class="col-lg-12">
-                                  <h1>Sanction</h1>
+                                <div class="col-lg-12" style="padding-left: 50px;">
+                                  <h3>Sanctions</h3>
+																	<p>The Sanction is the core of the system. It has 4 divisions; “Add Student-Sanction”, “Edit by Year” and “Sanction List”. Note: This section cannot be accessed if there are no students and meeting data. Depending on which the admin is lacking, the page will be automatically redirected. </p>
+																	<div class="row" style="padding-left: 70px;">
+																		<h4>Add Student-Sanction</h4>
+																		<p>This panel is for registering students into the sanction table. It is important to note that the Select dropdown field are names from the student table which are not yet registered into the sanction table. And since using CSV format and text format bulk registration automatically registers the students name into the sanction list, this panel would seem of little use. However, when there are students that has been left that has not been registered into the system yet, this panel would prove itself useful.</p>
+																		<h4>Edit by year</h4>
+																		<p>This panel will be for multiple editing, which is ordered by year level; when clicked, it activates a modal containing all the students in a year level. Since it would take forever to update the sanction individually through the option column in the Sanction List, thus this section is developed.</p>
+																		<h4>Sanction List</h4>
+																		<p>The Sanction List is a panel that contains functions on managing Sanction Record. The 2 buttons on the panel-header are “download” and “print”, the former converts the Sanction List table and reads it into an excel file and downloads it automatically, while the latter extracts the record and creates another window ready for printing. The search input is the same with the other search inputs in the system and the table with the list and options are basically the same. There is no Delete All button because once the students are deleted, so is the record in this table.</p>
+																	</div>
                                 </div>
                               </div>
                         </li>
@@ -252,9 +324,17 @@ if($_SESSION['admin'] == "dean"){
                             <i class="fa fa-fw fa-caret-down"></i>
                           </a>
                               <div class="row collapse" id="super">
-                                <div class="col-lg-12">
-                                  <h1>Super</h1>
-                                </div>
+                                <div class="col-lg-12" style="padding-left: 50px;">
+                                  <h3>Superuser</h3>
+																	<p>The Superuser tab is a hidden section. The administrators with the admin privilege will not be able to access this tab let alone see it. The user “Dean” will only have access to this section</p>
+																	<p>There are 3 panels in this section, First is Register Admin, second is the Admins List and lastly the System Refresh panel.</p>
+																	<div class="row" style="padding-left: 70px;">
+																		<h4>Manage Admin & Admins List</h4>
+																		<p>The registration and table is the same as with the other section as well as the edit button.</p>
+																		<h4>System Refresh</h4>
+																		<p>The system refresh are “delete everything” buttons. With a note: No recovery option. And when the enable button is clicked, the 2 buttons will be activated, the first one is to delete the login records and the second is to delete all the system records, the meetings and student records.</p>
+																	</div>
+																</div>
                               </div>
                         </li>
                         <li>

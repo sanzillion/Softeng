@@ -249,7 +249,7 @@ function sancbyyear($yr){
 						FROM sanction
 						INNER JOIN student
 						ON sanction.s_id = student.s_id
-						WHERE student.year = ?");
+						WHERE student.year = ? ORDER BY student.year,student.surname");
 
 	$sth->bindParam(1,$yr);
 	$sth->execute();

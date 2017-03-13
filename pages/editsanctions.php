@@ -121,7 +121,7 @@ if(isset($_POST['searchname'])){
   $results = searchsanction($_POST['searchname']);
     if($results){
         foreach($results as $k){
-          $output .= '<tr><td>'.$k->name.'</td>';
+          $output .= '<tr><td>'.$k->surname.', '.$k->firstname.'</td>';
           try{  $total = 0;
           if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
               if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
@@ -161,7 +161,7 @@ if(isset($_POST['searchname'])){
 if(isset($_POST['show'])){
   $output = '';
   foreach(getsanction() as $k){
-      $output .= '<tr><td>'.$k->name.'</td>';
+      $output .= '<tr><td>'.$k->surname.', '.$k->firstname.'</td>';
       try{ $total = 0;
         if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';
             if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}}
@@ -209,7 +209,7 @@ if(isset($_POST["yr"])){
           $i = 0;
         foreach ($res as $k){
           $output .= '<tr>
-            <td>'.$k->name.'<input type="hidden" name="meeting['.$i.'][m0]"
+            <td>'.$k->surname.', '.$k->firstname.'<input type="hidden" name="meeting['.$i.'][m0]"
                 value="'.$k->sanc_id.'"></td>';
             if($arraycount >= 1){  $output .= '<td><select class="form-control"
               name="meeting['.$i.'][m1]" style="margin-bottom: 5px;" required>
@@ -249,7 +249,7 @@ if(isset($_POST['searchnameindex'])){
   $results = searchsanction($_POST['searchnameindex']);
     if($results){
         foreach($results as $k){
-          $output .= '<tr><td>'.$k->name.'</td>';
+          $output .= '<tr><td>'.$k->surname.', '.$k->firstname.'</td>';
           try{
           if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
           if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}
@@ -273,7 +273,7 @@ if(isset($_POST['searchnameindex'])){
 if(isset($_POST['showindex'])){
   $output = '';
   foreach(getsanction() as $k){
-      $output .= '<tr><td>'.$k->name.'</td>';
+      $output .= '<tr><td>'.$k->surname.', '.$k->firstname.'</td>';
       try{
         if($arraycount >= 1){  $output .= '<td>'.$k->$desc[0].'</td>';}
         if($arraycount >= 2){  $output .= '<td>'.$k->$desc[1].'</td>';}

@@ -50,6 +50,11 @@ for ($i = 0; $i <$arraycount; $i++){
 		}
   }
 
+$table = getsanction();
+if(isset($_GET['year'])){
+		$table = sancbyyear($_GET['year']);
+}
+
 
 
 ?>
@@ -323,12 +328,18 @@ for ($i = 0; $i <$arraycount; $i++){
 										<div class="panel panel-primary">
 											<div class="panel-heading">
 												<div class="row">
-													<div class="col-lg-4">
+													<div class="col-lg-3">
 														<h1 style="font-size: 1.5em;" class="panel-title">
 														<i class="fa fa-th"></i>
 														&nbsp Sanction List</h1>
 													</div>
-													<div class="col-lg-4 text-right">
+													<div class="col-lg-3">
+														<a class="btn btn-default btn-sm" href="sanctions.php?year=1st">1st</a>
+														<a class="btn btn-default btn-sm" href="sanctions.php?year=2nd">2nd</a>
+														<a class="btn btn-default btn-sm" href="sanctions.php?year=3rd">3rd</a>
+														<a class="btn btn-default btn-sm" href="sanctions.php?year=4th">4th</a>
+													</div>
+													<div class="col-lg-2 text-right" style="padding-left: 0px; padding-right: 0px;">
 														<a class="btn btn-success btn-sm" href="../process/filedownload.php?file=4">
 															<i class="fa fa-download"></i></a>
 														<a class="btn btn-warning btn-sm" value="print"
@@ -365,9 +376,9 @@ for ($i = 0; $i <$arraycount; $i++){
 																</tr>
 															</thead>
 															<tbody id="sanctions-table">
-																<?php foreach (getsanction() as $k):?>
+																<?php foreach ($table as $k):?>
 																	<tr>
-																		<td><?php echo $k->name ?></td>
+																		<td><?php echo $k->surname.', '.$k->firstname; ?></td>
 																		<?php $total = 0;?>
 																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
 																						if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
