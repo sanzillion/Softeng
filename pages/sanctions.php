@@ -5,8 +5,12 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error=2');
 }
 
+if($_SESSION['priv'] != 'TREASURER' && $_SESSION['priv'] != 'DEAN'){
+	header('Location: index.php?error=4');
+}
+
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -87,7 +91,7 @@ if(isset($_GET['year'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
 </head>
 
 <body>
@@ -108,7 +112,7 @@ if(isset($_GET['year'])){
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -134,13 +138,13 @@ if(isset($_GET['year'])){
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">
-                    </i> &nbsp Admin <b class="caret"></b></a>
+                    </i> &nbsp <?php echo $_SESSION['priv']; ?><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>

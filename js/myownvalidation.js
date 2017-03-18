@@ -327,6 +327,27 @@ var dateerror = true;
     }
   })
 
+  $('#penalty').focusout(function(){
+    console.log("In!");
+    var sanction = $("#penaltyfield").val();
+    var rgx = /^([0-9]+)$/;
+    if(!rgx.test(sanction)){
+      $("#penalty").addClass("has-error");
+      nameerror = true;
+    }
+    else {
+      $("#penalty").removeClass("has-error");
+      nameerror = false;
+    }
+
+    if(nameerror == false && dateerror == false){
+      $("#eventsubmit").prop('disabled', false);
+    }
+    else{
+      $("#eventsubmit").prop('disabled', true);
+    }
+  })
+
 });
 
 // $('#image').bind('change', function(){

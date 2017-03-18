@@ -12,12 +12,15 @@ if(isset($_POST['addmeeting'])){ //from meeting.php
 	else{
 		$desc = $_POST['desc']; //description
 		$date = $_POST['dato']; //date
+		$pen = $_POST['penalty']; //penalty
 
 		$query = $db->prepare("INSERT INTO meeting SET
 													description = :descs,
+													penalty = :pen,
 													m_date = :datet");
 
 		$execute_query = [':descs' => $desc,
+							':pen' => $pen,
 							':datet' => $date];
 
 		if(empty(getmeet())){
@@ -71,10 +74,10 @@ if(isset($_POST['submitstudent'])){ //Register Student
 
 		if($query->execute()){
 			echo "success";
-			header('Location: ../pages/students.php?succes');
+			header('Location: ../pages/students.php?success=2');
 		}else{
 			echo "fail";
-			header('Location: ../pages/students.php?error');
+			header('Location: ../pages/students.php?error=3');
 		}
 
 
@@ -84,29 +87,35 @@ if(isset($_POST['submitstudent'])){ //Register Student
 if(isset($_POST['add-admin'])){
 	$name = $_POST['name'];
 	$pw = $_POST['pass'];
+	$priv = $_POST['priv'];
 
 	if(preg_match('/[^a-z_\-0-9]/i', $name) ||
 			preg_match('/[^a-z_\-0-9]/i', $pw)){
-		header('Location: ../pages/superuser.php?invalid-inputs');
+		header('Location: ../pages/superuser.php?error=1');
+		//invalid username
 	}
 	elseif (count(getadmins()) > 2) {
-		header('Location: ../pages/superuser.php?max3admins');
+		//max admin = 3
+		header('Location: ../pages/superuser.php?error=2');
 	}
-	elseif (findadmin($name)){
-		header('Location: ../pages/superuser.php?nametaken');
+	elseif (findadmin($name, $priv)){
+		//privilege taken or username taken
+		header('Location: ../pages/superuser.php?error=3');
 	}
 	else{
 		$query = $db->prepare("INSERT INTO admin SET
 			                 		user = ?,
-			                 		pass = ?");
+			                 		pass = ?,
+													privilege = ?");
 
 		$query->bindParam(1,$name);
 		$query->bindParam(2,$pw);
+		$query->bindParam(3,$priv);
 
 		if($query->execute()){
-			header('Location: ../pages/superuser.php?succes');
+			header('Location: ../pages/superuser.php?succes=1');
 		}else{
-			header('Location: ../pages/superuser.php?error');
+			header('Location: ../pages/superuser.php?error=4');
 		}
 	}
 

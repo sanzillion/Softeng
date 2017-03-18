@@ -12,6 +12,7 @@ if(isset($_POST['delete'])){
             $output .= '<tr class="text-center">
               <td>'.$g->m_id.'</td>
               <td>'.$g->description.'</td>
+              <td>'.$g->penalty.'</td>
               <td class="text-center">'.$g->m_date.'</td>
               <td class="text-center"><a data-toggle="modal" data-id="'.$g->m_id.'" title="Add this item"
                 class="editMeeting btn btn-primary" data-target="#edit-meeting">
@@ -45,6 +46,10 @@ if(isset($_POST["view"])){
                 <tr>
                      <td width="30%"><label>Description :</label></td>
                      <td width="70%"><input class="form-control" type="text" name="des" value="'.$res->description.'"></td>
+                </tr>
+                <tr>
+                     <td width="30%"><label>Penalty :</label></td>
+                     <td width="70%"><input class="form-control" type="text" name="pen" value="'.$res->penalty.'"></td>
                 </tr>
                 <tr>
                      <td width="30%"><label>Date :</label></td>

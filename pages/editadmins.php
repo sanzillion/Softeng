@@ -11,6 +11,7 @@ if(isset($_POST['delete'])){
              <td class="indent">'.$g->id.'</td>
              <td class="text-center">'.$g->user.'</td>
              <td class="text-center">'.$g->pass.'</td>
+             <td class="text-center">'.$g->privilege.'</td>
              <td class="text-center"><a data-toggle="modal" data-id="'.$g->id.'"
              title="Add this item"
                class="editAdmin btn btn-primary" data-target="#edit-admin">
@@ -49,6 +50,15 @@ if(isset($_POST['edit'])){
                 <tr>
                      <td width="30%"><label>Password :</label></td>
                      <td width="70%"><input class="form-control" type="password" name="pw" value="'.$res->pass.'"></td>
+                </tr>
+                <tr>
+                     <td width="30%"><label>Privilege :</label></td>
+                     <td width="70%"><select name="priv" class="form-control">
+                      <option>'.$res->privilege.'</option>
+                      <option>PRESIDENT</option>
+                      <option>TREASURER</option>
+                      <option>ASSISTANT</option>
+                     </select></td>
                 </tr>';
 
            $output .= '</table></div>';

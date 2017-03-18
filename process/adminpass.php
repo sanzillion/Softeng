@@ -22,8 +22,6 @@ if(isset($_POST['submit'])){
  		{
  			if($newpass == $conpass)
  			{
-
-
 				$stmt = $db->prepare("UPDATE admin set pass=:password where id = :user_id");
 				$stmt->bindValue('user_id',$id);
 				$stmt->bindValue('password',$conpass);
@@ -32,17 +30,18 @@ if(isset($_POST['submit'])){
  			}
  			else{
  				$_SESSION['error']='3';
- 				header('Location:../pages/index.php?error=3');
+ 				header('Location:../pages/index.php?error=6');
  			}
  		}
  		else{
  			$_SESSION['error']='2';
- 			header('Location:../pages/index.php?error=2');
+ 			header('Location:../pages/index.php?error=6');
  		}
  	}
  	else{
  		$_SESSION['error']='1';
- 		header('Location:../pages/index.php?error=1');
- 	}}
+ 		header('Location:../pages/index.php?error=6');
+ 	}
+}
 
 ?>

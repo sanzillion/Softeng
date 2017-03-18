@@ -6,7 +6,7 @@ if(!isset($_SESSION['admin'])){
 }
 
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -44,7 +44,7 @@ if($_SESSION['admin'] == "dean"){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
 </head>
 
 <body>
@@ -65,7 +65,7 @@ if($_SESSION['admin'] == "dean"){
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -91,11 +91,11 @@ if($_SESSION['admin'] == "dean"){
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user">
-                    </i> &nbsp Admin <b class="caret"></b></a>
+                    </i> &nbsp <?php echo $_SESSION['priv']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
@@ -288,7 +288,7 @@ if($_SESSION['admin'] == "dean"){
                               <div class="row collapse" id="meetings">
                                 <div class="col-lg-12" style="padding-left: 50px;">
                                   <h3>Meetings</h3>
-																	<p>The image above shows the Meetings section of the navigation bar. With 2 panels namely, “Manage Meeting”, and “Meetings List”.</p>
+																	<p>The Meetings section of the navigation bar can only be accessed by the President and Dean. With 2 panels namely, “Manage Meeting”, and “Meetings List”.</p>
 																	<div class="row" style="padding-left: 70px;">
 																		<h4>Manage Meetings</h4>
 																		<p>The former panel is a simple event registration with 2 input fields, Event description and Date of the event. Once submitted, it will be added automatically to the next panel. </p>
@@ -306,7 +306,7 @@ if($_SESSION['admin'] == "dean"){
                               <div class="row collapse" id="sanction">
                                 <div class="col-lg-12" style="padding-left: 50px;">
                                   <h3>Sanctions</h3>
-																	<p>The Sanction is the core of the system. It has 4 divisions; “Add Student-Sanction”, “Edit by Year” and “Sanction List”. Note: This section cannot be accessed if there are no students and meeting data. Depending on which the admin is lacking, the page will be automatically redirected. </p>
+																	<p>The Sanction is the core of the system. It has 4 divisions; “Add Student-Sanction”, “Edit by Year” and “Sanction List”. Note: This section cannot be accessed if there are no students and meeting data and only by the treasurer. Depending on which the admin is lacking, the page will be automatically redirected. </p>
 																	<div class="row" style="padding-left: 70px;">
 																		<h4>Add Student-Sanction</h4>
 																		<p>This panel is for registering students into the sanction table. It is important to note that the Select dropdown field are names from the student table which are not yet registered into the sanction table. And since using CSV format and text format bulk registration automatically registers the students name into the sanction list, this panel would seem of little use. However, when there are students that has been left that has not been registered into the system yet, this panel would prove itself useful.</p>

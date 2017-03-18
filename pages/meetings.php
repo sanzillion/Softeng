@@ -5,8 +5,12 @@ if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error=2');
 }
 
+if($_SESSION['priv'] != 'PRESIDENT' && $_SESSION['priv'] != 'DEAN'){
+	header('Location: index.php?error=5');
+}
+
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -51,6 +55,7 @@ else{
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
 </head>
 
 <body>
@@ -71,7 +76,7 @@ else{
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -97,13 +102,13 @@ else{
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                      </i> &nbsp Admin <b class="caret"></b></a>
+                      </i> &nbsp <?php echo $_SESSION['priv']; ?><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -190,17 +195,31 @@ else{
 																		<!-- PROBLEM DISABLE PROPERTY -->
 																		<form class="" method="POST" action="../process/registerprocess.php">
 																			<h4><i class="fa fa-calendar-plus-o"></i> Register Event</h4>
-																				<div class="form-group input-group" id="event">
-																					<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-																					<input type="text" name="desc" placeholder="Event Description" required maxlength="50"
-																					id="eventname" title="Format: aA" class="form-control">
+																			<div class="form-group input-group" id="event">
+																				<span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+																				<input type="text" name="desc" placeholder="Event Description" required maxlength="50"
+																				id="eventname" title="Format: aA" class="form-control">
+																			</div>
+																			<div class="row">
+																				<div class="col-md-5">
+																					<div class="form-group input-group" id="penalty">
+																						<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+																						<input type="text" name="penalty" placeholder="Sanction" required maxlength="3"
+																						id="penaltyfield" title="Numbers only" class="form-control">
+																					</div>
 																				</div>
-																				<div class="form-group input-group" id="eventdate">
-																					<span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-																					<input type="date" name="dato"  required="required" class="form-control"
-																					maxlength="11" placeholder="yyyy-dd-mm" id="dateevent">
+																				<div class="col-md-7" style="padding-left: 0px;">
+																					<div class="form-group input-group" id="eventdate">
+																						<span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
+																						<input type="date" name="dato"  required="required" class="form-control"
+																						maxlength="11" placeholder="yyyy-dd-mm" id="dateevent">
+																					</div>
 																				</div>
+																			</div>
 																				<div class="col-md-12 text-right" style="margin-bottom: 10px;">
+																					<a class="danger" data-toggle="tooltip" data-placement="left"
+																					title="You might need to focusout from the input field to enable submit the button. Try clicking here!">
+																					<i class="fa fa-question-circle primary"	style="font-size: 1.2em; margin-right: 10px;"></i></a>
 																					<button id="eventsubmit" class="btn btn-primary" type="submit" name="addmeeting"
 																					<?php echo $dis;?>>	Add Event &nbsp  <i class="fa fa-send"></i></button>
 																				</div>
@@ -227,6 +246,7 @@ else{
 																			<tr>
 																				<th class="text-center">Id</th>
 																				<th class="text-center">Description</th>
+																				<th class="text-center">Penalty</th>
 																				<th class="text-center">Date</th>
 																				<th class="text-center">Options</th>
 																			</tr>
@@ -236,6 +256,7 @@ else{
 																			<tr class="text-center">
 																				<td><?php echo  $g->m_id; ?></td>
 																				<td><?php echo  $g->description; ?></td>
+																				<td><?php echo  $g->penalty; ?></td>
 																				<td class="text-center"><?php echo  $g->m_date; ?></td>
 																				<td class="text-center"><a data-toggle="modal" data-id="<?php echo $g->m_id;?>" title="Add this item"
 																					class="editMeeting btn btn-primary" data-target="#edit-meeting">
@@ -256,7 +277,7 @@ else{
 																		class="btn btn-danger" type="button" data-toggle="tooltip"
 																		title="Proceed with caution!" name="button">
 																		<i class="fa fa-warning"></i>&nbsp Delete All</a>
-																		<a href="" class="danger" data-toggle="tooltip" data-placement="right"
+																		<a class="danger" data-toggle="tooltip" data-placement="right"
 																		title="Warning! This will delete everything in the list">
 																		<i class="fa fa-exclamation-circle"
 																		style="font-size: 1.5em; color: #BB1A1A; margin-left: 10px;"></i></a>
@@ -300,6 +321,17 @@ else{
     </div>
     <!-- /#wrapper -->
 
+		<!-- for notification modal  -->
+		<div class="modal fade" role="dialog" id="errormodal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="text-center" style="padding: 10px 20px;">
+							<h4 id="text"></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
 
@@ -317,25 +349,35 @@ else{
 			$(document).ready(function(){
 					$('[data-toggle="tooltip"]').tooltip();
 			});
-		</script>
 
-		<?php
-		if(isset($_GET['success']) && $_GET['success'] == 1){
-				echo '<script type="text/javascript">
-					alert("Added Successfuly");
-				</script>';
-		}
-		if(isset($_GET['success']) && $_GET['success'] == 2){
-			echo '<script type="text/javascript">
-				alert("Updated Successfuly");
-			</script>';
-		}
-		if(isset($_GET['error']) && $_GET['error'] == 5){
-			echo '<script type="text/javascript">
-				alert("Add meetings first!");
-			</script>';
-		}
-		?>
+			var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			var success = '<?php if(isset($_GET['success'])){echo $_GET['success'];}else{echo '';} ?>';
+			var texterror = '<?php if(isset($_SESSION['error'])){echo $_SESSION['error'];}else{ echo '';} ?>';
+			console.log(error);
+			if(error != '' || success != ''){
+				console.log('inside here');
+				switch (success) {
+					case '1':
+					  $('#text').text("Added Successfully!");
+					  $('#errormodal').modal('show');
+						break;
+					case '2':
+						$('#text').text("Updated Successfully!");
+						$('#errormodal').modal('show');
+						break;
+				}
+				switch (error) {
+				 case '2':
+					 $('#text').text("DB error!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '5':
+					 $('#text').text("Add meetings first!");
+					 $('#errormodal').modal('show');
+					 break;
+				}
+			}
+		</script>
 
 </body>
 

@@ -64,7 +64,7 @@ if(isset($_POST['submit'])){
           }
 
       } else {
-         $_SESSION['error'] .= "Sorry, there was an error uploading your file.";
+         $_SESSION['error'] = "Sorry, there was an error uploading your file.";
       }
     }
   }

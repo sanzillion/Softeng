@@ -6,7 +6,7 @@ if(!isset($_SESSION['admin'])){
 }
 
 $super = "";
-if($_SESSION['admin'] == "dean"){
+if($_SESSION['priv'] == "DEAN"){
 	$super = '<li id="superuser">
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
@@ -76,7 +76,7 @@ if(!empty(getbulletin())){ //bulletin control
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
 </head>
 
 <body>
@@ -97,7 +97,7 @@ if(!empty(getbulletin())){ //bulletin control
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -123,14 +123,14 @@ if(!empty(getbulletin())){ //bulletin control
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user">
-                    </i> &nbsp Admin <b class="caret"></b></a>
+                    </i> &nbsp <?php echo $_SESSION['priv']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -376,6 +376,16 @@ if(!empty(getbulletin())){ //bulletin control
     </div>
     <!-- /#wrapper -->
 
+		<div class="modal fade" role="dialog" id="errormodal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="text-center" style="padding: 10px 20px;">
+							<h4 id="text"></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
 
@@ -385,28 +395,38 @@ if(!empty(getbulletin())){ //bulletin control
     <!-- Custom JS -->
     <script src="../js/myownvalidation.js"></script>
 
-		<?php
-		if(isset($_GET['error']) && $_GET['error'] == 1){
-      echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("'.$_SESSION['error'].'");
-				})(jQuery);
-      </script>';
-    }
-		elseif(isset($_GET['error']) && $_GET['error'] == 2){
-			echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("'.$_SESSION['error'].'");
-				})(jQuery);
-      </script>';
-		}
-		elseif(isset($_GET['error']) && $_GET['error'] == 3){
-			echo '<script type="text/javascript">
-				$(document).ready(function(){
-        alert("Fill up sanction first!");
-				})(jQuery);
-      </script>';
-		}
-		 ?>
+		<script type="text/javascript">
+			 var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			 var texterror = '<?php if(isset($_SESSION['error'])){echo $_SESSION['error'];}else{ echo '';} ?>';
+			 console.log(error);
+			 if(error != ''){
+				 console.log('inside here');
+				 switch (error) {
+				 	case '1': case '2':
+				 		$('#text').text(texterror);
+						$('#errormodal').modal('show');
+				 		break;
+					case '3':
+						$('#text').text("Fill up sanction first!");
+						$('#errormodal').modal('show');
+						break;
+					case '4':
+						$('#text').text("Only the treasurer is allowed");
+						$('#errormodal').modal('show');
+						break;
+					case '5':
+						$('#text').text("Only the president is allowed");
+						$('#errormodal').modal('show');
+						console.log("here!");
+				 		break;
+					case '6':
+						$('#text').text("You insolent fool! Try again!");
+						$('#errormodal').modal('show');
+						console.log("here!");
+				 		break;
+				 }
+			 }
+		</script>
+
 </body>
 </html>

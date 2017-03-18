@@ -4,7 +4,7 @@ include "../process/functions.php";
 if(!isset($_SESSION['admin'])){
 	header('Location: ../index.php?error=2');
 }
-elseif($_SESSION['admin'] != "dean") {
+elseif($_SESSION['priv'] != "DEAN") {
   header('Location: ../index.php?error=3');
 }
 
@@ -45,10 +45,10 @@ if(isset($_GET['enable'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
 </head>
 
-<body>
+<body style="margin-top: 35px;">
 
     <div id="wrapper">
 
@@ -66,7 +66,7 @@ if(isset($_GET['enable'])){
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
                         <li>
@@ -92,13 +92,13 @@ if(isset($_GET['enable'])){
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                      &nbsp Admin <b class="caret"></b></a>
+                      &nbsp <?php echo $_SESSION['priv']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Help</a>
+                            <a href="help.php"><i class="fa fa-fw fa-gear"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -160,7 +160,7 @@ if(isset($_GET['enable'])){
             <div class="container-fluid" style="height: 600px !important; overflow: auto;">
 
                 <!-- Page Heading -->
-                <div class="row">
+                <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li>
@@ -193,12 +193,24 @@ if(isset($_GET['enable'])){
 														<div class="form-group">
 															<form class="" action="../process/registerprocess.php" method="post">
 																<label for="#user">Admin Name: </label>
-																<input id="user" class="form-control" type="text" name="name" value="">
+																<input id="user" class="form-control" type="text" name="name" required
+                                placeholder="only alphanumeric characters" maxlength="15">
 																<label for="pw">Password: </label>
-																<input id="pw" class="form-control" type="password" name="pass" value="">
-																<div class="text-right">
-																	<button style="margin-top: 10px;"
-																	type="submit" name="add-admin" class="btn btn-default">Submit New Admin</button>
+																<input id="pw" class="form-control" type="password" name="pass" required
+                                placeholder="only alphanumeric characters" maxlength="15">
+																<div class="row">
+																	<div class="col-md-6">
+																		<select style="margin-top: 10px;" class="form-control" name="priv" required>
+																			<option disabled selected hidden value="">ACCESS LEVEL</option>
+																			<option>PRESIDENT</option>
+																			<option>TREASURER</option>
+																			<option>ASSISTANT</option>
+																		</select>
+																	</div>
+																	<div class="col-md-6 pull-right">
+																		<button style="margin-top: 10px;"
+																		type="submit" name="add-admin" class="btn btn-default">Submit</button>
+																	</div>
 																</div>
 															</form>
 														</div>
@@ -236,7 +248,7 @@ if(isset($_GET['enable'])){
 									</div><!-- end of column 4 -->
 
 									  <div class="col-lg-8">
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary" style="margin-bottom: 0px;">
                             <div class="panel-heading">
 															<div class="row">
 																<div class="col-md-6">
@@ -248,31 +260,26 @@ if(isset($_GET['enable'])){
 															<!-- End of row -->
                             </div>
 														<!-- end of panel heading -->
-														<div class="row">
-															<div class="col-md-12">
-																<table class="table block" style="margin-bottom: 0px;">
-																	<thead class="text-center">
-																		<tr>
-																			<th width="10%" class="indent">Id</th>
-																			<th width="30%" class="text-center">User</th>
-																			<th width="20%" class="text-center">Pass</th>
-																			<th width="40%" class="text-center">Option</th>
-																		</tr>
-																	</thead>
-																</table>
-															</div>
-														</div>
-														<!-- end of row table header -->
                             <div class="panel-body" style="padding-top: 0px;">
 															<div class="row"style="overflow: auto;">
-																<div  id="admins-table" class="flot-chart"																>
+																<div  class="flot-chart"																>
 																	<table class="table table-hover table-striped">
-																		<tbody>
+    																	<thead class="text-center">
+    																		<tr>
+    																			<th width="10%" class="indent">Id</th>
+    																			<th width="15%" class="text-center">User</th>
+    																			<th width="20%" class="text-center">Pass</th>
+    																			<th width="20%" class="text-center">Access Level</th>
+    																			<th width="25%" class="text-center">Option</th>
+    																		</tr>
+    																	</thead>
+																		<tbody id="admins-table">
 																			<?php foreach(getadmins() as $g): ?>
 																			<tr>
 																				<td class="indent"><?php echo  $g->id; ?></td>
 																				<td class="text-center"><?php echo  $g->user; ?></td>
 																				<td class="text-center"><?php echo  $g->pass; ?></td>
+																				<td class="text-center"><?php echo  $g->privilege; ?></td>
 																				<td class="text-center"><a data-toggle="modal"
 																					data-id="<?php echo $g->id;?>" title="Add this item"
 																					class="editAdmin btn btn-primary" data-target="#edit-admin">
@@ -333,6 +340,16 @@ if(isset($_GET['enable'])){
 
     </div>
     <!-- /#wrapper -->
+		<!-- modal for notifications -->
+		<div class="modal fade" role="dialog" id="errormodal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="text-center" style="padding: 10px 20px;">
+							<h4 id="text"></h4>
+					</div>
+				</div>
+			</div>
+		</div>
 
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
@@ -348,45 +365,42 @@ if(isset($_GET['enable'])){
 			$(document).ready(function(){
 					$('[data-toggle="tooltip"]').tooltip();
 			});
+
+			var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			var success = '<?php if(isset($_GET['success'])){echo $_GET['success'];}else{echo '';} ?>';
+			console.log(error);
+			if(error != '' || success != ''){
+				console.log('inside here');
+				switch (success) {
+					case '1':
+					  $('#text').text("Registered Successfully!");
+					  $('#errormodal').modal('show');
+						break;
+					case '2':
+					  $('#text').text("Updated Successfully!");
+					  $('#errormodal').modal('show');
+						break;
+				}
+				switch (error) {
+				 case '1':
+					 $('#text').text("Invalid Username or Password!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '2':
+					 $('#text').text("Only 3 admins are allowed!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '3':
+					 $('#text').text("Username or privilege already taken!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '4':
+					 $('#text').text("DB error!");
+					 $('#errormodal').modal('show');
+					 break;
+				}
+			}
 		</script>
-
-<?php
-if(isset($_GET['success']) && $_GET['success'] == 1){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Update Success");
-			});
-	 </script>';
-}
-if(isset($_GET['success']) && $_GET['success'] == 2){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Successfully deleted!");
-			});
-	 </script>';
-}
-if(isset($_GET['error']) && $_GET['error'] == 1){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Delete meetings first");
-			});
-	 </script>';
-}
-if(isset($_GET['error']) && $_GET['error'] == 2){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Something went wrong!");
-			});
-	 </script>';
-}
-if(isset($_GET['error']) && $_GET['error'] == 5){
-	echo ' <script type="text/javascript">
-			$(document).ready(function(){
-				alert("Register a student first");
-			});
-	 </script>';
-}
-
  ?>
 
 </body>

@@ -26,9 +26,11 @@ if($db = connect()){
 					$stmt2->bindValue(':user',$user);
 					$stmt2->execute();
 					$account2 = $stmt2->fetch(PDO::FETCH_OBJ);
+					$priv = $account2->privilege;
 					$id = $account2->user_id;
 					$_SESSION['admin']=$user;
 					$_SESSION['id']=$id;
+					$_SESSION['priv']=$priv;
 
 					header("Location:../pages/index.php");
 		}

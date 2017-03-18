@@ -501,7 +501,7 @@ for ($i = 0; $i <$arraycount; $i++){
 												<tbody id="sanctions-table">
 													<?php foreach (getsanction() as $k):?>
 														<tr>
-															<td><?php echo $k->name ?></td>
+															<td><?php echo $k->surname.', '.$k->firstname; ?></td>
 															<?php $total = 0;?>
 															<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';} ?>
 															<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';} ?>
@@ -527,6 +527,15 @@ for ($i = 0; $i <$arraycount; $i++){
     </div>
   </div>
 
+	<div class="modal fade" role="dialog" id="errormodal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="text-center" style="padding: 10px 20px;">
+						<h4 id="text"></h4>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 
@@ -587,27 +596,26 @@ for ($i = 0; $i <$arraycount; $i++){
 					$('[data-toggle="tooltip"]').tooltip();
 			});
 
+			var error = '<?php if(isset($_GET['error'])){echo $_GET['error'];}else{ echo '';} ?>';
+			console.log(error);
+			if(error != ''){
+				console.log('inside here');
+				switch (error) {
+				 case '1':
+					 $('#text').text("Invalid user or password");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '2':
+					 $('#text').text("You need to login first!");
+					 $('#errormodal').modal('show');
+					 break;
+				 case '3':
+					 $('#text').text("You need super user privileges!");
+					 $('#errormodal').modal('show');
+					 break;
+				}
+			}
     </script>
-
-    <?php
-    if(isset($_GET['error']) && $_GET['error'] == 1){
-      echo '<script type="text/javascript">
-        alert("Invalid user or password");
-      </script>';
-    }
-
-    if(isset($_GET['error']) && $_GET['error'] == 2){
-      echo '<script type="text/javascript">
-        alert("You need to login first!");
-      </script>';
-    }
-
-    if(isset($_GET['error']) && $_GET['error'] == 3){
-      echo '<script type="text/javascript">
-        alert("You need super user privileges");
-      </script>';
-    }
-     ?>
 
 </body>
 </html>

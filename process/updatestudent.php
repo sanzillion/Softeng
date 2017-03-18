@@ -51,6 +51,7 @@ if(isset($_POST['updato'])){ //update meeting
 	$id = $_POST['id'];
  	$des = $_POST['des'];
 	$dat = $_POST['dat'];
+	$pen = $_POST['pen'];
 
 	$account = getmeetbyid($id); // get description name
 	$desc = $account->description;
@@ -59,10 +60,12 @@ if(isset($_POST['updato'])){ //update meeting
 
 	$stmt = $db->prepare("UPDATE meeting SET
 												description = :des,
+												penalty = :pen,
 												m_date = :dat
 						            WHERE m_id = :id");
 
 			$stmt->bindValue('des',$des);
+			$stmt->bindValue('pen',$pen);
 			$stmt->bindValue('dat',$dat);
 			$stmt->bindValue('id',$id);
 
@@ -78,28 +81,34 @@ if(isset($_POST['updateadmin'])){
 	$id = $_POST['id'];
 	$user = $_POST['user'];
 	$pw = $_POST['pw'];
+	$priv = $_POST['priv'];
 
 	if(preg_match('/[^a-z_\-0-9]/i', $user) ||
 			preg_match('/[^a-z_\-0-9]/i', $pw)){
-		header('Location: ../pages/superuser.php?invalid-inputs');
+		header('Location: ../pages/superuser.php?error=1');
 	}
-	elseif (findadmin($user)){
-		header('Location: ../pages/superuser.php?nametaken');
+	elseif (findsamepriv($priv, $id)){
+	 	header('Location: ../pages/superuser.php?error=3');
+	}
+	elseif(findsameuser($user, $id)){
+			header('Location: ../pages/superuser.php?error=3');
 	}
 	else{
 		$stmt = $db->prepare("UPDATE admin SET
 													user = :u,
-													pass = :p
+													pass = :p,
+													privilege = :priv
 													WHERE id = :id");
 
 				$stmt->bindValue('u',$user);
 				$stmt->bindValue('p',$pw);
+				$stmt->bindValue('priv',$priv);
 				$stmt->bindValue('id',$id);
 
 				if($stmt->execute()){
-					header('Location:../pages/superuser.php?success');
+					header('Location:../pages/superuser.php?success=2');
 				}else{
-					header('Location:../pages/superuser.php?error');
+					header('Location:../pages/superuser.php?error=4');
 				}
 	}
 }
