@@ -10,7 +10,6 @@ if(isset($_POST['delete'])){
            $output .= '<tr>
              <td class="indent">'.$g->id.'</td>
              <td class="text-center">'.$g->user.'</td>
-             <td class="text-center">'.$g->pass.'</td>
              <td class="text-center">'.$g->privilege.'</td>
              <td class="text-center"><a data-toggle="modal" data-id="'.$g->id.'"
              title="Add this item"

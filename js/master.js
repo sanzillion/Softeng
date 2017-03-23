@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
    $(window).scroll(function (){
-     //everytime i scroll this function executes
+     //everytime i scroll, this function executes
       //if you hard code, then use console
       //.log to determine when you want the
       //nav bar to stick.

@@ -279,6 +279,22 @@ function getrecord(){
 	return $account;
 }
 
+function downloadrecord(){
+	$db = connect();
+	$stmt = $db->prepare("SELECT * from record ORDER BY r_id DESC LIMIT 10");
+	$stmt->execute();
+	$account = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	return $account;
+}
+
+function getrecordmodal(){
+	$db = connect();
+	$stmt = $db->prepare("SELECT * from record ORDER BY r_id DESC LIMIT 100");
+	$stmt->execute();
+	$account = $stmt->fetchAll(PDO::FETCH_OBJ);
+	return $account;
+}
+
 function searchstudent($name){ //getemp2
 	$names = "";
 	$names.= '%';
@@ -498,6 +514,20 @@ function findadmin($name,$priv){
   privilege = :priv");
   $q->bindValue('user',$name);
   $q->bindValue('priv',$priv);
+  if($q->execute()){
+      if($q->rowCount() > 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+}
+
+function findadminuser($name){
+  $db = connect();
+  $q = $db->prepare("SELECT * FROM admin WHERE user = :user");
+  $q->bindValue('user',$name);
   if($q->execute()){
       if($q->rowCount() > 0){
         return true;

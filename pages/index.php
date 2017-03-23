@@ -11,8 +11,8 @@ if($_SESSION['priv'] == "DEAN"){
 							<a href="superuser.php"><i class="fa fa-fw fa-user-secret"></i> Superuser</a>
 						</li>';
 }
-$admin = $_SESSION['admin'];
-$account = getadmin($admin);
+$id = $_SESSION['id'];
+$account = getadminbyid($id);
 
 //default bulletin properties
 $loc = "../uploads/";
@@ -43,6 +43,7 @@ if(!empty(getbulletin())){ //bulletin control
 	$dis2 = ""; //enable delete bulletin
 }
 
+$limit = '10';
  ?>
 
 <!DOCTYPE html>
@@ -222,39 +223,34 @@ if(!empty(getbulletin())){ //bulletin control
 													<div class="panel-heading">
 														<a href="javascript:;" data-toggle="collapse" class="bggray cblack"
 														data-target="#pass-form" style="text-decoration: none; color: black;">
-															<h3 class="panel-title"><i class="fa fa-lock fa-fw"></i> Change Password
+															<h3 class="panel-title"><i class="fa fa-address-card fa-fw"></i> &nbsp Account Details
 															<i class="fa fa-fw fa-caret-down"></i></h3>
 													</a></div>
 													<div id="pass-form" class="collapse panel-body">
 															<div class="container-fluid">
-																<form id="p-form" class="form-group" action="../process/adminpass.php" method="POST">
-																	<h3>Admin no.<?php echo $account->id; ?> </h3>
-																	<input required="Required Field" type="hidden" name="id"
-																		value="<?php echo $account->id;?>" id="idadmin">
-																		<input required="Required Field" type="hidden" name="name"
-																			value="<?php echo $account->user;?>" id="admin">
-																		<label>Old password:
-																		<p style="display: inline; color: red;" id="olderror"></p></label>
-																		<div class="" id="operror">
-																			<input class="form-control" type="password" name="old"
-																			required id="old-pass">
-																		</div>
-																		<label>New Password:
-																		<p style="display: inline; color: red;" id="newerror"></p></label>
-																		<div class="" id="nperror">
-																			<input class="form-control" id="new-pass" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
-																		</div>
-																		<label>Confirm Password:
-																		<p style="display: inline; color: red;" id="conerror"></p></label>
-																		<div class="" id="cperror">
-																			<input class="form-control" id="con-pass" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-																			title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
-																		</div>
-																		<div class="text-right" style="margin-top: 10px;">
-																			<input class="btn btn-default" type="submit" name="submit" value="Save Password" id="pbutton">
-																		</div>
-																	</form>
+																<div class="row">
+																		<h3><i class="fa fa-universal-access fa-fw"></i> Admin no. <?php echo $_SESSION['id']; ?></h3>
+																	<div class="col-lg-5">
+																			<h4>Username: </h4>
+																			<h4>Access Level: </h4>
+																	</div>
+																	<div class="col-lg-7">
+																		<h4><strong> <?php echo $account->user; ?></strong>	</h4>
+																		<h4><strong> <?php echo $account->privilege; ?></strong></h4>
+																	</div>
+																</div>
+																<div class="row" style="margin-top: 10px;">
+																	<div class="col-lg-6">
+																		<button type="button" class="btn btn-default btn-block"
+																		data-toggle="modal" data-target="#changeuser">
+																		<i class="fa fa-edit"></i> Update Username</button>
+																	</div>
+																	<div class="col-lg-6">
+																		<button type="button" class="btn btn-default btn-block"
+																		data-toggle="modal" data-target="#changepass">
+																		<i class="fa fa-lock"></i> Update Password</button>
+																	</div>
+																</div>
 															</div>
 													</div>
 											</div>
@@ -272,7 +268,7 @@ if(!empty(getbulletin())){ //bulletin control
 																	<thead>
 																		<tr>
 																			<th>User</th>
-																			<th>Date</th>
+																			<th>Date [y-m-d]</th>
 																			<th>Time</th>
 																			<th>Day</th>
 																		</tr>
@@ -288,9 +284,17 @@ if(!empty(getbulletin())){ //bulletin control
 																		<?php endforeach; ?>
 																	</tbody>
 																</table>
-                                <div class="text-right">
-                                    <a href="#">View All Activity
+                                <div class="row">
+																	<div class="col-lg-6">
+																		<a class="btn btn-success btn-sm" href="../process/filedownload.php?file=5">
+																			<i class="fa fa-download"></i></a>
+																		<a class="btn btn-warning btn-sm" value="print"
+																	 	onclick="PrintDiv();"><i class="fa fa-print"></i></a>
+																	</div>
+																	<div class="col-lg-6 text-right">
+																		<a class="btn btn-primary" data-toggle="modal" data-target="#loginrecords">View All Activity
 																			<i class="fa fa-arrow-circle-right"></i></a>
+																	</div>
                                 </div>
                             </div>
                         </div>
@@ -376,6 +380,109 @@ if(!empty(getbulletin())){ //bulletin control
     </div>
     <!-- /#wrapper -->
 
+		<div class="modal fade" id="loginrecords" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 class="modal-title font2"><i class="fa fa-clock-o fa-fw"></i>&nbsp Login Records</h3>
+						</div>
+						<div class="modal-body" style="height: 400px; overflow: auto;" id="divToPrint">
+							<table border="1" class="table table-bordered table-hover table-striped">
+								<thead>
+									<tr>
+										<th>User</th>
+										<th>Date [y-m-d]</th>
+										<th>Time</th>
+										<th>Day</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach(getrecordmodal($limit) as $g): ?>
+										<tr>
+											<td><?php echo  $g->name; ?></td>
+											<td><?php echo  $g->dates; ?></td>
+											<td><?php echo  $g->time; ?></td>
+											<td><?php echo  $g->day; ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of modal -->
+
+		<!-- Password modal -->
+		<div class="modal fade" role="dialog" id="changepass">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content" style="padding-left: 20px; padding-right: 20px;">
+					<div class="row">
+						<div class="col-lg-12">
+							<form id="p-form" class="form-group" action="../process/adminpass.php" method="POST">
+						    <h3><strong>Update Password</strong></h3>
+						    <input required="Required Field" type="hidden" name="id"
+						      value="<?php echo $account->id;?>" id="idadmin">
+						      <input required="Required Field" type="hidden" name="name"
+						        value="<?php echo $account->user;?>" id="admin">
+						      <label>Old password:
+						      <p style="display: inline; color: red;" id="olderror"></p></label>
+						      <div class="" id="operror">
+						        <input class="form-control" type="password" name="old"
+						        required id="old-pass">
+						      </div>
+						      <label>New Password:
+						      <p style="display: inline; color: red;" id="newerror"></p></label>
+						      <div class="" id="nperror">
+						        <input class="form-control" id="new-pass" type="password" name="new" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						        title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+						      </div>
+						      <label>Confirm Password:
+						      <p style="display: inline; color: red;" id="conerror"></p></label>
+						      <div class="" id="cperror">
+						        <input class="form-control" id="con-pass" type="password" name="con" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						        title="Must contain at least one number and one uppercase and lowercase letter and at least 8 or more characters">
+						      </div>
+						      <div class="text-right" style="margin-top: 10px;">
+						        <input class="btn btn-default" type="submit" name="submit" value="Save Password" id="pbutton">
+						      </div>
+						    </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- username modal -->
+		<div class="modal fade" role="dialog" id="changeuser">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content" style="padding-left: 20px; padding-right: 20px;">
+					<div class="row">
+						<div class="col-lg-12">
+							<form class="form-group" action="../process/updatestudent.php" method="POST">
+								<h3><strong>Update Username</strong></h3>
+								<input required="Required Field" type="hidden" name="id"
+									value="<?php echo $account->id;?>">
+									<label>Username:</label>
+									<div class="">
+										<input class="form-control" type="text" name="uname" required pattern="(?=.*\d)(?=.*[a-z]).{8,}"
+										title="Must be alphanumeric character and not your previous username" value="<?php echo $account->user; ?>">
+									</div>
+									<div class="text-right" style="margin-top: 10px;">
+										<input class="btn btn-default" type="submit" name="useronly" value="Update username">
+									</div>
+								</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- errormodal -->
 		<div class="modal fade" role="dialog" id="errormodal">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
@@ -424,8 +531,21 @@ if(!empty(getbulletin())){ //bulletin control
 						$('#errormodal').modal('show');
 						console.log("here!");
 				 		break;
+					case '7':
+						$('#text').text("Username already exists!");
+						$('#errormodal').modal('show');
+						console.log("here!");
+				 		break;
 				 }
 			 }
+
+			 function PrintDiv() {
+				   var divToPrint = document.getElementById('divToPrint');
+				   var popupWin = window.open('', '_blank', 'width=900,height=500');
+				   popupWin.document.open();
+				   popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+				   popupWin.document.close();
+	 		  }
 		</script>
 
 </body>

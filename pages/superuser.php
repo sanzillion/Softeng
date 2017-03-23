@@ -268,7 +268,6 @@ if(isset($_GET['enable'])){
     																		<tr>
     																			<th width="10%" class="indent">Id</th>
     																			<th width="15%" class="text-center">User</th>
-    																			<th width="20%" class="text-center">Pass</th>
     																			<th width="20%" class="text-center">Access Level</th>
     																			<th width="25%" class="text-center">Option</th>
     																		</tr>
@@ -278,7 +277,6 @@ if(isset($_GET['enable'])){
 																			<tr>
 																				<td class="indent"><?php echo  $g->id; ?></td>
 																				<td class="text-center"><?php echo  $g->user; ?></td>
-																				<td class="text-center"><?php echo  $g->pass; ?></td>
 																				<td class="text-center"><?php echo  $g->privilege; ?></td>
 																				<td class="text-center"><a data-toggle="modal"
 																					data-id="<?php echo $g->id;?>" title="Add this item"

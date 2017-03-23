@@ -82,6 +82,39 @@ if(isset($_GET['file']) && $_GET['file']== 4){
 
 }
 
+if(isset($_GET['file']) && $_GET['file'] == 5){
+	//RECORD DOWNLOAD EXCEL FILE
+
+	// output headers so that the file is downloaded rather than displayed
+	header('Content-Type: text/csv; charset=utf-8');
+	header('Content-Disposition: attachment; filename=LoginRecords.csv');
+
+	//set headings
+	$heading = [];
+	$heading[] = "ID";
+	$heading[] = "User";
+	$heading[] = "Date";
+	$heading[] = "Time";
+	$heading[] = "Day";
+
+	//open file to write
+	$fp = fopen('php://output', 'w');
+
+	//write headings first
+	fputcsv($fp, $heading);
+
+	//fetch assoc array
+	$results = downloadrecord();
+
+	//put every row into the file
+	foreach ($results as $fields) {
+			fputcsv($fp, $fields);
+	}
+
+	//close the opened file
+	fclose($fp);
+}
+
 
 
 ?>

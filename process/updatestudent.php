@@ -113,4 +113,29 @@ if(isset($_POST['updateadmin'])){
 	}
 }
 
+if(isset($_POST['useronly'])){
+	$id = $_POST['id'];
+	$name = $_POST['uname'];
+
+	if(findadminuser($name)){
+		header('Location: ../pages/index.php?error=7');
+	}
+	else{
+		$stmt = $db->prepare("UPDATE admin SET
+													user = :u
+													WHERE id = :id");
+		$stmt->bindValue('u',$name);
+		$stmt->bindValue('id',$id);
+
+		if($stmt->execute()){
+			header('Location:../pages/index.php?successfullyupdated');
+		}
+		else{
+			header('Location: ../pages/index.php?dberror');
+		}
+
+	}
+
+}
+
 ?>
