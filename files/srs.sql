@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2017 at 03:46 AM
+-- Generation Time: Mar 23, 2017 at 10:10 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -29,17 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `user` varchar(15) NOT NULL,
-  `pass` varchar(15) NOT NULL
+  `pass` varchar(15) NOT NULL,
+  `privilege` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `user`, `pass`) VALUES
-(1, 'dean', 'dean'),
-(2, 'admin', 'admin'),
-(3, 'admin2', 'admin2');
+INSERT INTO `admin` (`id`, `user`, `pass`, `privilege`) VALUES
+(1, 'dean', 'dean', 'DEAN'),
+(2, 'pres', 'pres', 'PRESIDENT'),
+(3, 'treasurer', 'treasurer', 'TREASURER');
 
 -- --------------------------------------------------------
 
@@ -54,6 +55,13 @@ CREATE TABLE `bulletin` (
   `post` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `bulletin`
+--
+
+INSERT INTO `bulletin` (`id`, `imgname`, `title`, `post`) VALUES
+(2, 'slide-3.jpg', 'PLS READ', 'Hi ICT students, click the RECORD tab to view your sanctions.<br />\r\n<br />\r\nFor questions and clarifications just contact:<br />\r\nElla - 09123838260 <br />\r\nor PM her in:<br />\r\nhttps://www.facebook.com/xhiaenisella');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +71,7 @@ CREATE TABLE `bulletin` (
 CREATE TABLE `meeting` (
   `m_id` int(11) NOT NULL,
   `description` varchar(50) NOT NULL,
+  `penalty` int(3) NOT NULL,
   `m_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -75,10 +84,27 @@ CREATE TABLE `meeting` (
 CREATE TABLE `record` (
   `r_id` int(2) NOT NULL,
   `name` varchar(11) NOT NULL,
-  `dates` date NOT NULL,
+  `dates` varchar(20) NOT NULL,
   `time` time NOT NULL,
   `day` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `record`
+--
+
+INSERT INTO `record` (`r_id`, `name`, `dates`, `time`, `day`) VALUES
+(1, 'dean', '2017-03-23', '12:54:23', 'Thursday'),
+(2, 'dean', '2017-03-23', '12:55:01', 'Thursday'),
+(3, 'admin', '2017-03-23', '12:58:08', 'Thursday'),
+(4, 'dean', '2017-03-23', '13:10:23', 'Thursday'),
+(5, 'dean', '2017-03-23', '13:14:00', 'Thursday'),
+(6, 'dean', '2017-03-23', '13:57:25', 'Thursday'),
+(7, 'admin', '2017-03-23', '14:11:47', 'Thursday'),
+(8, 'admin', '2017-03-23', '14:15:54', 'Thursday'),
+(9, 'dean', '2017-03-23', '14:16:15', 'Thursday'),
+(10, 'admin', '2017-03-23', '14:17:46', 'Thursday'),
+(11, 'dean', '2017-03-23', '18:03:18', 'Thursday');
 
 -- --------------------------------------------------------
 
@@ -155,32 +181,32 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `bulletin`
 --
 ALTER TABLE `bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `r_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `r_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `sanction`
 --
 ALTER TABLE `sanction`
-  MODIFY `sanc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=677;
+  MODIFY `sanc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=947;
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=906;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1177;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

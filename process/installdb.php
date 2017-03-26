@@ -24,13 +24,14 @@ catch(PDOException $e)
    `id` int(11) NOT NULL AUTO_INCREMENT,
    `user` varchar(15) NOT NULL,
    `pass` varchar(15) NOT NULL,
+   `privilege` varchar(15) NOT NULL,
    PRIMARY KEY (`id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
- $adminvalues = $con->prepare("INSERT INTO `admin` (`id`, `user`, `pass`) VALUES
- (1, 'dean', 'dean'),
- (2, 'admin', 'admin'),
- (3, 'admin2', 'admin2');");
+ $adminvalues = $con->prepare("INSERT INTO `admin` (`id`, `user`, `pass`, `privilege`) VALUES
+ (1, 'dean', 'dean', 'DEAN'),
+ (2, 'pres', 'pres', 'PRESIDENT'),
+ (3, 'treasurer', 'treasurer', 'TREASURER');");
 
  $bulletin = $con->prepare("CREATE TABLE `bulletin` (
    `id` int(11) NOT NULL AUTO_INCREMENT,

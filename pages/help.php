@@ -206,7 +206,7 @@ if($_SESSION['priv'] == "DEAN"){
 																			<h4>System Configuration</h4>
 																			<p>The system operates on any browser application. It is compatible with Microsoft Edge, Mozilla Firefox, Google Chrome and etc. Although the application required internet connection, there is no need for any installation only deployment and can be used immediately without any further configuration.</p>
 																			<h4>User access level</h4>
-																			<p>The system provides default administrators together with respective passwords. The Dean will be given the super-user privilege which can manage the admin accounts. The administrators have full access to systems basic features.</p>
+																			<p>The system provides default administrators together with respective passwords and access levels. The Dean will be given the super-user privilege which can manage the admin accounts. The administrators have full access to systems basic features with their respective access levels.</p>
 																			<h4>Contingencies</h4>
 																			<p>In case of power outage, the system will not be directly affected, unsaved data will be lost but the data already stored in the database is kept safe. In case there is no Internet connection available data cannot be saved in internal memory of the operating device.</p>
 																		</div>

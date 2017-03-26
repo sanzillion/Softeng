@@ -14,7 +14,7 @@ if($_SESSION['priv'] == "DEAN"){
 
 $admin = $_SESSION['admin'];
 $db = connect();
-$dis = "disabled";
+$dis = "";
 $btn = "btn-default";
 
 if(isset($_SESSION['QUE_ERROR'])){
@@ -212,10 +212,11 @@ if(isset($_SESSION['QUE_ERROR'])){
 																			<i class="fa fa-info-circle"
 																			style="font-size: 15px; color: black;
 																			margin-left: 10px;"></i></a></h4>
-																			<input class="form-control" name="csv" type="file"
+																			<input class="form-control" id="csvfile" name="csv" type="file"
 																			placeholder="asdfasdf" value="Names" required>
 																			<div class="text-right" style="margin-top: 10px;">
-																				<button class="btn btn-primary"
+																				<img src="../img/loading.gif" alt="loading" class="gif">
+																				<button class="btn btn-primary submitcsv"
 																				type="submit" name="sub"> Submit File &nbsp<i class="fa fa-send">
 																				</i></button>
 																			</div>
@@ -243,14 +244,14 @@ if(isset($_SESSION['QUE_ERROR'])){
 																							<div class="form-group" style="margin-top: 10px;">
 																								<label for="names" class="col-sm-2">Sname:</label>
 																								<div class="col-sm-10">
-																									<input id="names" name="userlast" type="file"
+																									<input id="lnames" name="userlast" type="file"
 																									class="" placeholder="Names" required <?php echo $dis; ?>>
 																								</div>
 																							</div>
 																							<div class="form-group" style="margin-top: 10px;">
 																								<label for="names" class="col-sm-2">Gname:</label>
 																								<div class="col-sm-10">
-																									<input id="names" name="userfirst" type="file"
+																									<input id="fnames" name="userfirst" type="file"
 																									class="" placeholder="Names" required <?php echo $dis; ?>>
 																								</div>
 																							</div>
@@ -269,7 +270,8 @@ if(isset($_SESSION['QUE_ERROR'])){
 																								</div>
 																							</div>
 																							<div class="text-right" style="margin-bottom: 10px;">
-																								<button class="btn btn-default" type="submit"
+																								<img src="../img/loading.gif" alt="loading" class="gif2">
+																								<button class="btn btn-default submittxt" type="submit"
 																								value="Submit File" name="submit"
 																								<?php echo $dis; ?>> Submit File
 																								 <i class="fa fa-send"></i> </button>
@@ -488,6 +490,22 @@ if(isset($_SESSION['QUE_ERROR'])){
 						}
 				});
 		});
+
+		$(document).on("click", ".submitcsv", function () {
+		   var id = $('#csvfile').val();
+		     if(id != '')
+		       {
+						 $('.gif').show();
+		       }
+		});
+
+		$(document).on("click", ".submittxt", function () {
+		   var id = $('#cpnum').val();
+		     if(id != '')
+		       {
+						 $('.gif2').show();
+		       }
+		});
 		</script>
 
 		<!-- Activate bootstrap tooltip -->
@@ -535,3 +553,16 @@ if(isset($_SESSION['QUE_ERROR'])){
 		</script>
 </body>
 </html>
+
+<style>
+	.gif{
+		display: none;
+		height: 10%;
+		width: 10%;
+	}
+	.gif2{
+		display: none;
+		height: 10%;
+		width: 10%;
+	}
+</style>
