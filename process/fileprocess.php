@@ -53,11 +53,11 @@ if(isset($_POST['sub'])){
 				else{
 					$query->closeCursor();
 					$_SESSION['QUE_ERROR'] += 1;
-					header('Location: ../pages/students.php?error=dberror');
+					header('Location: ../pages/students.php?error=3');
 				}
 			}
 			else{
-				header('Location: ../pages/students.php?filetypeinvalid');
+				header('Location: ../pages/students.php?error=6');
 			}
 
 		}

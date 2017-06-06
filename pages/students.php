@@ -58,6 +58,7 @@ if(isset($_SESSION['QUE_ERROR'])){
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
+		<link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
 
 <body>
@@ -547,6 +548,10 @@ if(isset($_SESSION['QUE_ERROR'])){
 					 $('#text').text("Register a student first!");
 					 $('#errormodal').modal('show');
 					 break;
+				 case '6':
+				 	 $('#text').text("File Tpye Invalid!");
+				 	 $('#errormodal').modal('show');
+				 	 break;
 				}
 			}
 

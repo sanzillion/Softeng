@@ -7,10 +7,9 @@ include "process/functions.php";
 $loc = "uploads/";
 $src = "img/slide-1.jpg";
 $title = 'Title Here';
-$par = 'The boxes used in this template are nested inbetween a
-	normal Bootstrap row and the start of your column layout.
-	The boxes will be full-width boxes, so if you want to make
-	them smaller then you will need to customize. <br>
+$par = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  Nunc placerat diam quis nisl vestibulum dignissim. In hac
+  habitasse platea dictumst. <br>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 	Nunc placerat diam quis nisl vestibulum dignissim. In hac
 	habitasse platea dictumst. Interdum et malesuada fames ac
@@ -70,6 +69,7 @@ for ($i = 0; $i <$arraycount; $i++){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="icon" type="image/png" href="img/favicon.png">
 
 </head>
 
@@ -219,7 +219,7 @@ for ($i = 0; $i <$arraycount; $i++){
             </div>
         </div>
 
-        <div class="row" id="contact">
+        <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
@@ -262,7 +262,7 @@ for ($i = 0; $i <$arraycount; $i++){
     <!-- /.container -->
 
     <!-- FOOTER -->
-    <footer class="bggray padtopbot">
+    <footer class="bggray padtopbot" id="contact">
         <div class="container">
             <div class="row text-center margin-bottom">
               <h1 class="text-center cwhite no-margin" style="margin-top: 10px;"> Developers </h1>

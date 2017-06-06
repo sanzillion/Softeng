@@ -78,6 +78,7 @@ $limit = '10';
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 		<link href="https://fonts.googleapis.com/css?family=Play|Squada+One" rel="stylesheet">
+		<link rel="icon" type="image/png" href="../img/favicon.png">
 </head>
 
 <body>

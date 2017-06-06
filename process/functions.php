@@ -1,7 +1,7 @@
 <?php
  function connect(){
    try {
-     $db = new PDO("mysql:host=localhost;dbname=srs","root","", array(
+     $db = new PDO("mysql:host=localhost;dbname=srs","root","creativity31", array(
     		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES UTF8",
     		PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
     		//PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
