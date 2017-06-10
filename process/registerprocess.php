@@ -15,9 +15,9 @@ if(isset($_POST['addmeeting'])){ //from meeting.php
 		$pen = $_POST['penalty']; //penalty
 
 		$query = $db->prepare("INSERT INTO meeting SET
-													description = :descs,
-													penalty = :pen,
-													m_date = :datet");
+								description = :descs,
+								penalty = :pen,
+								m_date = :datet");
 
 		$execute_query = [':descs' => $desc,
 							':pen' => $pen,

@@ -42,9 +42,10 @@ catch(PDOException $e)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
  $meeting = $con->prepare("CREATE TABLE `meeting` (
-   `m_id` int(11) NOT NULL AUTO_INCREMENT,
-   `description` varchar(50) NOT NULL,
-   `m_date` date NOT NULL,
+  `m_id` int(11) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `penalty` varchar(4) NOT NULL,
+  `m_date` date NOT NULL
    PRIMARY KEY (`m_id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
