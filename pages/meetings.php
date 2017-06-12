@@ -219,7 +219,7 @@ else{
 																			</div>
 																				<div class="col-md-12 text-right" style="margin-bottom: 10px;">
 																					<a class="danger" data-toggle="tooltip" data-placement="left"
-																					title="You might need to focusout from the input field to enable submit the button. Try clicking here!">
+																					title="You might need to focusout from the input field to enable the submit button. Try clicking here!">
 																					<i class="fa fa-question-circle primary"	style="font-size: 1.2em; margin-right: 10px;"></i></a>
 																					<button id="eventsubmit" class="btn btn-primary" type="submit" name="addmeeting"
 																					<?php echo $dis;?>>	Add Event &nbsp  <i class="fa fa-send"></i></button>

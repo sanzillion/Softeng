@@ -14,8 +14,9 @@ if(isset($_POST['sub'])){
 	}else{
 		if(is_uploaded_file($_FILES['csv']['tmp_name'])){
 				echo $_FILES['csv']['type'];
-				if($_FILES['csv']['type'] == "application/vnd.ms-excel"
-					|| $_FILES['csv']['type'] == "application/octet-streamfile"){
+				if($_FILES['csv']['type'] == "application/vnd.ms-excel" 
+					|| $_FILES['csv']['type'] == "application/octet-streamfile"
+					|| $_FILES['csv']['type'] == "text/csv"){
 				$uploaddir = '../uploads/';
 				$uploadfile = $uploaddir . basename($_FILES['csv']['name']);
 				echo $uploadfile.'<br>';

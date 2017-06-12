@@ -59,8 +59,6 @@ if(isset($_GET['year'])){
 		$table = sancbyyear($_GET['year']);
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -369,48 +367,48 @@ if(isset($_GET['year'])){
 											<div class="panel-body" style="padding-top: 0px;">
 												<div class="row" style="overflow: auto;">
 													<div class="flot-chart" id="divToPrint">
-														<table class="table table-responsive table-striped">
-															<thead class="text-center">
-																<tr class="">
-																	<th>Student</th>
-																	<?php foreach ($meetdate as $g): ?>
-																	<th><?php echo $g; ?></th>
-																	<?php endforeach;?>
-																	<th>Total</th>
-																	<th class="text-center">Option</th>
-																</tr>
-															</thead>
-															<tbody id="sanctions-table">
-																<?php foreach ($table as $k):?>
-																	<tr>
-																		<td><?php echo $k->surname.', '.$k->firstname; ?></td>
-																		<?php $total = 0;?>
-																		<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
-																						if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
-																		<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';
-																						if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}} ?>
-																		<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';
-																						if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}} ?>
-																		<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';
-																						if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}} ?>
-																		<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';
-																						if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}} ?>
-																		<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';
-																						if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}} ?>
-																		<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';
-																						if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
-																		<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
-																						if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
-																		<td><?php if($total == 0){ echo "CLEARED";}else{echo $total;} ?></td>
-																		<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
-																			class="editSanction btn btn-primary" data-target="#edit-sanction">
-																		<i class="fa fa-edit"></i></a>
-																		<a class="deleteSanction btn btn-danger" data-id="<?php echo $k->sanc_id?>">
-																		<i class="fa fa-trash"></i></a></td>
-																	</tr>
-																	<?php endforeach;?>
-															</tbody>
-														</table>
+			<table class="table table-responsive table-striped">
+				<thead class="text-center">
+					<tr class="">
+						<th>Student</th>
+						<?php foreach ($meetdate as $g): ?>
+						<th><?php echo $g; ?></th>
+						<?php endforeach;?>
+						<th>Total</th>
+						<th class="text-center">Option</th>
+					</tr>
+				</thead>
+				<tbody id="sanctions-table">
+					<?php foreach ($table as $k):?>
+						<tr>
+							<td><?php echo $k->surname.', '.$k->firstname; ?></td>
+							<?php $total = 0;?>
+							<?php if($arraycount >= 1){echo '<td>'.$k->$desc[0].'</td>';
+											if(is_numeric($k->$desc[0])){$total += $k->$desc[0];}} ?>
+							<?php if($arraycount >= 2){echo '<td>'.$k->$desc[1].'</td>';
+											if(is_numeric($k->$desc[1])){$total += $k->$desc[1];}} ?>
+							<?php if($arraycount >= 3){echo '<td>'.$k->$desc[2].'</td>';
+											if(is_numeric($k->$desc[2])){$total += $k->$desc[2];}} ?>
+							<?php if($arraycount >= 4){echo '<td>'.$k->$desc[3].'</td>';
+											if(is_numeric($k->$desc[3])){$total += $k->$desc[3];}} ?>
+							<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';
+											if(is_numeric($k->$desc[4])){$total += $k->$desc[4];}} ?>
+							<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';
+											if(is_numeric($k->$desc[5])){$total += $k->$desc[5];}} ?>
+							<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';
+											if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
+							<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
+											if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
+							<td><?php if($total == 0){ echo "CLEARED";}else{echo $total;} ?></td>
+							<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
+								class="editSanction btn btn-primary" data-target="#edit-sanction">
+							<i class="fa fa-edit"></i></a>
+							<a class="deleteSanction btn btn-danger" data-id="<?php echo $k->sanc_id?>">
+							<i class="fa fa-trash"></i></a></td>
+						</tr>
+						<?php endforeach;?>
+				</tbody>
+			</table>
 													</div>
 												</div>
 											</div>
