@@ -20,7 +20,7 @@ $db = connect();
 
 $results = getdescription();
 $arraycount = count($results);
-if($arraycount > 7){
+if($arraycount > 8){
 	$dis = "disabled";
 }
 else{

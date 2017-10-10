@@ -510,7 +510,8 @@ for ($i = 0; $i <$arraycount; $i++){
 															<?php if($arraycount >= 5){echo '<td>'.$k->$desc[4].'</td>';} ?>
 															<?php if($arraycount >= 6){echo '<td>'.$k->$desc[5].'</td>';} ?>
 															<?php if($arraycount >= 7){echo '<td>'.$k->$desc[6].'</td>';} ?>
-															<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
+                              								<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';} ?>
+															<?php if($arraycount >= 9){echo '<td>'.$k->$desc[8].'</td>';} ?>
 															<td><?php if($k->total == 0){echo "CLEARED";}else{echo $k->total;}?></td>
 														</tr>
 														<?php endforeach;?>

@@ -20,6 +20,7 @@ if($arraycount >= 5){$meet5 = $desc[4];}
 if($arraycount >= 6){$meet6 = $desc[5];}
 if($arraycount >= 7){$meet7 = $desc[6];}
 if($arraycount >= 8){$meet8 = $desc[7];}
+if($arraycount >= 9){$meet9 = $desc[8];}
 
 if(isset($_POST['addsanc'])){
 	$total = 0; //initialize total
@@ -39,7 +40,9 @@ if(isset($_POST['addsanc'])){
 	if($arraycount >= 7){ $r7 = $_POST["$meet7"];
 			if(is_numeric($r7)){$total += $r7;} }
 	if($arraycount >= 8){ $r8 = $_POST["$meet8"];
-			if(is_numeric($r8)){$total += $r8;} }
+			if(is_numeric($r8)){$total += $r8;} }	
+	if($arraycount >= 9){ $r9 = $_POST["$meet9"];
+			if(is_numeric($r9)){$total += $r9;} }
 
 	$student = getstudentsbyname($_POST['name']);
 	$name = $student->s_id;
@@ -144,6 +147,23 @@ if(isset($_POST['addsanc'])){
 				$stmt->bindParam(':total', $total);
 
 		}
+		elseif($arraycount == 9){
+			$stmt = $db->prepare("INSERT INTO sanction (s_id, $meet1, $meet2, $meet3, $meet4,
+														$meet5, $meet6, $meet7, $meet8, $meet9, total)
+		    VALUES (:name, :m1, :m2, :m3, :m4, :m5, :m6, :m7, :m8, :m9, :total)");
+		    $stmt->bindParam(':name', $name);
+		    $stmt->bindParam(':m1', $r1);
+		    $stmt->bindParam(':m2', $r2);
+		    $stmt->bindParam(':m3', $r3);
+		    $stmt->bindParam(':m4', $r4);
+		    $stmt->bindParam(':m5', $r5);
+		    $stmt->bindParam(':m6', $r6);
+		    $stmt->bindParam(':m7', $r7);
+		    $stmt->bindParam(':m8', $r8);
+		    $stmt->bindParam(':m9', $r9);
+			$stmt->bindParam(':total', $total);
+
+		}
 
 	if($stmt->execute())
 	{
@@ -177,6 +197,8 @@ if(isset($_POST['updatesanc'])){
 			if(is_numeric($r7)){$total += $r7;} }
 	if($arraycount >= 8){ $r8 = $_POST["$meet8"];
 			if(is_numeric($r8)){$total += $r8;} }
+	if($arraycount >= 9){ $r9 = $_POST["$meet9"];
+			if(is_numeric($r9)){$total += $r9;} }
 
 	$id = $_POST['id'];
 
@@ -262,6 +284,21 @@ if(isset($_POST['updatesanc'])){
 	    $stmt->bindParam(':id', $id);
 			$stmt->bindParam(':total', $total);
 	}
+	elseif($arraycount == 9){
+		$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3,
+							$meet4 = :m4, $meet5 = :m5, $meet6 = :m6, $meet7 = :m7, $meet8 = :m8, $meet9 = :m9, total = :total WHERE sanc_id = :id");
+	    $stmt->bindParam(':m1', $r1);
+	    $stmt->bindParam(':m2', $r2);
+	    $stmt->bindParam(':m3', $r3);
+	    $stmt->bindParam(':m4', $r4);
+	    $stmt->bindParam(':m5', $r5);
+	    $stmt->bindParam(':m6', $r6);
+	    $stmt->bindParam(':m7', $r7);
+	    $stmt->bindParam(':m8', $r8);
+	    $stmt->bindParam(':m9', $r9);
+	    $stmt->bindParam(':id', $id);
+			$stmt->bindParam(':total', $total);
+	}
 
  	$stmt->execute();
 	// if($stmt->execute()){
@@ -295,6 +332,8 @@ if(isset($_POST['updatebyyr'])){
 			if(is_numeric($r7)){$total += $r7;} }
 		if($arraycount >= 8){ $r8 = $g['m8'];
 			if(is_numeric($r8)){$total += $r8;} }
+		if($arraycount >= 9){ $r9 = $g['m9'];
+			if(is_numeric($r9)){$total += $r9;} }
 		$id = $g['m0'];
 
 		if($arraycount == 1){
@@ -374,6 +413,21 @@ if(isset($_POST['updatebyyr'])){
 				$stmt->bindParam(':m6', $r6);
 				$stmt->bindParam(':m7', $r7);
 				$stmt->bindParam(':m8', $r8);
+				$stmt->bindParam(':id', $id);
+				$stmt->bindParam(':total', $total);
+		}		
+		elseif($arraycount == 9){
+			$stmt = $db->prepare("UPDATE sanction SET $meet1 = :m1, $meet2 = :m2, $meet3 = :m3,
+								$meet4 = :m4, $meet5 = :m5, $meet6 = :m6, $meet7 = :m7, $meet8 = :m8, $meet9 = :m9, total = :total WHERE sanc_id = :id");
+				$stmt->bindParam(':m1', $r1);
+				$stmt->bindParam(':m2', $r2);
+				$stmt->bindParam(':m3', $r3);
+				$stmt->bindParam(':m4', $r4);
+				$stmt->bindParam(':m5', $r5);
+				$stmt->bindParam(':m6', $r6);
+				$stmt->bindParam(':m7', $r7);
+				$stmt->bindParam(':m8', $r8);
+				$stmt->bindParam(':m9', $r9);
 				$stmt->bindParam(':id', $id);
 				$stmt->bindParam(':total', $total);
 		}

@@ -256,6 +256,11 @@ if(isset($_GET['year'])){
 																			name="'.$desc[6].'" style="margin-bottom: 5px;" required>';
 	  																 echo '<option disabled selected hidden value="">'.$desc[6].'</option>';
 	  																 echo $options.'</select>';}?>
+	  																 <?php if($arraycount >= 9)
+	  																{echo '<select class="form-control"
+																			name="'.$desc[8].'" style="margin-bottom: 5px;" required>';
+	  																 echo '<option disabled selected hidden value="">'.$desc[8].'</option>';
+	  																 echo $options.'</select>';}?>
 																</div>
 																<div class="col-md-6" style="margin-bottom: 10px;">
 																	<?php if($arraycount >= 2)
@@ -399,6 +404,8 @@ if(isset($_GET['year'])){
 											if(is_numeric($k->$desc[6])){$total += $k->$desc[6];}} ?>
 							<?php if($arraycount >= 8){echo '<td>'.$k->$desc[7].'</td>';
 											if(is_numeric($k->$desc[7])){$total += $k->$desc[7];}} ?>
+							<?php if($arraycount >= 9){echo '<td>'.$k->$desc[7].'</td>';
+											if(is_numeric($k->$desc[8])){$total += $k->$desc[8];}} ?>
 							<td><?php if($total == 0){ echo "CLEARED";}else{echo $total;} ?></td>
 							<td class="text-center"><a data-toggle="modal" data-id="<?php echo $k->sanc_id;?>" title="Add this item"
 								class="editSanction btn btn-primary" data-target="#edit-sanction">
